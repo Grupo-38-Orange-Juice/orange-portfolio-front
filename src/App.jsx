@@ -1,3 +1,4 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import DefaultButton from './components/default-button';
@@ -5,18 +6,22 @@ import { primaryButtonTheme, secondaryButtonTheme } from './mui-theme/buttons';
 
 function App() {
   const handlePrimaryButtonClick = () => {
-    console.log("Botão primário clicado!");
+    console.log('Botão primário clicado!');
   };
 
   const handleSecondaryButtonClick = () => {
-    console.log("Botão secundário clicado!");
+    console.log('Botão secundário clicado!');
   };
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit
+          {' '}
+          <code>src/App.js</code>
+          {' '}
+          and save to reload.
         </p>
         <a
           className="App-link"
