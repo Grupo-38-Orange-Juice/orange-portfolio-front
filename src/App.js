@@ -1,7 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import DefaultButton from './components/default-button';
+import { primaryButtonTheme, secondaryButtonTheme } from './mui-theme/buttons';
 
 function App() {
+  const handlePrimaryButtonClick = () => {
+    console.log("Botão primário clicado!");
+  };
+
+  const handleSecondaryButtonClick = () => {
+    console.log("Botão secundário clicado!");
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +27,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <DefaultButton theme={primaryButtonTheme} label="Primary Button" handleClick={handlePrimaryButtonClick} />
+      <DefaultButton theme={secondaryButtonTheme} label="Secundary Button" handleClick={handleSecondaryButtonClick} />
     </div>
   );
 }
