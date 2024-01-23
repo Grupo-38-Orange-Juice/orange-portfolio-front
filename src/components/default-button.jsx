@@ -1,15 +1,29 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider } from '@mui/material';
 
-const DefaultButton = ({ theme, label, handleClick, size, ...props }) => {
+function DefaultButton({
+  theme, label, handleClick, size,
+}) {
   return (
     <ThemeProvider theme={theme}>
-      <Button {...props} variant="contained" color="primary" onClick={handleClick} size={size}>
+      <Button variant="contained" color="primary" onClick={handleClick} size={size}>
         {label}
       </Button>
     </ThemeProvider>
   );
 }
+
+DefaultButton.propTypes = {
+  theme: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  size: PropTypes.string,
+};
+
+DefaultButton.defaultProps = {
+  size: 'medium',
+};
 
 export default DefaultButton;
