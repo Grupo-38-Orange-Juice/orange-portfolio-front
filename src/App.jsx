@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import DefaultButton from './components/default-button';
 import { primaryButtonTheme, secondaryButtonTheme } from './mui-theme/buttons';
@@ -15,7 +14,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit
           {' '}
@@ -32,8 +30,16 @@ function App() {
           Learn React
         </a>
       </header>
-      <DefaultButton theme={primaryButtonTheme} label="Primary Button" handleClick={handlePrimaryButtonClick} />
-      <DefaultButton theme={secondaryButtonTheme} label="Secundary Button" handleClick={handleSecondaryButtonClick} />
+      <DefaultButton
+        theme={primaryButtonTheme}
+        label="Primary Button"
+        handleClick={handlePrimaryButtonClick}
+      />
+      <DefaultButton
+        theme={secondaryButtonTheme}
+        label="Secundary Button"
+        handleClick={handleSecondaryButtonClick}
+      />
     </div>
   );
 }

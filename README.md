@@ -1,4 +1,4 @@
-# Orange Portfolio Frontend
+# 🍊 Orange Portfolio Frontend
 
 Bem-vindo ao repositório do frontend do Orange Portfolio! Este projeto é desenvolvido utilizando React e Material-UI, seguindo as diretrizes do estilo de código Airbnb. Abaixo estão as instruções básicas para iniciar o projeto.
 
@@ -25,12 +25,20 @@ Acesse o diretório do projeto e instale as dependências utilizando o npm:
 cd orange-portfolio-front
 npm install
 ```
-
-## Iniciando o Projeto
-```bash	
-npm start
+ou
+```bash
+cd orange-portfolio-front
+yarn install
 ```
 
+## Iniciando o Projeto
+```bash
+npm start
+```
+Ou
+```bash
+yarn start
+```
 ## Bibliotecas Utilizadas
 
 - [React](https://reactjs.org/)
