@@ -1,28 +1,29 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  createUser, loginResquest, getUserLocalStorage, setUserLocalStorage,
+  getTokenStorage, setTokenLocalStorage, clearTokenLocalStorage, clearTokenSessionStorage,
 } from './util';
+import { createUser, loginResquest } from '../../service/api';
 
 export const AuthContext = createContext({});
 
 function authProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const user = getUserLocalStorage();
+    const localToken = getTokenStorage();
 
-    if (user) {
-      setUser(user);
+    if (token) {
+      setToken(localToken);
     }
   }, []);
 
   async function authenticate(email, password) {
     const response = await loginResquest(email, password);
     if (response.token !== undefined) {
-      const payload = { id: response.id, token: response.token };
-      setUser(payload);
-      setUserLocalStorage(payload);
+      const payload = { token: response.token };
+      setToken(payload);
+      setTokenLocalStorage(payload);
     } else {
       throw new Error('Usuário não autenticado');
     }
@@ -33,8 +34,9 @@ function authProvider({ children }) {
   };
 
   function logout() {
-    setUser(null);
-    setUserLocalStorage(null);
+    setToken(null);
+    clearTokenLocalStorage();
+    clearTokenSessionStorage();
   }
 
   async function accountCreate(name, email, password, role) {
@@ -44,8 +46,8 @@ function authProvider({ children }) {
       throw new Error(response.message);
     }
 
-    setUser(response.data);
-    setUserLocalStorage(response.data);
+    setToken(response.data);
+    setTokenLocalStorage(response.data.token);
 
     return response.data;
   }
@@ -59,7 +61,7 @@ function authProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{
-      ...user, authenticate, logout, accountCreate,
+      ...token, authenticate, logout, accountCreate,
     }}
     >
       {children}
