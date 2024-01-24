@@ -1,29 +1,5 @@
 import { createTheme } from '@mui/material';
 
-/* export const buttonTheme = createTheme({
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        contained: {
-          background: "#FF5522",
-          "&:hover": {
-            background: "#CC4400"
-          }
-        },
-        root: {
-          // Adicione estilos de fonte aqui
-          fontFamily: "Roboto, sans-serif",
-          lineHeight: "26px",
-          letterSpacing: "0.46px",
-          fontSize: "15px",
-          color: "#EDEFF2",
-        },
-      }
-    }
-  }
-}); */
-
-// Configurações base
 const buttonBaseStyles = {
   fontFamily: 'Roboto, sans-serif',
   lineHeight: '26px',
@@ -33,7 +9,6 @@ const buttonBaseStyles = {
   startIcon: false,
 };
 
-// Função utilitária para criar temas de botão
 const createButtonTheme = (background, hoverBackground) => createTheme({
   components: {
     MuiButton: {

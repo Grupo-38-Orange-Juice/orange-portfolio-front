@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import DefaultButton from './components/default-button';
 import { primaryButtonTheme, secondaryButtonTheme } from './mui-theme/buttons';
+import Header from './components/header/header';
 
 function App() {
   const handlePrimaryButtonClick = () => {
@@ -14,24 +13,7 @@ function App() {
   };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
       <DefaultButton theme={primaryButtonTheme} label="Primary Button" handleClick={handlePrimaryButtonClick} />
       <DefaultButton theme={secondaryButtonTheme} label="Secundary Button" handleClick={handleSecondaryButtonClick} />
     </div>
