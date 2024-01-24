@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  CreateUser, LoginResquest, getUserLocalStorage, setUserLocalStorage,
+  createUser, loginResquest, getUserLocalStorage, setUserLocalStorage,
 } from './util';
 
 export const AuthContext = createContext({});
 
-function AuthProvider({ children }) {
+function authProvider({ children }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
   }, []);
 
   async function authenticate(email, password) {
-    const response = await LoginResquest(email, password);
+    const response = await loginResquest(email, password);
     if (response.token !== undefined) {
       const payload = { id: response.id, token: response.token };
       setUser(payload);
@@ -27,14 +27,18 @@ function AuthProvider({ children }) {
       throw new Error('Usuário não autenticado');
     }
   }
+  authenticate.propTypes = {
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  };
 
   function logout() {
     setUser(null);
     setUserLocalStorage(null);
   }
 
-  async function createUser(name, email, password, role) {
-    const response = await CreateUser(name, email, password, role);
+  async function accountCreate(name, email, password, role) {
+    const response = await createUser(name, email, password, role);
 
     if (response.status === 400) {
       throw new Error(response.message);
@@ -46,9 +50,16 @@ function AuthProvider({ children }) {
     return response.data;
   }
 
+  accountCreate.propTypes = {
+    name: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  };
+
   return (
     <AuthContext.Provider value={{
-      ...user, authenticate, logout, createUser,
+      ...user, authenticate, logout, accountCreate,
     }}
     >
       {children}
@@ -56,8 +67,8 @@ function AuthProvider({ children }) {
   );
 }
 
-AuthProvider.propTypes = {
+authProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default AuthProvider;
+export default authProvider;

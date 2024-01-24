@@ -18,7 +18,7 @@ export function getUserLocalStorage() {
   return user;
 }
 
-export async function LoginResquest({ email, password }) {
+export async function loginResquest({ email, password }) {
   try {
     const request = await Api.post('authenticate', { email, password });
     return request.data;
@@ -27,12 +27,12 @@ export async function LoginResquest({ email, password }) {
   }
 }
 
-LoginResquest.propTypes = {
+loginResquest.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
 };
 
-export async function CreateUser({
+export async function createUser({
   name, lastname, email, password,
 }) {
   try {
@@ -47,7 +47,7 @@ export async function CreateUser({
   }
 }
 
-CreateUser.propTypes = {
+createUser.propTypes = {
   name: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
