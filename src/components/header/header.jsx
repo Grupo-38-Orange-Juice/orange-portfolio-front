@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from '../../atoms/logo/logo';
-import Profile from '../../atoms/profile/profile';
-import NotificationIcon from '../../atoms/notiification/NotificationIcon';
+import Logo from './logo/logo';
+import Profile from '../profile/profile';
+import NotificationIcon from './notiification/NotificationIcon';
 
 function Header() {
   return (
