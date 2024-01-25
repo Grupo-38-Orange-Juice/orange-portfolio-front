@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './Header.module.css';
 import Logo from './Logo/Logo';
 import Profile from '../Profile/Profile';
 import NotificationIcon from './Notiification/NotificationIcon';
@@ -17,17 +18,20 @@ function Header() {
   }
 
   return (
-    <header>
-      <div>
+    <header className={styles.container}>
+      <div className={styles.container_logo}>
         <Logo />
-        <Paragraph change={() => redirectToHome}>
-          Meus projetos
-        </Paragraph>
-        <Paragraph change={() => redirectToExplore}>
-          Descobrir
-        </Paragraph>
+        <div className={styles.container_navigate}>
+          <Paragraph change={() => redirectToHome}>
+            Meus projetos
+          </Paragraph>
+          <Paragraph change={() => redirectToExplore}>
+            Descobrir
+          </Paragraph>
+        </div>
+
       </div>
-      <div>
+      <div className={styles.container_profile}>
         <Profile />
         <NotificationIcon />
       </div>

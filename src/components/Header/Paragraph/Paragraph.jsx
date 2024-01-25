@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './Paragraph.module.css';
 
 function Paragraph({ children, change }) {
   return (
-    <button type="button" onClick={change()}>
+    <button className={styles.navigate_item} type="button" onClick={change()}>
       {children}
     </button>
   );

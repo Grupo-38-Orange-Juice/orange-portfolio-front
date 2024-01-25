@@ -1,0 +1,35 @@
+.container{
+  display: flex;
+  flex: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 73px;
+  max-height: 73px;
+  border-bottom: 1px solid var(--color-principal-100, #113);
+  background: var(--color-principal-100, #113);
+  padding: 16px 30px;
+  box-sizing:content-box;
+}
+
+.container_logo{
+  display: flex;
+  flex: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 100px;
+}
+
+.container_navigate{
+  display: flex;
+  flex: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.container_profile{
+  display: flex;
+  flex: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
