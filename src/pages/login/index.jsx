@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './styles.css';
+import TextField from '@mui/material/TextField';
 import login from '../../images/img_login.svg';
-// import google from '../../images/Button Google Sign in.svg';
-// import DefaultButton from '../../components/default-button';
-import DefaultInput from '../../components/defaultInput';
+import DefaultButton from '../../components/default-button';
+import {
+  primaryButtonTheme,
+} from '../../mui-theme/buttons';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,28 +19,45 @@ function Login() {
   return (
     <div>
       <div>
-        <img src={login} alt="Imagem de login" />
-        {/* <img src={google} alt="Button Google Sign in.svg" /> */}
+        <img src={login} alt="Imagem de login" style={{ width: '28%' }} />
       </div>
       <div>
+
         <h1> Entre no Orange Portfólio </h1>
         <h2> Faça login com email </h2>
+
         <div className="email">
-          <DefaultInput
-            title="Email address"
-            defaultValue="email@email.com"
+          <TextField
+            label="Email address"
+            placeholder="email@email.com"
             type="email"
-            onChange={handleInput}
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
             value={email}
+            onChange={handleInput}
           />
         </div>
         <div className="key">
-          <DefaultInput
+          <TextField
+            label="Password"
             title="Password"
+            placeholder="*************"
             defaultValue=""
             type="password"
+            ullWidth
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </div>
+        <div className="buttonOrange">
+          <DefaultButton theme={primaryButtonTheme} label="Entrar" />
+        </div>
+        <h3>Cadastre-se</h3>
       </div>
     </div>
   );

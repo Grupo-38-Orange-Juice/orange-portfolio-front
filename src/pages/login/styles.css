@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 
 
-h1, h2 {
+h1, h2 , h3{
     font-family: 'Roboto', sans-serif;
     margin-left: 20px;
     font-weight: 400;
@@ -13,8 +13,8 @@ h1 {
     font-size: 48px;
     line-height: 40px;
     letter-spacing: 0em;
-    margin-top: 0px;
-    margin-left: 510px;
+    margin-top: -520px;
+    margin-left: 550px;
 }
 
 h2 {
@@ -22,12 +22,19 @@ h2 {
     font-size: 24px;
     line-height: 24px;
     letter-spacing: 0em;
-    margin-top: 30px;
-    margin-left: 520px;
+    margin-top: 100px;
+    margin-left: 550px;
+}
+h3 {
+    color: #96969f;
+    font-size: 20px;
+    line-height: 40px;
+    letter-spacing: 0,1em;
+    margin-top: 3px;
+    margin-left: 550px;
 }
 
 .imag img {
-    position: relative;
     width: 40px;
 
 }
@@ -38,15 +45,15 @@ h2 {
 
 .email {
     margin-top: 20px;
-    margin-left: 520px;
+    margin-left: 550px;
     width: 500px;
     height: 50px;
     font-family: 'Roboto';
     border-color: #515255;
 }
 .key {
-    margin-top: 20px;
-    margin-left: 520px;
+    margin-top: 40px;
+    margin-left: 550px;
     width: 500px;
     height: 50px;
     font-family: 'Roboto';
@@ -68,6 +75,7 @@ h2 {
 }
 
 
-.Button:hover {
-    background-color: #f93e05;
+.buttonOrange {
+    margin-top: 20px;
+    margin-left: 710px;
 }
