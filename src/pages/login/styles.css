@@ -1,0 +1,94 @@
+body {
+    background-color: #FFFFFF;
+    margin: 0;
+}
+/* 
+@font-face {
+    font-family: 'Roboto';
+    src: url('../Fontes/Roboto/Roboto-Regular.ttf');
+} */
+
+h1, h2 {
+    font-family: 'Roboto';
+    margin-left: 20px;
+    font-weight: 400;
+}
+
+h1 {
+    color: #222244;
+    font-size: 48px;
+    line-height: 40px;
+    letter-spacing: 0em;
+    margin-top: 150px;
+    margin-left: 510px;
+}
+
+h2 {
+    color: #515255;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: 0em;
+    margin-top: 30px;
+    margin-left: 520px;
+}
+
+.imag {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.imag img {
+    width: 440px;
+}
+
+.google img {
+    margin: 0px 0 0 690px;
+}
+
+p {
+    margin-left: 520px;
+    width: 500px;
+    height: 50px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.4000000059604645px;
+    text-align: left;
+    border-color: #515255;
+}
+.cadastro {
+    margin-top: 10px;
+    margin-left: 520px;
+}
+
+.cadastro a {
+    color: #515255;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cadastro a:hover {
+    color: #222244;
+}
+
+.Button {
+    margin-left: 520px;
+    width: 520px;
+    height: 50px;
+    background-color: #FF5522;
+    border: 1px solid #FF5522;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.573);
+
+}
+
+.Button:hover {
+    background-color: #f93e05;
+}
