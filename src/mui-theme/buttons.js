@@ -30,7 +30,6 @@ const buttonBaseStyles = {
   fontSize: '15px',
   color: 'rgba(255, 255, 255, 1)',
   startIcon: false,
-  width: '500px',
 };
 
 const createButtonTheme = (background, hoverBackground) => createTheme({
