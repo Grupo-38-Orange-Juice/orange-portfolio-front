@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Paragraph({ children, change }) {
   return (
-    <button type="button" onClick={change}>
+    <button type="button" onClick={change()}>
       {children}
     </button>
   );
