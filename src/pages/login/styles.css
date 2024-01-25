@@ -10,28 +10,27 @@ h1, h2 , h3{
 
 h1 {
     color: #222244;
-    font-size: 48px;
+    font-size: 300%;
     line-height: 40px;
-    letter-spacing: 0em;
-    margin-top: -520px;
-    margin-left: 550px;
+    margin-top: -33%;
+    margin-left: 37%;
 }
 
 h2 {
     color: #515255;
-    font-size: 24px;
+    font-size: 150%;
     line-height: 24px;
     letter-spacing: 0em;
     margin-top: 100px;
-    margin-left: 550px;
+    margin-left: 38%;
 }
 h3 {
     color: #96969f;
-    font-size: 20px;
+    font-size: 120%;
     line-height: 40px;
     letter-spacing: 0,1em;
     margin-top: 3px;
-    margin-left: 550px;
+    margin-left: 38%;
 }
 
 .imag img {
@@ -45,7 +44,7 @@ h3 {
 
 .email {
     margin-top: 20px;
-    margin-left: 550px;
+    margin-left: 38%;
     width: 500px;
     height: 50px;
     font-family: 'Roboto';
@@ -53,7 +52,7 @@ h3 {
 }
 .key {
     margin-top: 40px;
-    margin-left: 550px;
+    margin-left: 38%;
     width: 500px;
     height: 50px;
     font-family: 'Roboto';
@@ -61,7 +60,7 @@ h3 {
 }
 .cadastro {
     margin-top: 10px;
-    margin-left: 520px;
+    margin-left: 38%;
 }
 
 .cadastro a {
@@ -77,5 +76,6 @@ h3 {
 
 .buttonOrange {
     margin-top: 20px;
-    margin-left: 710px;
+    margin-left: 38%;
+    
 }
