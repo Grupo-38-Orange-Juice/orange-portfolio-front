@@ -1,12 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Importe useNavigate aqui
-import Logo from './logo/logo';
-import Profile from '../profile/profile';
-import NotificationIcon from './notiification/NotificationIcon';
-import Paragraph from './paragraph/paragraph';
+import { useNavigate } from 'react-router-dom';
+import Logo from './Logo/Logo';
+import Profile from '../Profile/Profile';
+import NotificationIcon from './Notiification/NotificationIcon';
+import Paragraph from './Paragraph/Paragraph';
 
 function Header() {
-  const navigate = useNavigate(); // Obtenha a função navigate usando useNavigate
+  const navigate = useNavigate();
 
   function redirectToHome() {
     navigate('/');
