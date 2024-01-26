@@ -50,33 +50,33 @@ function Register() {
         <img src={registerImage} alt="Imagem de registro" style={{ width: '28%' }} />
         <h1> Cadastre-se </h1>
         <form onSubmit={handleFormSubmit}>
-          <div className="nome">
-            <TextField
-              className="text-field"
-              label="Nome"
-              placeholder="Digite seu nome"
-              type="text"
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={nome}
-              onChange={handleNomeInput}
-            />
-          </div>
-          <div className="sobrenome">
-            <TextField
-              className="text-field"
-              label="Sobrenome"
-              placeholder="Digite seu sobrenome"
-              type="text"
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={sobrenome}
-              onChange={handleSobrenomeInput}
-            />
+          <div className="nome-sobrenome-container">
+            <div className="nome">
+              <TextField
+                className="text-field"
+                label="Nome"
+                placeholder="Digite seu nome"
+                type="text"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={nome}
+                onChange={handleNomeInput}
+              />
+            </div>
+            <div className="sobrenome">
+              <TextField
+                className="text-field"
+                label="Sobrenome"
+                placeholder="Digite seu sobrenome"
+                type="text"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={sobrenome}
+                onChange={handleSobrenomeInput}
+              />
+            </div>
           </div>
           <div className="email">
             <TextField

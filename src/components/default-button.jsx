@@ -4,11 +4,11 @@ import Button from '@mui/material/Button';
 import { ThemeProvider } from '@mui/material';
 
 function DefaultButton({
-  theme, label, handleClick, fullWidth,
+  theme, label, onClick, fullWidth,
 }) {
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained" color="primary" onClick={handleClick} fullWidth={fullWidth}>
+      <Button variant="contained" color="primary" onClick={onClick} fullWidth={fullWidth}>
         {label}
       </Button>
     </ThemeProvider>
@@ -18,7 +18,7 @@ function DefaultButton({
 DefaultButton.propTypes = {
   theme: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   fullWidth: PropTypes.bool,
 };
 

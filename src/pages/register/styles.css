@@ -13,7 +13,7 @@ h1 {
     font-size: 300%;
     line-height: 40px;
     margin-top: -33%;
-    margin-left: 45%;
+    margin-left: 38%;
 }
 
 h2 {
@@ -43,24 +43,18 @@ h3 {
 }
 
 .nome {
-    margin-top: 20px;
-    margin-left: 38%;
     width: 500px;
     height: 50px;
     font-family: 'Roboto';
     border-color: #515255;
 }
 .sobrenome {
-    margin-top: -50px;
-    margin-left: 53%;
-    width: 500px;
-    height: 50px;
     font-family: 'Roboto';
     border-color: #515255;
-    max-width: 800px;
 }
 .email {
-    margin-top: 20px;
+    max-width: 33%;
+    margin-top: 10px;
     margin-left: 38%;
     width: 500px;
     height: 50px;
@@ -68,7 +62,8 @@ h3 {
     border-color: #515255;
 }
 .key {
-    margin-top: 40px;
+    max-width: 33%;
+    margin-top: 50px;
     margin-left: 38%;
     width: 500px;
     height: 50px;
@@ -92,9 +87,10 @@ h3 {
 
 
 .buttonOrange {
-    max-width: 500px;
+    max-width: 33%;
     margin-top: 20px;
     margin-left: 38%;
+    
     
 }
 
@@ -109,3 +105,16 @@ h3 {
       width: 80%;
     }
   }
+  .nome-sobrenome-container {
+    margin-left: 38%;
+    margin-top: 30px;
+    display: flex;
+    max-width: 37%;
+    width: 100%;
+    gap: 15px;
+} 
+  .nome,
+  .sobrenome {
+    flex: 1; 
+  }
+  
