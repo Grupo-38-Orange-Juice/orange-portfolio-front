@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './styles.css';
 import TextField from '@mui/material/TextField';
-import login from '../../images/img_login.svg';
+import registerImage from '../../images/img_cadastro.png';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,9 +28,9 @@ function Login() {
   return (
     <div>
       <div>
-        <img src={login} alt="Imagem de login" style={{ width: '28%' }} />
-        <h1> Entre no Orange Portfólio </h1>
-        <h2> Faça login com email </h2>
+        <img src={registerImage} alt="Imagem de registro" style={{ width: '28%' }} />
+        <h1> Crie sua conta no Orange Portfólio </h1>
+        <h2> Cadastre-se com seu email </h2>
 
         <form onSubmit={handleFormSubmit}>
           <div className="email">
@@ -64,14 +64,17 @@ function Login() {
             />
           </div>
           <div className="buttonOrange">
-            <DefaultButton theme={primaryButtonTheme} label="Entrar" type="submit" fullWidth />
+            <DefaultButton theme={primaryButtonTheme} label="Registrar" type="submit" fullWidth />
           </div>
         </form>
 
-        <h3>Cadastre-se</h3>
+        <h3>
+          Já tem uma conta?
+          <a href="/login">Faça login</a>
+        </h3>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;
