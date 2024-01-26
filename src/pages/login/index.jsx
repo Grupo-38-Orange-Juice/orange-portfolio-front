@@ -66,7 +66,7 @@ function Login() {
             />
           </div>
           <div className="buttonOrange">
-            <DefaultButton theme={primaryButtonTheme} label="Entrar" type="submit" fullWidth />
+            <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
           </div>
         </form>
 

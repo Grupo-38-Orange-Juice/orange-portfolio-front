@@ -6,9 +6,15 @@ import { ThemeProvider } from '@mui/material';
 function DefaultButton({
   theme, label, onClick, fullWidth,
 }) {
+  const handleClick = (event) => {
+    if (onClick) {
+      onClick(event);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained" color="primary" onClick={onClick} fullWidth={fullWidth}>
+      <Button variant="contained" color="primary" onClick={handleClick} fullWidth={fullWidth} type="button">
         {label}
       </Button>
     </ThemeProvider>
