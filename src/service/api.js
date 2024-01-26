@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getTokenStorage } from '../context/AuthProvider/util';
 
 const Api = axios.create({
-  baseURL: 'https://url/',
+  baseURL: 'http://localhost:8080/',
 });
 
 Api.interceptors.request.use(
