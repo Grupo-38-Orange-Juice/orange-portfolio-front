@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import Logo from './Logo/Logo';
 import Profile from '../Profile/Profile';
-import NotificationIcon from './Notiification/NotificationIcon';
+import NotificationIcon from './Notification/NotificationIcon';
 import Paragraph from './Paragraph/Paragraph';
+import MenuFilled from './MenuFilledBar';
 
 function Header() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function Header() {
   return (
     <header className={styles.container}>
       <div className={styles.container_logo}>
+        <MenuFilled />
         <Logo />
         <div className={styles.container_navigate}>
           <Paragraph change={() => redirectToHome}>
@@ -29,8 +31,8 @@ function Header() {
             Descobrir
           </Paragraph>
         </div>
-
       </div>
+
       <div className={styles.container_profile}>
         <Profile />
         <NotificationIcon />
