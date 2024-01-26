@@ -8,19 +8,38 @@ import { primaryButtonTheme } from '../../mui-theme/buttons';
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nome, setNome] = useState('');
+  const [sobrenome, setSobrenome] = useState('');
+
+  const handleNomeInput = (event) => {
+    const { value } = event.target;
+    setNome(value);
+    console.log(value);
+  };
+
+  const handleSobrenomeInput = (event) => {
+    const { value } = event.target;
+    setSobrenome(value);
+    console.log(value);
+  };
 
   const handleEmailInput = (event) => {
-    setEmail(event.target.value);
-    console.log(email);
+    const { value } = event.target;
+    setEmail(value);
+    console.log(value);
   };
 
   const handlePasswordInput = (event) => {
-    setPassword(event.target.value);
-    console.log(password);
+    const { value } = event.target;
+    setPassword(value);
+    console.log(value);
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    console.log('Dados do formulário:');
+    console.log('Nome:', nome);
+    console.log('Sobrenome:', sobrenome);
     console.log('Email:', email);
     console.log('Password:', password);
   };
@@ -29,10 +48,36 @@ function Register() {
     <div>
       <div>
         <img src={registerImage} alt="Imagem de registro" style={{ width: '28%' }} />
-        <h1> Crie sua conta no Orange Portfólio </h1>
-        <h2> Cadastre-se com seu email </h2>
-
+        <h1> Cadastre-se </h1>
         <form onSubmit={handleFormSubmit}>
+          <div className="nome">
+            <TextField
+              className="text-field"
+              label="Nome"
+              placeholder="Digite seu nome"
+              type="text"
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={nome}
+              onChange={handleNomeInput}
+            />
+          </div>
+          <div className="sobrenome">
+            <TextField
+              className="text-field"
+              label="Sobrenome"
+              placeholder="Digite seu sobrenome"
+              type="text"
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={sobrenome}
+              onChange={handleSobrenomeInput}
+            />
+          </div>
           <div className="email">
             <TextField
               className="text-field"
@@ -51,7 +96,6 @@ function Register() {
           <div className="key">
             <TextField
               label="Password"
-              title="Password"
               placeholder="*************"
               defaultValue=""
               type="password"
@@ -70,7 +114,7 @@ function Register() {
 
         <h3>
           Já tem uma conta?
-          <a href="/login">Faça login</a>
+          <a href="/login"> Faça login</a>
         </h3>
       </div>
     </div>

@@ -13,7 +13,7 @@ h1 {
     font-size: 300%;
     line-height: 40px;
     margin-top: -33%;
-    margin-left: 37%;
+    margin-left: 45%;
 }
 
 h2 {
@@ -42,6 +42,23 @@ h3 {
     margin: 0px 0 0 690px;
 }
 
+.nome {
+    margin-top: 20px;
+    margin-left: 38%;
+    width: 500px;
+    height: 50px;
+    font-family: 'Roboto';
+    border-color: #515255;
+}
+.sobrenome {
+    margin-top: -50px;
+    margin-left: 53%;
+    width: 500px;
+    height: 50px;
+    font-family: 'Roboto';
+    border-color: #515255;
+    max-width: 800px;
+}
 .email {
     margin-top: 20px;
     margin-left: 38%;

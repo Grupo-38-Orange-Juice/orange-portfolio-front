@@ -10,13 +10,15 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const handleEmailInput = (event) => {
-    setEmail(event.target.value);
-    console.log(email);
+    const { value } = event.target;
+    setEmail(value);
+    console.log(value);
   };
 
   const handlePasswordInput = (event) => {
-    setPassword(event.target.value);
-    console.log(password);
+    const { value } = event.target;
+    setPassword(value);
+    console.log(value);
   };
 
   const handleFormSubmit = (event) => {
@@ -68,7 +70,9 @@ function Login() {
           </div>
         </form>
 
-        <h3>Cadastre-se</h3>
+        <h3>
+          <a href="/register">Cadastre-se</a>
+        </h3>
       </div>
     </div>
   );

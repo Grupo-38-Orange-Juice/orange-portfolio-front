@@ -24,13 +24,14 @@ h2 {
     margin-top: 6%;
     margin-left: 38%;
 }
-h3 {
+a {
     color: #96969f;
-    font-size: 120%;
+    font-size: 100%;
     line-height: 40px;
     letter-spacing: 0,1em;
     margin-top: 3px;
-    margin-left: 38%;
+    margin-left: 0%;
+    text-decoration: none;
 }
 
 .imag img {
