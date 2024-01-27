@@ -22,9 +22,9 @@ Api.interceptors.request.use(
 export async function loginResquest({ email, password }) {
   try {
     const request = await Api.post('login', { email, password });
-    return request.data;
+    return { data: request.data, status: request.status };
   } catch (error) {
-    return error;
+    return { data: error.response.data, status: error.response.status };
   }
 }
 
