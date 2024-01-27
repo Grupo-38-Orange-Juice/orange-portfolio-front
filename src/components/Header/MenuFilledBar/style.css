@@ -1,0 +1,20 @@
+.menuFilled img{
+    display: none;
+    visibility: hidden;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 100%;
+}
+
+@media (max-width: 600px){
+  .menuFilled img {
+    visibility: visible;
+    display: flex; /* mostrar apenas em dispositivos móveis */
+    left: 25px;
+    position: absolute;
+    align-items: 50%;
+    bottom: 35%;
+  }
+}
+  
