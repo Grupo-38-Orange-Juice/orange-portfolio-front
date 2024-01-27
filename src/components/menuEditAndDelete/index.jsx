@@ -1,44 +1,15 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import './style.css';
+import React, { useState, useRef, useEffect } from 'react';
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Stack from '@mui/material/Stack';
 
-// fazer um tema para a lista com MUI e ver imagem arrow
-
-// eslint-disable-next-line no-empty-pattern
-function MenuEditAndDelete({
-  // labelEdit = 'Editar', labelDelete = 'Excluir',
-}) {
+function MenuEditAndDelete() {
   return (
-    <Box className="menu">
-      <svg src="/assets/arrow1.svg" viewBox="0 0 18 26" />
-      <Box className="box" sx={{ width: 400, maxWidth: 208, bgcolor: 'background.paper' }}>
-        <nav>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemText primary="Editar" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton component="a" href="#simple-list">
-                <ListItemText primary="Excluir" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </nav>
-      </Box>
-    </Box>
+    
   );
 }
-
-// MenuEditAndDelete.propTypes = {
-//   labelEdit: PropTypes.string.isRequired,
-//   labelDelete: PropTypes.string.isRequired,
-// };
-
-export default MenuEditAndDelete;
