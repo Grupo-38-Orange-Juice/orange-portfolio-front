@@ -26,7 +26,7 @@ footer, header, hgroup, menu, nav, section {
 body, html {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+
 }
 ol, ul {
 	list-style: none;
