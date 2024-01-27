@@ -1,10 +1,11 @@
 import React from 'react';
 import './style.css';
+import menu from '../../../assets/menu.svg';
 
 function MenuFilled() {
   return (
     <div className="menuFilled">
-      <img src="/assets/menu.svg" alt="Menu SVG" />
+      <img src={menu} alt="Menu SVG" />
     </div>
   );
 }
