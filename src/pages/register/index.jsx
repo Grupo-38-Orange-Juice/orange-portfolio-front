@@ -29,7 +29,6 @@ function Register() {
     } = formValues;
 
     const response = await createUser({ fullName: `${name} ${lastName}`, email, password });
-    console.log(response);
     if (response.status === 201) {
       toast.success('Usuário cadastrado com sucesso!');
     } else {
@@ -129,7 +128,7 @@ function Register() {
             name="password"
             style={{ marginBottom: '1rem' }}
           />
-          <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
+          <DefaultButton theme={primaryButtonTheme} label="CADASTRAR" onClick={handleFormSubmit} fullWidth />
         </form>
         <Typography
           variant="h3"
