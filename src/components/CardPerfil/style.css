@@ -48,3 +48,26 @@ h5 {
     margin-top: auto;
 }
 
+@media (max-width: 600px) {
+    .box__card_perfil {
+        width: 312px;
+        height: 236px;
+        flex-shrink: 0;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .container__right {
+        gap: 8px
+    }
+
+    .text_input {
+        width: 200px;
+        flex-direction: column;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+}
+
