@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Profile.module.css';
+import profile from '../../assets/profile.png';
 
 function Profile({
-  src, size,
+  size,
 }) {
   return (
     <div className={styles.profileImage}>
-      <img src={src} width={size} height={size} alt="" />
+      <img src={profile} width={size} height={size} alt="" />
     </div>
   );
 }
 
 Profile.propTypes = {
-  src: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
 };
 

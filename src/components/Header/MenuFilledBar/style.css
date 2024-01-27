@@ -11,7 +11,7 @@
   .menuFilled img {
     visibility: visible;
     display: flex; /* mostrar apenas em dispositivos móveis */
-    left: 30px;
+    left: 25px;
     position: absolute;
     align-items: 50%;
     bottom: 35%;
