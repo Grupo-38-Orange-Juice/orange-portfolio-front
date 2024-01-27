@@ -10,7 +10,7 @@ h1, h2 , h3{
 
 h1 {
     color: #222244;
-    font-size: 300%;
+    font-size: 300px;
     line-height: 40px;
     margin-top: -33%;
     margin-left: 37%;
@@ -32,6 +32,7 @@ a {
     margin-top: 3px;
     margin-left: 0%;
     text-decoration: none;
+    
 }
 
 .imag img {
