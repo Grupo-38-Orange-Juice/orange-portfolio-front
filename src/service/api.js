@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getTokenStorage } from '../context/AuthProvider/util';
 
 const Api = axios.create({
-  baseURL: 'https://url/',
+  baseURL: 'http://localhost:8080/',
 });
 
 Api.interceptors.request.use(
@@ -21,7 +21,7 @@ Api.interceptors.request.use(
 
 export async function loginResquest({ email, password }) {
   try {
-    const request = await Api.post('authenticate', { email, password });
+    const request = await Api.post('login', { email, password });
     return request.data;
   } catch (error) {
     return error;
@@ -29,11 +29,11 @@ export async function loginResquest({ email, password }) {
 }
 
 export async function createUser({
-  name, lastname, email, password,
+  fullName, email, password,
 }) {
   try {
     const request = await Api.post('users', {
-      name, lastname, email, password,
+      fullName, email, password,
     })
       .then((res) => ({ data: { ...res.data }, status: res.status }))
       .catch((err) => err.response.data);

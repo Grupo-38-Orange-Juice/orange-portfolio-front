@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import registerImage from '../../images/img_cadastro.png';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
+import { createUser } from '../../service/api';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -35,13 +36,15 @@ function Register() {
     console.log(value);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
+    const token = await createUser({ fullName: nome + sobrenome, email, password });
     console.log('Dados do formulário:');
     console.log('Nome:', nome);
     console.log('Sobrenome:', sobrenome);
     console.log('Email:', email);
     console.log('Password:', password);
+    console.log('token:', token);
   };
 
   return (
