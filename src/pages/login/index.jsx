@@ -11,7 +11,7 @@ import registerImage from '../../images/img_cadastro.png';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
 
-function Register() {
+function Login() {
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -121,4 +121,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;
