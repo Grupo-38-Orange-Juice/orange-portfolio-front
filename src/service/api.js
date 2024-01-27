@@ -12,7 +12,7 @@ Api.interceptors.request.use(
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     };
   },
@@ -34,12 +34,10 @@ export async function createUser({
   try {
     const request = await Api.post('users', {
       fullName, email, password,
-    })
-      .then((res) => ({ data: { ...res.data }, status: res.status }))
-      .catch((err) => err.response.data);
-    return request.data;
+    });
+    return { data: request.data, status: request.status };
   } catch (error) {
-    return error;
+    return { data: error.response.data, status: error.response.status };
   }
 }
 
