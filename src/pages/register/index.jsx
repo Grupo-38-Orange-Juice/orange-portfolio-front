@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import { createUser } from '../../service/api';
-import registerImage from '../../images/img_cadastro.png';
+import registerImage from '../../images/img_cadastro.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
@@ -46,7 +46,7 @@ function Register() {
     <Container
       maxWidth={false}
       style={{
-        margin: '0', textAlign: 'center', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
+        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
       }}
     >
       <Box
@@ -68,17 +68,18 @@ function Register() {
         <img src={registerImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
       </Box>
       <Box style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        flexDirection: 'column', justifyContent: 'center',
       }}
       >
         <Typography
           variant="h3"
           style={{
-            fontSize: '2rem', color: 'rgba(34, 34, 68, 1)', textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, lineHeight: '40px', marginTop: '12rem',
+            fontSize: '2.9rem', color: 'rgba(34, 34, 68, 1)', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '10rem', marginBottom: '3rem',
           }}
         >
           Cadastre-se
         </Typography>
+
         <form onSubmit={handleFormSubmit} style={{ width: '100%', maxWidth: '500px', margin: 'auto' }}>
           <TextField
             label="Nome"
@@ -139,12 +140,12 @@ function Register() {
         <Typography
           variant="h3"
           style={{
-            marginTop: '1rem', fontSize: '1.2rem', color: 'rgba(34, 34, 68, 1)', textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, lineHeight: '40px',
+            textDecoration: 'none', marginTop: '1rem', fontSize: '1.2rem', color: 'rgba(34, 34, 68, 1)', fontWeight: 400, lineHeight: '40px',
           }}
         >
           Já tem uma conta?
           {' '}
-          <a href="/login"> Faça login</a>
+          <a href="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>Faça Login</a>
         </Typography>
       </Box>
       <ToastContainer />

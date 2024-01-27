@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import { loginResquest } from '../../service/api';
-import registerImage from '../../images/img_cadastro.png';
+import loginImage from '../../images/img_login.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
 
@@ -43,7 +43,7 @@ function Login() {
     <Container
       maxWidth={false}
       style={{
-        margin: '0', textAlign: 'center', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
+        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
       }}
     >
       <Box
@@ -62,21 +62,29 @@ function Login() {
           visibility: window.innerWidth <= 700 ? 'hidden' : 'visible',
         }}
       >
-        <img src={registerImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
+        <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
       </Box>
       <Box style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        display: 'flex', flexDirection: 'column', justifyContent: 'center',
       }}
       >
         <Typography
-          variant="h3"
           style={{
-            fontSize: '48px', color: 'rgba(34, 34, 68, 1)', textAlign: 'center', fontFamily: 'Roboto', fontWeight: 400, lineHeight: '40px', marginTop: '12rem',
+            color: '#222244', fontWeight: 400, lineHeight: '40px', marginTop: '8rem', fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
           }}
         >
-          Entre no Orange Portfolio
+          Entre no Orange Portfólio
         </Typography>
-        <form onSubmit={handleFormSubmit} style={{ width: '100%', maxWidth: '500px', margin: 'auto' }}>
+
+        <Typography
+          style={{
+            fontSize: '1.2rem', color: 'rgba(169, 169, 169, 1)', textAlign: 'left', fontWeight: 400, lineHeight: '40px', marginTop: '5rem',
+          }}
+        >
+          Faça login com Email
+        </Typography>
+
+        <form onSubmit={handleFormSubmit} style={{ marginTop: '1rem', width: '100%', maxWidth: '500px' }}>
           <TextField
             label="Email address"
             placeholder="email@email.com"
@@ -105,16 +113,15 @@ function Login() {
             name="password"
             style={{ marginBottom: '1rem' }}
           />
-          <DefaultButton theme={primaryButtonTheme} label="ENTRAR" onClick={handleFormSubmit} fullWidth />
-          <Typography
-            variant="h3"
-            style={{
-              fontSize: '1.2rem', textAlign: 'left', fontFamily: 'Roboto', fontWeight: 400, lineHeight: '40px',
-            }}
-          >
-            <a href="/register" style={{ textDecoration: 'none', color: 'rgba(129, 131, 136, 1)' }}> Cadastre-se</a>
-          </Typography>
+          <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
         </form>
+        <Typography
+          style={{
+            marginTop: '0rem', fontSize: '1.2rem', textDecoration: 'none', color: 'rgba(34, 34, 68, 1)', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
+          }}
+        >
+          <a href="/register" style={{ textDecoration: 'none', color: 'inherit' }}>Cadastre-se</a>
+        </Typography>
       </Box>
       <ToastContainer />
     </Container>
