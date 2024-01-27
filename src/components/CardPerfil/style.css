@@ -1,0 +1,73 @@
+* {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+
+.box__card_perfil {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 42px;
+}
+
+.container__right { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.profile {
+    flex: 0 0 auto; 
+}
+
+.text_input {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+h5 {
+    font-size: 24px;
+    line-height: 24px;
+    color: #000;
+}
+
+.location {
+    font-size: 16px;
+    letter-spacing: 0.15px;
+    color: #000;
+    opacity: 0.5;
+}
+
+.button_add {
+    margin-top: auto;
+}
+
+@media (max-width: 600px) {
+    .box__card_perfil {
+        width: 312px;
+        height: 236px;
+        flex-shrink: 0;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .container__right {
+        gap: 8px
+    }
+
+    .text_input {
+        width: 200px;
+        flex-direction: column;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+}
+
