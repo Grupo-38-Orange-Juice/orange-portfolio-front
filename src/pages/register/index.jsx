@@ -41,7 +41,7 @@ function Register() {
     <Container
       maxWidth={false}
       style={{
-        margin: '0', textAlign: 'center', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh', border: '1px solid red',
+        margin: '0', textAlign: 'center', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
       }}
     >
       <Box
