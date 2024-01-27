@@ -20,8 +20,8 @@ function Header() {
 
   return (
     <header className={styles.container}>
+      <MenuFilled className="menuFilled" />
       <div className={styles.container_logo}>
-        <MenuFilled className="menuFilled" />
         <Logo />
         <div className={styles.container_navigate}>
           <Paragraph change={() => redirectToHome}>
@@ -34,7 +34,7 @@ function Header() {
       </div>
 
       <div className={styles.container_profile}>
-        <Profile src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="60" />
+        <Profile className="profile" src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="60" />
         <NotificationIcon />
       </div>
     </header>

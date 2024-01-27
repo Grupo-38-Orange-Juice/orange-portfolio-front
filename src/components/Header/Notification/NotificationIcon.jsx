@@ -1,5 +1,5 @@
 import React from 'react';
-import notificationIcon from '../../../assets/Icon-notifications.png';
+import notificationIcon from '../../../assets/notification.svg';
 import styles from './NotificationIcon.module.css';
 
 function NotificationIcon() {
