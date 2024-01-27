@@ -11,5 +11,10 @@
         ]
       }
     ]
+  },
+  "globals": {
+    "localStorage": true,
+    "window": true,
+    "sessionStorage": true
   }
 }
