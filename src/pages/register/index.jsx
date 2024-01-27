@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { Box, Typography } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import { createUser } from '../../service/api';
@@ -16,6 +17,8 @@ function Register() {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
@@ -31,6 +34,9 @@ function Register() {
     const response = await createUser({ fullName: `${name} ${lastName}`, email, password });
     if (response.status === 201) {
       toast.success('Usuário cadastrado com sucesso!');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1200);
     } else {
       toast.error(response.data.message || 'Erro ao cadastrar usuário!');
     }
