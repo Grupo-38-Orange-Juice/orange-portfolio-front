@@ -54,8 +54,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
+body, html {
+  margin: 0;
+  padding: 0;
+
 }
 ol, ul {
 	list-style: none;
