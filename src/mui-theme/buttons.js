@@ -53,5 +53,5 @@ const createButtonTheme = (background, hoverBackground) => createTheme({
 });
 
 export const primaryButtonTheme = createButtonTheme('rgba(255, 85, 34, 1)', 'rgba(204, 68, 0, 1)');
-export const secondaryButtonTheme = createButtonTheme('rgba(68, 68, 102, 1)', 'rgba(34, 34, 68, 1)');
+export const secondaryButtonTheme = createButtonTheme('rgba(0, 0, 0, 0.12)', 'rgba(34, 34, 68, 1)');
 export const errorButtonTheme = createButtonTheme('rgba(221, 0, 0, 1)', 'rgba(187, 0, 0, 1)');
