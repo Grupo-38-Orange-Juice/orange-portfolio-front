@@ -1,0 +1,26 @@
+.edit-menu {
+    display: flex;
+    padding: 16px 0;
+    gap: 8px;
+
+    position: absolute;
+    right: 16px;
+    top: 50px;
+
+    border-radius: 8px;
+    background: var(--Neutral-Colors-Neutral-60, #FCFDFF);
+    box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.30);
+}
+
+.arrow {
+    width: 15px;
+    height: auto;
+    transform: rotate(-90deg);
+
+    position: absolute;
+    right: 24px;
+    top: 0.002px;
+
+    stroke-width: 3px;
+    stroke: #FCFDFF;
+}

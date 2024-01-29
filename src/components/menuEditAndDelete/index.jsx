@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import iconEdit from '../../assets/icon_edit.svg';
+import arrow from '../../assets/arrow1.svg';
+import './style.css';
 
 function MenuEditAndDelete() {
-  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
 
   const handleClick = (event) => {
@@ -14,18 +16,28 @@ function MenuEditAndDelete() {
     setAnchorElement(null);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick(event);
+    }
+  };
+
   return (
     <>
-      {/* aria-controls: se for true, abre edit-menu, se não, undefined */}
-      <img
+      <div
         id="iconEdit"
-        src={iconEdit}
-        alt="Menu Editar e Excluir"
+        role="button"
+        tabIndex={0}
         onClick={handleClick}
-        aria-controls={open ? 'edit-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-      />
+        onKeyDown={handleKeyDown}
+      >
+        <img
+          src={iconEdit}
+          alt="Menu Editar e Excluir"
+        />
+
+        <img className="arrow" src={arrow} alt="" />
+      </div>
       <Menu
         id="edit-menu"
         anchorEl={anchorElement}
