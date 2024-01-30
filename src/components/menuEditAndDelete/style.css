@@ -13,6 +13,8 @@
 }
 
 .arrow {
+    display: none; /* descobrir como fazer aparecer apenas quando o menu aparecer */
+
     width: 15px;
     height: auto;
     transform: rotate(-90deg);
