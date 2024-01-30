@@ -1,0 +1,16 @@
+.proj_info_frame {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.infos {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 600px) {
+    .infos {
+        flex-direction: row;
+    }
+}
