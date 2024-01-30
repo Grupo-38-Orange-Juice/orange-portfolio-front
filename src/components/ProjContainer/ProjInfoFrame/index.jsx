@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import Profile from '../../Profile/Profile';
+import ChipTag from '../../ChipTag';
 import './style.css';
 
 // função para pegar data
@@ -56,6 +57,7 @@ function ProjInfoFrame() {
           </>
         )}
       </p>
+      <ChipTag />
     </Box>
   );
 }

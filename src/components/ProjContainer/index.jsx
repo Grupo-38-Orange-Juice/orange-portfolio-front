@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import imgProj from '../../assets/img.png';
 import ProjInfoFrame from './ProjInfoFrame';
-import ChipTag from '../ChipTag';
 import './style.css';
 
 function ProjContainer() {
@@ -11,9 +10,8 @@ function ProjContainer() {
       <Box>
         <img className="img_proj" src={imgProj} alt="" />
       </Box>
-      <Box>
+      <Box className="bottom_proj">
         <ProjInfoFrame />
-        <ChipTag />
       </Box>
     </Box>
   );
