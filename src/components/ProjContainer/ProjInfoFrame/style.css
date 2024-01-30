@@ -2,11 +2,17 @@
     display: flex;
     gap: 5px;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .infos {
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+.profile {
+    align-items: center;
 }
 
 @media (max-width: 600px) {
