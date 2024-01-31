@@ -3,13 +3,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/index';
 import Register from './pages/register';
 import HomePage from './pages/HomePage/HomePage';
-import TestePag from './components/Teste/teste';
+import AdicionarProjeto from './components/PortfolioRegistration/portfolioRegistration';
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/teste" element={<TestePag />} />
+        <Route path="/adicionarprojeto" element={<AdicionarProjeto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<HomePage />} />
