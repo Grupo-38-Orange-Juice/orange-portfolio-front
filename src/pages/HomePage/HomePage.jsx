@@ -5,6 +5,7 @@ import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import ProjContainer from '../../components/ProjContainer/index';
 import DefaultContainer from '../../components/DefaultContainer/index';
+import TextfieldResponsive from '../../components/TextfieldResponsive';
 
 function HomePage() {
   const projects = [{
@@ -23,12 +24,7 @@ function HomePage() {
         </div>
         <Box className="box_proj" mt={3}>
           <h6>Meus projetos</h6>
-          <TextField
-            className="tag_text_field"
-            d="outlined-basic"
-            label="Buscar tags"
-            sx={{ width: window.innerWidth < 600 ? 288 : 513 }}
-          />
+          <TextfieldResponsive />
           <Grid container spacing={3}>
             {projects.length > 0 ? (
               projects.map((project) => (
