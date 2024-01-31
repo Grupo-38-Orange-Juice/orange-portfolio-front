@@ -34,7 +34,7 @@ function Header() {
       </div>
 
       <div className={styles.container_profile}>
-        <Profile className="profile" src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="60" />
+        <Profile className="profile" src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="41" />
         <NotificationIcon />
       </div>
     </header>
