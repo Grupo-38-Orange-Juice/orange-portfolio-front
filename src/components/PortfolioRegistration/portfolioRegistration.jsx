@@ -11,7 +11,7 @@ import CardPerfil from '../CardPerfil';
 
 Modal.setAppElement('#root');
 
-export default function PortfolioRegistration() {
+export default function AdicionarProjeto() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formValues, setFormValues] = useState({
     lastTitulo: '',

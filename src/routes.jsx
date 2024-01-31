@@ -4,11 +4,13 @@ import Register from './pages/register';
 import Login from './pages/Login';
 import HomePage from './pages/HomePage/HomePage';
 import AdicionarProjeto from './components/PortfolioRegistration/portfolioRegistration';
+import ModalSaveProject from './components/PortfolioRegistration/modalAddProject';
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/modaladd" element={<ModalSaveProject />} />
         <Route path="/adicionarprojeto" element={<AdicionarProjeto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

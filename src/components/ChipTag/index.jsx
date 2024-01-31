@@ -14,7 +14,6 @@ function ChipTag() {
   const [tag, setTag] = useState(null);
 
   useEffect(() => {
-    // função para obter a tag e atualizar o estado
     const fetchTag = async () => {
       const tagFromBackend = await getTag();
       setTag(tagFromBackend);
