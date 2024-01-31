@@ -23,17 +23,15 @@ import { createTheme } from '@mui/material';
   }
 }); */
 
-// Configurações base
 const buttonBaseStyles = {
   fontFamily: 'Roboto, sans-serif',
-  lineHeight: '26px',
+  lineHeight: '36px',
   letterSpacing: '0.46px',
   fontSize: '15px',
   color: 'rgba(255, 255, 255, 1)',
   startIcon: false,
 };
 
-// Função utilitária para criar temas de botão
 const createButtonTheme = (background, hoverBackground) => createTheme({
   components: {
     MuiButton: {

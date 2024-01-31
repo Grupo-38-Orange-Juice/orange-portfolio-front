@@ -12,7 +12,7 @@ Api.interceptors.request.use(
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     };
   },
@@ -21,25 +21,23 @@ Api.interceptors.request.use(
 
 export async function loginResquest({ email, password }) {
   try {
-    const request = await Api.post('authenticate', { email, password });
-    return request.data;
+    const request = await Api.post('login', { email, password });
+    return { data: request.data, status: request.status };
   } catch (error) {
-    return error;
+    return { data: error.response.data, status: error.response.status };
   }
 }
 
 export async function createUser({
-  name, lastname, email, password,
+  fullName, email, password,
 }) {
   try {
     const request = await Api.post('users', {
-      name, lastname, email, password,
-    })
-      .then((res) => ({ data: { ...res.data }, status: res.status }))
-      .catch((err) => err.response.data);
-    return request.data;
+      fullName, email, password,
+    });
+    return { data: request.data, status: request.status };
   } catch (error) {
-    return error;
+    return { data: error.response.data, status: error.response.status };
   }
 }
 

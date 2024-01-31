@@ -1,0 +1,26 @@
+.proj_container {
+    width: 380px;
+    height: 290px;
+    gap: 1px;
+
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.img_proj {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+
+    background: #d3d3d3 50%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 600px) {
+    .proj_container {
+        width: 310px;
+        height: 210px;
+    }
+}
