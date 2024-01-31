@@ -52,7 +52,6 @@ function Login() {
           maxWidth: '450px',
           marginBottom: '0px',
           height: '100%',
-          flex: '1',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

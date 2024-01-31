@@ -10,6 +10,7 @@ function CardPerfil({
   user = 'Camila Soares', location = 'Brasil',
 }) {
   const handleAddProject = () => {
+    window.location.href = '/adicionarprojeto';
     console.log('Projeto adicionado!');
   };
   return (
