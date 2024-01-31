@@ -1,37 +1,27 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, {
+  createContext, useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import {
-  getTokenStorage, setTokenLocalStorage, clearTokenLocalStorage, clearTokenSessionStorage,
+  getTokenStorage, clearTokenLocalStorage, clearTokenSessionStorage,
 } from './util';
-import { createUser, loginResquest } from '../../service/api';
+import { meRequest } from '../../service/api';
 
 export const AuthContext = createContext({});
 
-function authProvider({ children }) {
+function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const localToken = getTokenStorage();
-
-    if (token) {
-      setToken(localToken);
+  useEffect(async () => {
+    setToken(getTokenStorage());
+    const response = await meRequest(token);
+    if (response.status === 200) {
+      setUser(response.data);
+    } else {
+      console.log('Usuário não autenticado');
     }
   }, []);
-
-  async function authenticate(email, password) {
-    const response = await loginResquest(email, password);
-    if (response.token !== undefined) {
-      const payload = { token: response.token };
-      setToken(payload);
-      setTokenLocalStorage(payload);
-    } else {
-      throw new Error('Usuário não autenticado');
-    }
-  }
-  authenticate.propTypes = {
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  };
 
   function logout() {
     setToken(null);
@@ -39,38 +29,21 @@ function authProvider({ children }) {
     clearTokenSessionStorage();
   }
 
-  async function accountCreate(name, email, password, role) {
-    const response = await createUser(name, email, password, role);
-
-    if (response.status === 400) {
-      throw new Error(response.message);
-    }
-
-    setToken(response.data);
-    setTokenLocalStorage(response.data.token);
-
-    return response.data;
-  }
-
-  accountCreate.propTypes = {
-    name: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  };
+  const authContextValue = useMemo(() => ({
+    token,
+    user,
+    logout,
+  }), [token, user]);
 
   return (
-    <AuthContext.Provider value={{
-      ...token, authenticate, logout, accountCreate,
-    }}
-    >
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-authProvider.propTypes = {
+AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default authProvider;
+export default AuthProvider;

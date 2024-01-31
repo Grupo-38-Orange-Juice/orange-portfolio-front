@@ -41,4 +41,13 @@ export async function createUser({
   }
 }
 
+export async function meRequest() {
+  try {
+    const request = await Api.get('me');
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
 export default Api;
