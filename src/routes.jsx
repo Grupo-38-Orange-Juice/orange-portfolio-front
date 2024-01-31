@@ -4,15 +4,30 @@ import Register from './pages/register';
 import Login from './pages/Login';
 import HomePage from './pages/HomePage/HomePage';
 import AdicionarProjeto from './components/PortfolioRegistration/portfolioRegistration';
+import AuthProvider from './context/AuthProvider/authProvider';
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/adicionarprojeto" element={<AdicionarProjeto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={(
+            <AuthProvider>
+              <HomePage />
+            </AuthProvider>
+        )}
+        />
+        <Route
+          path="/adicionarprojeto"
+          element={(
+            <AuthProvider>
+              <AdicionarProjeto />
+            </AuthProvider>
+          )}
+        />
       </Routes>
     </BrowserRouter>
   );
