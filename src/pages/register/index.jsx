@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { Box, Typography } from '@mui/material';
@@ -17,8 +17,21 @@ function Register() {
     email: '',
     password: '',
   });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
@@ -49,6 +62,7 @@ function Register() {
         margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
       }}
     >
+      {windowWidth > 700 && (
       <Box
         style={{
           width: '100%',
@@ -67,6 +81,8 @@ function Register() {
       >
         <img src={registerImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
       </Box>
+      )}
+
       <Box style={{
         flexDirection: 'column', justifyContent: 'center',
       }}
