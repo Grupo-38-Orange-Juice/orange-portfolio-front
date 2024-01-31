@@ -1,6 +1,6 @@
 .proj_container {
     width: 380px;
-    height: 290px;
+    height: 280px;
     gap: 1px;
 
     display: flex;
@@ -20,7 +20,7 @@
 
 @media (max-width: 600px) {
     .proj_container {
-        width: 310px;
-        height: 210px;
+        width: 320px;
+        height: 220px;
     }
 }

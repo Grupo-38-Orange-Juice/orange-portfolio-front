@@ -6,7 +6,7 @@
 .box__card_perfil {
     width: auto;
     height: auto;
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     align-items: stretch;
     gap: 42px;
@@ -50,7 +50,7 @@ h5 {
 
 @media (max-width: 600px) {
     .box__card_perfil {
-        width: 312px;
+        width: 359px;
         height: 236px;
         flex-shrink: 0;
         display: inline-flex;

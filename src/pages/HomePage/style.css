@@ -1,17 +1,14 @@
 * {
     padding: 0;
-}
-
-.container_top {
-    width: 100%;
-    height: 500px;
     align-items: center;
 }
 
-.card_perfil {
-    margin: auto;
-    display: block;
-}
+.title_proj {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+  }
 
 .tag_text_field {
     display: flex;
