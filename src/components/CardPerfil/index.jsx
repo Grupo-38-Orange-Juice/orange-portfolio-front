@@ -15,7 +15,9 @@ function CardPerfil({
   };
   return (
     <Box className="box__card_perfil">
-      <Profile className="profile" src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="130" />
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Profile className="profile" src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="130" />
+      </Box>
       <Box className="container__right">
         <Box className="text_input">
           <h5>{user}</h5>

@@ -42,6 +42,10 @@
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 0;
+  }
+
   .container_navigate {
     display: none;  
   }

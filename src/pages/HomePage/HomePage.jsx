@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
-// import { auto, left } from '@popperjs/core';
+import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import ProjContainer from '../../components/ProjContainer/index';
@@ -47,23 +47,68 @@ function HomePage() {
           margin: 'auto',
           width: '100%',
           maxWidth: 1980,
+          // media
           '@media (max-width: 600px)': {
             alignItems: 'center',
           },
         }}
       >
         <Box sx={{
-          height: '200px', display: 'flex', alignItems: 'end', justifyContent: 'center',
+          height: '200px',
+          display: 'flex',
+          alignItems: 'end',
+          justifyContent: 'center',
+          // media
+          '@media (max-width: 600px)': {
+            height: '0',
+            display: 'flex',
+            margin: '40px auto 0 auto',
+          },
         }}
         >
           <CardPerfil />
         </Box>
-        <Box className="box_proj" mt={3}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '18px' }}>
-            <h6 className="title_proj">Meus projetos</h6>
+        <Box
+          className="box_proj"
+          mt={3}
+          sx={{
+            marginLeft: { xs: 0, md: 'auto' },
+          }}
+        >
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            marginTop: '18px',
+            marginBottom: '30px',
+            // media
+            '@media (max-width: 600px)': {
+              alignItems: 'center',
+              justifyContent: 'start',
+            },
+          }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: '20px',
+                fontStyle: 'normal',
+                fontWeight: '500',
+                letterSpacing: '0.15px',
+                opacity: '0.6',
+                // media
+                '@media (max-width: 600px)': {
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'start',
+                },
+              }}
+            >
+              Meus projetos
+            </Typography>
             <TextfieldResponsive />
           </Box>
-          <Grid container spacing={10} sx={{ paddingTop: '40px' }}>
+          <Grid container spacing={8} sx={{ '@media (max-width: 600px)': { alignItems: 'center', justifyContent: 'center' } }}>
             {projects.length > 0 ? (
               projects.map((project) => (
                 <Grid
@@ -73,6 +118,14 @@ function HomePage() {
                   sm={6}
                   md={4}
                   lg={4}
+                  sx={{
+                    width: '100%',
+                    // media
+                    '@media (max-width: 600px)': {
+                      display: 'flex',
+                      justifyContent: 'center',
+                    },
+                  }}
                 >
                   <ProjContainer
                     id={project.id}
