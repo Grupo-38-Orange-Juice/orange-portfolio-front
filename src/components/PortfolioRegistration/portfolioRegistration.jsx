@@ -69,7 +69,7 @@ export default function PortfolioRegistration() {
             },
             content: {
               maxWidth: '900px',
-              margin: '8% auto auto auto',
+              margin: '5% auto auto auto',
 
             },
           }}
@@ -79,21 +79,21 @@ export default function PortfolioRegistration() {
               fontFamily: 'Roboto, sans-serif',
               fontSize: '30px',
               color: '#515255',
-              margin: '10px 0px 10px 10px',
+              margin: 'auto',
             }}
           >
-            <p>Adicionar Projeto</p>
+            <h1>Adicionar Projeto</h1>
           </Box>
           <Box
             style={{
               fontFamily: 'Roboto, sans-serif',
               fontSize: '15px',
               color: '#515255',
-              margin: '10px 0px 10px 10px',
+              margin: '10px 0px 0px 0px',
               maxWidth: '100%',
             }}
           >
-            <p>Selecione um conteudo que vc deseja fazer upload</p>
+            <h3>Selecione um conteudo que vc deseja fazer upload</h3>
           </Box>
           <Box
             style={{
@@ -170,7 +170,7 @@ export default function PortfolioRegistration() {
               display: 'grid',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: windowWidth <= 950 ? '40px auto 0px auto' : '-320px 0px 0px 0px',
+              margin: windowWidth <= 950 ? '40px auto 0px auto' : '-340px 0px 0px 0px',
             }}
           >
             <img
@@ -187,7 +187,7 @@ export default function PortfolioRegistration() {
               margin: windowWidth <= 950 ? '10px auto 5px 15%' : '10px 0px 0px 0px',
             }}
           >
-            <p> Visualizar Publicação</p>
+            <h1> Visualizar Publicação</h1>
           </Box>
 
           <Box
@@ -198,7 +198,7 @@ export default function PortfolioRegistration() {
               flexDirection: 'row',
               justifyContent: 'flex-start',
               gap: '20px',
-              margin: windowWidth <= 950 ? 'auto' : '0px 0px 0px 0px',
+              margin: windowWidth <= 950 ? 'auto' : '10px 0px 0px 0px',
             }}
           >
             <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={closeModal} style={{ margin: '0 0.5rem 0 0' }} />
