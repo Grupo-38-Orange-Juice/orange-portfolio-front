@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/register';
 import Login from './pages/Login';
-import HomePage from './pages/HomePage/HomePage';
+import HomePage from './pages/homePage/HomePage';
 import AdicionarProjeto from './components/PortfolioRegistration/portfolioRegistration';
 import AuthProvider from './context/AuthProvider/authProvider';
 

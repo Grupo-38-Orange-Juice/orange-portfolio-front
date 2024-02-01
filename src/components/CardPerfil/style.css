@@ -6,9 +6,8 @@
 .box__card_perfil {
     width: auto;
     height: auto;
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
-    align-items: stretch;
     gap: 42px;
 }
 
@@ -21,15 +20,11 @@
     flex: 1;
 }
 
-.profile {
-    flex: 0 0 auto; 
-}
-
-.text_input {
+/* .text_input {
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
+} */
 
 h5 {
     font-size: 24px;
@@ -50,8 +45,8 @@ h5 {
 
 @media (max-width: 600px) {
     .box__card_perfil {
-        width: 312px;
-        height: 236px;
+        width: auto;
+        height: auto;
         flex-shrink: 0;
         display: inline-flex;
         flex-direction: column;
