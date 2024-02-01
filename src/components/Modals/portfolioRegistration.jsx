@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
-import Header from '../Header/Header';
-import Logo from '../Header/Logo/Logo';
 import DefaultButton from '../default-button';
 import ImageUpload from '../../images/Upload.svg';
-import CardPerfil from '../CardPerfil';
 
 Modal.setAppElement('#root');
 
-export default function AdicionarProjeto() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
     lastTags: '',
@@ -33,14 +30,6 @@ export default function AdicionarProjeto() {
     };
   }, []);
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({
@@ -51,17 +40,10 @@ export default function AdicionarProjeto() {
 
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
-      <Header />
-      <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
-      <CardPerfil />
-
-      <Logo />
-      <p> teste </p>
-
       {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          onRequestClose={toggleModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -201,11 +183,15 @@ export default function AdicionarProjeto() {
               margin: windowWidth <= 950 ? 'auto' : '10px 0px 0px 0px',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={closeModal} style={{ margin: '0 0.5rem 0 0' }} />
-            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={closeModal} style={{ margin: '0 0 0 0.5rem' }} />
+            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={toggleModal} style={{ margin: '0 0.5rem 0 0' }} />
+            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={toggleModal} style={{ margin: '0 0 0 0.5rem' }} />
           </Box>
         </Modal>
       )}
     </Box>
   );
 }
+AdicionarProjeto.propTypes = {
+  modalIsOpen: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};

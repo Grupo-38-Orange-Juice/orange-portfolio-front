@@ -9,11 +9,9 @@ import './style.css';
 function CardPerfil({
   user = 'Camila Soares',
   location = 'Brasil',
-}) {
-  const handleAddProject = () => {
-    window.location.href = '/adicionarprojeto';
-  };
+  toggleModal,
 
+}) {
   return (
     <Box className="box__card_perfil">
       <Profile className="profile" src="https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg" size="130" />
@@ -22,7 +20,7 @@ function CardPerfil({
           <h5>{user}</h5>
           <p className="location">{location}</p>
         </Box>
-        <DefaultButton className="button_add" theme={primaryButtonTheme} label="Adicionar projeto" onClick={handleAddProject} size="sm" />
+        <DefaultButton className="button_add" theme={primaryButtonTheme} label="Adicionar projeto" onClick={toggleModal} size="sm" />
       </Box>
     </Box>
   );
@@ -31,6 +29,7 @@ function CardPerfil({
 CardPerfil.propTypes = {
   user: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default CardPerfil;

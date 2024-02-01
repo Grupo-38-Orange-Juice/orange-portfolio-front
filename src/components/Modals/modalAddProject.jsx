@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
+import PropTypes from 'prop-types';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import Header from '../Header/Header';
 import DefaultButton from '../default-button';
@@ -12,8 +13,7 @@ import foto from '../../images/Circle.svg';
 
 Modal.setAppElement('#root');
 
-export default function ModalSaveProject() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export default function ModalAddProject({ modalIsOpen, toggleModal }) {
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
     lastTags: '',
@@ -32,13 +32,6 @@ export default function ModalSaveProject() {
     };
   }, []);
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
     setFormValues((prevValues) => ({
@@ -50,13 +43,13 @@ export default function ModalSaveProject() {
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       <Header />
-      <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
+      <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={toggleModal} fullWidth />
       <CardPerfil />
 
       {modalIsOpen && (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          onRequestClose={toggleModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -75,7 +68,7 @@ export default function ModalSaveProject() {
               right: '10px',
               cursor: 'pointer',
             }}
-            onClick={closeModal}
+            onClick={toggleModal}
           >
             <CloseIcon />
           </Box>
@@ -149,3 +142,8 @@ export default function ModalSaveProject() {
     </Box>
   );
 }
+
+ModalAddProject.propTypes = {
+  modalIsOpen: PropTypes.bool.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
