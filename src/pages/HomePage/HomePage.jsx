@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
@@ -6,8 +6,14 @@ import CardPerfil from '../../components/CardPerfil';
 import ProjContainer from '../../components/ProjContainer/index';
 import DefaultContainer from '../../components/DefaultContainer/index';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
+import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 
 function HomePage() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
   const projects = [{
     id: 1,
     imgSrc: 'https://i.pinimg.com/564x/da/9f/4a/da9f4a89b3eeefedc675aa25536235d8.jpg',
@@ -66,7 +72,7 @@ function HomePage() {
           },
         }}
         >
-          <CardPerfil />
+          <CardPerfil toggleModal={toggleModal} />
         </Box>
         <Box
           className="box_proj"
@@ -143,6 +149,7 @@ function HomePage() {
           </Box>
         </Box>
       </Container>
+      <AdicionarProjeto modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
     </main>
   );
 }
