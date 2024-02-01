@@ -48,7 +48,7 @@ function HomePage() {
           width: '100%',
           maxWidth: 1980,
           // media
-          '@media (max-width: 600px)': {
+          '@media (max-width: 700px)': {
             alignItems: 'center',
           },
         }}
@@ -59,7 +59,7 @@ function HomePage() {
           alignItems: 'end',
           justifyContent: 'center',
           // media
-          '@media (max-width: 600px)': {
+          '@media (max-width: 700px)': {
             height: '0',
             display: 'flex',
             margin: '40px auto 0 auto',
@@ -82,7 +82,7 @@ function HomePage() {
             marginTop: '18px',
             marginBottom: '30px',
             // media
-            '@media (max-width: 600px)': {
+            '@media (max-width: 700px)': {
               alignItems: 'center',
               justifyContent: 'start',
             },
@@ -97,7 +97,7 @@ function HomePage() {
                 letterSpacing: '0.15px',
                 opacity: '0.6',
                 // media
-                '@media (max-width: 600px)': {
+                '@media (max-width: 700px)': {
                   display: 'flex',
                   alignItems: 'flex-start',
                   justifyContent: 'start',
@@ -108,37 +108,39 @@ function HomePage() {
             </Typography>
             <TextfieldResponsive />
           </Box>
-          <Grid container spacing={8} sx={{ '@media (max-width: 600px)': { alignItems: 'center', justifyContent: 'center' } }}>
-            {projects.length > 0 ? (
-              projects.map((project) => (
-                <Grid
-                  item
-                  key={project.id}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={4}
-                  sx={{
-                    width: '100%',
-                    // media
-                    '@media (max-width: 600px)': {
-                      display: 'flex',
-                      justifyContent: 'center',
-                    },
-                  }}
-                >
-                  <ProjContainer
-                    id={project.id}
-                    imgSrc={project.imgSrc}
-                    user={project.user}
-                    location={project.location}
-                  />
-                </Grid>
-              ))
-            ) : (
-              <DefaultContainer />
-            )}
-          </Grid>
+          <Box>
+            <Grid container spacing={8} sx={{ '@media (max-width: 700px)': { alignItems: 'center', justifyContent: 'center' } }}>
+              {projects.length > 0 ? (
+                projects.map((project) => (
+                  <Grid
+                    item
+                    key={project.id}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={4}
+                    sx={{
+                      width: '100%',
+                      // media
+                      '@media (max-width: 700px)': {
+                        display: 'flex',
+                        justifyContent: 'center',
+                      },
+                    }}
+                  >
+                    <ProjContainer
+                      id={project.id}
+                      imgSrc={project.imgSrc}
+                      user={project.user}
+                      location={project.location}
+                    />
+                  </Grid>
+                ))
+              ) : (
+                <DefaultContainer />
+              )}
+            </Grid>
+          </Box>
         </Box>
       </Container>
     </main>
