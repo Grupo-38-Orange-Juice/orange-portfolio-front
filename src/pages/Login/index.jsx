@@ -58,10 +58,19 @@ function Login() {
           justifyContent: 'center',
           padding: '0px',
           overflow: 'hidden',
+
           visibility: window.innerWidth <= 700 ? 'hidden' : 'visible',
         }}
       >
-        <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
+        <img
+          src={loginImage}
+          alt="Imagem de registro"
+          style={{
+            width: '100%',
+            height: '100%',
+            '@media (max-Width: 700)': { display: 'none' },
+          }}
+        />
       </Box>
       <Box style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
