@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
@@ -8,10 +8,12 @@ import DefaultContainer from '../../components/DefaultContainer/index';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 import projects from '../../mocks/projects';
+import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const { projectsInfo } = useContext(ProjectsContext);
+  console.log(projectsInfo);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };

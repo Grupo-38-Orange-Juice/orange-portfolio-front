@@ -10,8 +10,11 @@ function ProjContainer({
   projectId, image, tags, createdAt,
 }) {
   return (
-    <Box className="proj_container" key={projectId}>
-      <Box>
+    <Box className="proj_container" key={projectId} sx={{ maxwidth: '100%', maxHeight: '100%' }}>
+      <Box sx={{
+        maxwidth: '100%', maxHeight: '100%', display: 'flex', justifyContent: 'center', justifyItems: 'center', alignItems: 'center', alignContent: 'center',
+      }}
+      >
         <img className="img_proj" src={image || imgProj} alt="" />
       </Box>
       <Box className="bottom_proj">

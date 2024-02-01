@@ -12,11 +12,9 @@ const formatDate = (date) => {
   return `${month}/${year}`;
 };
 
-// estado para armazenar o nome do usuário
 function ProjInfoFrame({ createdAt, tags }) {
   const { user } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-  console.log(tags);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
@@ -30,24 +28,29 @@ function ProjInfoFrame({ createdAt, tags }) {
 
   return (
     <Box className="proj_info_frame">
-      <Profile size="26" className="profile" image={user.image || ''} />
-      <p className="infos">
-        {user.fullName}
-        {isMobile ? (
-          <>
-            <br />
-            {formatDate(createdAt)}
-          </>
-        ) : (
-          /* se a tela for maior que 600px, rendeniza o "•" */
-          <>
-            {' '}
-            •
-            {' '}
-            {formatDate(createdAt)}
-          </>
+      {user
+        && (
+        <>
+          <Profile size="26" className="profile" image={user.image} />
+          <p className="infos">
+            {user.fullName}
+            {isMobile ? (
+              <>
+                <br />
+                {formatDate(createdAt)}
+              </>
+            ) : (
+            /* se a tela for maior que 600px, rendeniza o "•" */
+              <>
+                {' '}
+                •
+                {' '}
+                {formatDate(createdAt)}
+              </>
+            )}
+          </p>
+        </>
         )}
-      </p>
       <Box className="tags">
         {tags && tags.length > 0 && tags.map((tag) => (
           <Chip tag={tag} key={tag} />
