@@ -8,7 +8,6 @@ import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function HomePage() {
   const { projectsInfo } = useContext(ProjectsContext);
-  console.log(projectsInfo);
   return (
     <main>
       <Header />
