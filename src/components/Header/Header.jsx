@@ -4,15 +4,13 @@ import Paper from '@mui/material/Paper';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography';
 import styles from './Header.module.css';
 import Logo from './Logo/Logo';
 import Profile from '../Profile/Profile';
 import NotificationIcon from './Notification/NotificationIcon';
 import Paragraph from './Paragraph/Paragraph';
 import MenuFilled from './MenuFilledBar';
-import NotificationPopup from '../NotificationModal';
 
 function Header() {
   // menu
@@ -20,9 +18,9 @@ function Header() {
   const [menuAnchor, setMenuAnchor] = useState(null);
 
   // notification
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [popupOpen, setPopupOpen] = useState(false);
+  const [notificationAnchor, setNotificationAnchor] = useState(null);
 
+  // redirecionamentos
   function redirectToHome() {
     navigate('/');
   }
@@ -35,6 +33,7 @@ function Header() {
     navigate('/Settings');
   };
 
+  // handles menu
   const handleMenuClick = (event) => {
     setMenuAnchor(event.currentTarget);
   };
@@ -48,11 +47,13 @@ function Header() {
     handleMenuClose();
   };
 
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbarOpen(false);
+  // handles notification
+  const handleNotificationClick = (event) => {
+    setNotificationAnchor(event.currentTarget);
+  };
+
+  const closeNotificationPopup = () => {
+    setNotificationAnchor(null);
   };
 
   const menuOptions = [
@@ -66,15 +67,6 @@ function Header() {
       id: 'settings', label: 'Configurações', path: '/Settings', onClick: redirectToSettings,
     },
   ];
-
-  const handleNotificationClick = () => {
-    console.log('Ícone de notificação clicado!');
-    setPopupOpen(true);
-  };
-
-  const closeNotificationPopup = () => {
-    setPopupOpen(false);
-  };
 
   return (
     <header className={styles.container}>
@@ -121,17 +113,25 @@ function Header() {
         <NotificationIcon onClick={handleNotificationClick} />
       </div>
 
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
+      <Popover
+        open={Boolean(notificationAnchor)}
+        anchorEl={notificationAnchor}
+        onClose={closeNotificationPopup}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
       >
-        <Alert onClose={handleSnackbarClose} severity="info">
-          Notificação clicada!
-        </Alert>
-      </Snackbar>
-
-      {popupOpen && <NotificationPopup onClose={closeNotificationPopup} />}
+        <Paper sx={{ height: '50px', padding: '10px', alignItems: 'flex-start' }}>
+          <Typography variant="subtitle1">
+            Você não possui notificações no momento.
+          </Typography>
+        </Paper>
+      </Popover>
     </header>
   );
 }

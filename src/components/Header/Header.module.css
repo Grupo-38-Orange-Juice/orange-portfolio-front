@@ -12,6 +12,11 @@
   position: relative;
 }
 
+.menuFilled,
+.notificationIcon {
+  cursor: pointer;
+}
+
 /* .container_logo_navigate {
   display: flex;
   align-items: center;
