@@ -2,6 +2,11 @@
     padding: 0;
 }
 
+.grid_projects {
+    display: flex;
+    flex-direction: row;
+}
+
 .title_proj {
     font-size: 20px;
     font-style: normal;
