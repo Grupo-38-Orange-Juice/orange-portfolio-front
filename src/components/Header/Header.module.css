@@ -12,6 +12,11 @@
   position: relative;
 }
 
+.menuFilled,
+.notificationIcon {
+  cursor: pointer;
+}
+
 /* .container_logo_navigate {
   display: flex;
   align-items: center;
@@ -42,6 +47,10 @@
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 0;
+  }
+
   .container_navigate {
     display: none;  
   }
