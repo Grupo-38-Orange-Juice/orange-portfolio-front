@@ -7,12 +7,11 @@ import { primaryButtonTheme } from '../../mui-theme/buttons';
 import './style.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
 
-function CardPerfil({ location = 'Brasil' }) {
+function CardPerfil({ location }) {
   const { user } = useContext(AuthContext);
 
   const handleAddProject = () => {
     window.location.href = '/adicionarprojeto';
-    console.log('Projeto adicionado!');
   };
   return (
     <Box className="box__card_perfil">
@@ -29,10 +28,10 @@ function CardPerfil({ location = 'Brasil' }) {
 }
 
 CardPerfil.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.string,
 };
 
-PropTypes.defaultProps = {
+CardPerfil.defaultProps = {
   location: 'Brasil',
 };
 
