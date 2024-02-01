@@ -8,7 +8,7 @@ import './style.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
 
 function CardPerfil({
-  location = 'Brasil',
+  location,
   toggleModal,
 
 }) {
@@ -30,11 +30,11 @@ function CardPerfil({
 }
 
 CardPerfil.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.string,
   toggleModal: PropTypes.func.isRequired,
 };
 
-PropTypes.defaultProps = {
+CardPerfil.defaultProps = {
   location: 'Brasil',
 };
 

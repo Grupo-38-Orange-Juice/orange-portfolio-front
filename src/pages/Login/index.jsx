@@ -59,34 +59,6 @@ function Login() {
         margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
       }}
     >
-<<<<<<< HEAD
-      <Box
-        style={{
-          width: '100%',
-          maxWidth: '450px',
-          marginBottom: '0px',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '0px',
-          overflow: 'hidden',
-
-          visibility: window.innerWidth <= 700 ? 'hidden' : 'visible',
-        }}
-      >
-        <img
-          src={loginImage}
-          alt="Imagem de registro"
-          style={{
-            width: '100%',
-            height: '100%',
-            '@media (max-Width: 700)': { display: 'none' },
-          }}
-        />
-      </Box>
-=======
       {
   windowWidth > 700 && (
   <Box
@@ -107,7 +79,6 @@ function Login() {
   </Box>
   )
     }
->>>>>>> 181fbe2dde7cfa6928a011693ff4a2ea7166ed23
       <Box style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
       }}

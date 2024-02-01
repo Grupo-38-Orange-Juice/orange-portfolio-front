@@ -54,6 +54,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               margin: '5% auto auto auto',
 
             },
+            zIndex: 1000,
           }}
         >
           <Box
