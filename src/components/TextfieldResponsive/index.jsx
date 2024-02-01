@@ -24,7 +24,7 @@ function TextfieldResponsive() {
       className="tag_text_field"
       id="outlined-basic"
       label="Buscar tags"
-      sx={{ width: textFieldWidth }}
+      sx={{ width: textFieldWidth, zIndex: -1 }}
     />
   );
 }
