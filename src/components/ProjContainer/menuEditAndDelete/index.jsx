@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
-import iconEdit from '../../assets/icon_edit.svg';
-import arrow from '../../assets/arrow1.svg';
+import iconEdit from '../../../assets/icon_edit.svg';
+import arrow from '../../../assets/arrow1.svg';
 import './style.css';
 
 function MenuEditAndDelete() {
