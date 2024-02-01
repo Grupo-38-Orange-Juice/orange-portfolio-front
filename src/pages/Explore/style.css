@@ -1,6 +1,5 @@
 * {
     padding: 0;
-    align-items: center;
 }
 
 .title_proj {
@@ -9,6 +8,13 @@
     font-weight: 500;
     letter-spacing: 0.15px;
   }
+
+.tag_text_field {
+    display: flex;
+    min-height: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 @media (max-width: 600px) {
     .tag_text_field {

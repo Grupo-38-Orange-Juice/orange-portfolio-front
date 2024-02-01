@@ -40,7 +40,7 @@ function Explore() {
         disableGutters
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
           margin: 'auto',
@@ -49,67 +49,22 @@ function Explore() {
           // media
           '@media (max-width: 700px)': {
             alignItems: 'center',
+            flexDirection: 'column',
           },
         }}
       >
-        <Box sx={{
-          height: '200px',
-          display: 'flex',
-          alignItems: 'end',
-          justifyContent: 'center',
-          // media
-          '@media (max-width: 700px)': {
-            height: '0',
-            display: 'flex',
-            margin: '40px auto 0 auto',
-          },
-        }}
-        >
+        <Box sx={{ width: '750px' }}>
           <Typography
             variant="h4"
             fontSize={34}
             sx={{
-              display: 'flex', alignItems: 'center', fontWeight: '400', letterSpacing: '0.25px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '400', letterSpacing: '0.25px',
             }}
           >
             Junte-se à comunidade de inovação,
             inspiração e descobertas, transformando experiências
             em conexões inesquecíveis
           </Typography>
-          <TextfieldResponsive />
-          <Box>
-            <Grid container spacing={8} sx={{ '@media (max-width: 700px)': { alignItems: 'center', justifyContent: 'center' } }}>
-              {projects.length > 0 ? (
-                projects.map((project) => (
-                  <Grid
-                    item
-                    key={project.id}
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={4}
-                    sx={{
-                      width: '100%',
-                      // media
-                      '@media (max-width: 700px)': {
-                        display: 'flex',
-                        justifyContent: 'center',
-                      },
-                    }}
-                  >
-                    <ProjContainer
-                      id={project.id}
-                      imgSrc={project.imgSrc}
-                      user={project.user}
-                      location={project.location}
-                    />
-                  </Grid>
-                ))
-              ) : (
-                <DefaultContainer />
-              )}
-            </Grid>
-          </Box>
         </Box>
       </Container>
     </main>
