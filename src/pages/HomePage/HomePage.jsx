@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
@@ -7,38 +7,15 @@ import ProjContainer from '../../components/ProjContainer/index';
 import DefaultContainer from '../../components/DefaultContainer/index';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
+// import projectsInfoMock from '../../mocks/projects';
+import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const { projectsInfo } = useContext(ProjectsContext);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
-  const projects = [{
-    id: 1,
-    imgSrc: 'https://i.pinimg.com/564x/da/9f/4a/da9f4a89b3eeefedc675aa25536235d8.jpg',
-    user: 'Camila Soares',
-    location: 'Brasil',
-  },
-  {
-    id: 2,
-    imgSrc: 'https://i.pinimg.com/564x/c7/e3/f7/c7e3f73a8b94146f9740005f1a3d64a0.jpg',
-    user: 'Van Gogh',
-    location: 'Holanda',
-  },
-  {
-    id: 3,
-    imgSrc: 'https://i.pinimg.com/564x/28/44/90/2844905f4dee9d692893c2cb4a283456.jpg',
-    user: 'Frida Kahlo',
-    location: 'México',
-  },
-  {
-    id: 4,
-    imgSrc: 'https://i.pinimg.com/564x/1d/4f/fa/1d4ffa294f0eb98ce6af7ac62d4213ee.jpg',
-    user: 'Rita Lee',
-    location: 'Brasil',
-  },
-  ];
 
   return (
     <main>
@@ -116,11 +93,11 @@ function HomePage() {
           </Box>
           <Box>
             <Grid container spacing={8} sx={{ '@media (max-width: 700px)': { alignItems: 'center', justifyContent: 'center' } }}>
-              {projects.length > 0 ? (
-                projects.map((project) => (
+              {projectsInfo.length > 0 ? (
+                projectsInfo.map((info) => (
                   <Grid
                     item
-                    key={project.id}
+                    key={info.project.id}
                     xs={12}
                     sm={6}
                     md={4}
@@ -135,10 +112,10 @@ function HomePage() {
                     }}
                   >
                     <ProjContainer
-                      id={project.id}
-                      imgSrc={project.imgSrc}
-                      user={project.user}
-                      location={project.location}
+                      projectId={info.project.id}
+                      image={info.project.image}
+                      tags={[]}
+                      createdAt={info.project.createdAt}
                     />
                   </Grid>
                 ))

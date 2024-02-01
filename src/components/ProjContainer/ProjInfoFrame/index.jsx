@@ -1,65 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { Box } from '@mui/material';
+import React, { useState, useEffect, useContext } from 'react';
+import { Box, Chip } from '@mui/material';
+import PropTypes from 'prop-types';
 import Profile from '../../Profile/Profile';
-import ChipTag from '../../ChipTag';
 import './style.css';
+import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
-// função para pegar data
-function getCurrentDate() {
-  const currentDate = new Date();
-  const options = { month: '2-digit', year: '2-digit' };
-  return currentDate.toLocaleDateString('pt-BR', options);
-}
+const formatDate = (date) => {
+  const newDate = new Date(date);
+  const month = String(newDate.getMonth() + 1).padStart(2, '0');
+  const year = newDate.getFullYear().toString().slice(2);
+  return `${month}/${year}`;
+};
 
-// estado para armazenar o nome do usuário
-function ProjInfoFrame() {
-  const [user, setUser] = useState('');
+function ProjInfoFrame({ createdAt, tags }) {
+  const { user } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-
-  // função para pegar nome do usuário
-  const getUser = () => {
-    setUser('Camila Soares');
-  };
-
   useEffect(() => {
-    getUser();
-
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
     };
 
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  const dateCreated = getCurrentDate();
-
   return (
     <Box className="proj_info_frame">
-      <Profile size="26" className="profile" />
-      <p className="infos">
-        {user}
-        {isMobile ? (
-          <>
-            <br />
-            {dateCreated}
-          </>
-        ) : (
-          /* se a tela for maior que 600px, rendeniza o "•" */
-          <>
-            {' '}
-            •
-            {' '}
-            {dateCreated}
-          </>
+      {user
+        && (
+        <>
+          <Profile size="26" className="profile" image={user.image} />
+          <p className="infos">
+            {user.fullName}
+            {isMobile ? (
+              <>
+                <br />
+                {formatDate(createdAt)}
+              </>
+            ) : (
+            /* se a tela for maior que 600px, rendeniza o "•" */
+              <>
+                {' '}
+                •
+                {' '}
+                {formatDate(createdAt)}
+              </>
+            )}
+          </p>
+        </>
         )}
-      </p>
-      <ChipTag />
+      <Box className="tags">
+        {tags && tags.length > 0 && tags.map((tag) => (
+          <Chip tag={tag} key={tag} />
+        ))}
+      </Box>
     </Box>
   );
 }
+
+ProjInfoFrame.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  createdAt: PropTypes.string.isRequired,
+};
 
 export default ProjInfoFrame;
