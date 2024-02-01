@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -16,7 +16,20 @@ function Login() {
     email: '',
     password: '',
   });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
@@ -46,6 +59,7 @@ function Login() {
         margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
       }}
     >
+<<<<<<< HEAD
       <Box
         style={{
           width: '100%',
@@ -72,13 +86,35 @@ function Login() {
           }}
         />
       </Box>
+=======
+      {
+  windowWidth > 700 && (
+  <Box
+    style={{
+      width: '100%',
+      maxWidth: '450px',
+      marginBottom: '0px',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '0px',
+      overflow: 'hidden',
+    }}
+  >
+    <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
+  </Box>
+  )
+    }
+>>>>>>> 181fbe2dde7cfa6928a011693ff4a2ea7166ed23
       <Box style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
       }}
       >
         <Typography
           style={{
-            color: '#222244', fontWeight: 400, lineHeight: '40px', marginTop: '8rem', fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
+            color: '#222244', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '8rem', fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
           }}
         >
           Entre no Orange Portfólio

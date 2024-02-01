@@ -1,76 +1,51 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, {
+  createContext, useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import {
-  getTokenStorage, setTokenLocalStorage, clearTokenLocalStorage, clearTokenSessionStorage,
+  getTokenStorage, clearTokenLocalStorage, clearTokenSessionStorage,
 } from './util';
-import { createUser, loginResquest } from '../../service/api';
+import { meRequest } from '../../service/api';
 
 export const AuthContext = createContext({});
 
-function authProvider({ children }) {
-  const [token, setToken] = useState(null);
+function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const localToken = getTokenStorage();
+  const fetchUser = async () => {
+    const token = getTokenStorage();
+    if (!token) navigate('/login');
 
-    if (token) {
-      setToken(localToken);
-    }
-  }, []);
-
-  async function authenticate(email, password) {
-    const response = await loginResquest(email, password);
-    if (response.token !== undefined) {
-      const payload = { token: response.token };
-      setToken(payload);
-      setTokenLocalStorage(payload);
-    } else {
-      throw new Error('Usuário não autenticado');
-    }
-  }
-  authenticate.propTypes = {
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
+    const { data, status } = await meRequest(token);
+    if (status !== 200) navigate('/login');
+    setUser(data);
   };
 
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   function logout() {
-    setToken(null);
     clearTokenLocalStorage();
     clearTokenSessionStorage();
   }
 
-  async function accountCreate(name, email, password, role) {
-    const response = await createUser(name, email, password, role);
-
-    if (response.status === 400) {
-      throw new Error(response.message);
-    }
-
-    setToken(response.data);
-    setTokenLocalStorage(response.data.token);
-
-    return response.data;
-  }
-
-  accountCreate.propTypes = {
-    name: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-  };
+  const authContextValue = useMemo(() => ({
+    user,
+    logout,
+  }), [user]);
 
   return (
-    <AuthContext.Provider value={{
-      ...token, authenticate, logout, accountCreate,
-    }}
-    >
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-authProvider.propTypes = {
+AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default authProvider;
+export default AuthProvider;
