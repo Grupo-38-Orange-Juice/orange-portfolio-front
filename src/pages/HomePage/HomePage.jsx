@@ -7,13 +7,12 @@ import ProjContainer from '../../components/ProjContainer/index';
 import DefaultContainer from '../../components/DefaultContainer/index';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
-import projects from '../../mocks/projects';
+// import projectsInfoMock from '../../mocks/projects';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { projectsInfo } = useContext(ProjectsContext);
-  console.log(projectsInfo);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
@@ -94,11 +93,11 @@ function HomePage() {
           </Box>
           <Box>
             <Grid container spacing={8} sx={{ '@media (max-width: 700px)': { alignItems: 'center', justifyContent: 'center' } }}>
-              {projects.length > 0 ? (
-                projects.map((project) => (
+              {projectsInfo.length > 0 ? (
+                projectsInfo.map((info) => (
                   <Grid
                     item
-                    key={project.id}
+                    key={info.project.id}
                     xs={12}
                     sm={6}
                     md={4}
@@ -113,10 +112,10 @@ function HomePage() {
                     }}
                   >
                     <ProjContainer
-                      projectId={project.id}
-                      image={project.image}
+                      projectId={info.project.id}
+                      image={info.project.image}
                       tags={[]}
-                      createdAt={project.createdAt}
+                      createdAt={info.project.createdAt}
                     />
                   </Grid>
                 ))
