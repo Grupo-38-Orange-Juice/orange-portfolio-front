@@ -50,4 +50,13 @@ export async function meRequest() {
   }
 }
 
+export async function getProjectsByUserId(userId) {
+  try {
+    const request = await Api.get(`projects/users/${userId}`);
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
 export default Api;
