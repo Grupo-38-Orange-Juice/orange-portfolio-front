@@ -8,6 +8,8 @@ import './style.css';
 function ProjContainer({
   projectId, image, tags, createdAt,
 }) {
+  console.log(projectId, image);
+
   return (
     <Box className="proj_container">
       <Box>
