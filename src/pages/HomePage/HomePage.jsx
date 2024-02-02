@@ -1,10 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
-import ProjContainer from '../../components/ProjContainer/index';
-import DefaultContainer from '../../components/DefaultContainer/index';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 // import projectsInfoMock from '../../mocks/projects';

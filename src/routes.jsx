@@ -28,7 +28,9 @@ function Router() {
           path="/explore"
           element={(
             <AuthProvider>
-              <Explore />
+              <ProjectsProvider>
+                <Explore />
+              </ProjectsProvider>
             </AuthProvider>
           )}
         />
