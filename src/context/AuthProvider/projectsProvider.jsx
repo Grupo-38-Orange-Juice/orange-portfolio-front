@@ -2,13 +2,14 @@ import React, {
   createContext, useContext, useEffect, useMemo, useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { getProjectsByUserId } from '../../service/api';
+import { getAllTags, getProjectsByUserId } from '../../service/api';
 import { AuthContext } from './authProvider';
 
 export const ProjectsContext = createContext({});
 
 function ProjectsProvider({ children }) {
   const [projectsInfo, setProjects] = useState([]);
+  const [tags, setTags] = useState([]);
   const { user } = useContext(AuthContext);
 
   const fetchProjects = async (userId) => {
@@ -16,12 +17,20 @@ function ProjectsProvider({ children }) {
     setProjects(data);
   };
 
+  const fetchTags = async () => {
+    const { data } = await getAllTags();
+    setTags(data);
+  };
+
   useEffect(() => {
     if (user) fetchProjects(user.id);
+    fetchTags();
   }, [user]);
 
   const projectsContextValue = useMemo(() => ({
     projectsInfo,
+    tags,
+    fetchProjects,
   }), [projectsInfo]);
 
   return (
