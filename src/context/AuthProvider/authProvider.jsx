@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
     const token = getTokenStorage();
     if (!token) navigate('/login');
 
-    const { data } = await meRequest(token);
+    const { data, status } = await meRequest(token);
     if (status !== 200) navigate('/login');
     setUser(data);
   };
