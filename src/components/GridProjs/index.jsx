@@ -7,7 +7,7 @@ import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
 function GridProjs() {
   const { projectsInfo } = useContext(ProjectsContext);
-  console.log('Projeto', projectsInfo);
+  // console.log('Projeto', projectsInfo);
   return (
     <Box
       id="container-wrapper"
@@ -21,7 +21,13 @@ function GridProjs() {
           gridTemplateColumns: '1fr',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '140px',
+          gap: '120px',
+        },
+        '@media screen and (max-width: 360px)': {
+          gridTemplateColumns: '1fr',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '50px',
         },
       }}
     >
