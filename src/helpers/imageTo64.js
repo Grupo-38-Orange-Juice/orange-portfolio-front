@@ -1,13 +1,18 @@
-export default async (file) => new Promise((resolve, reject) => {
-  const reader = new FileReader();
+/* eslint-disable consistent-return */
+export default async (file) => {
+  if (!file) return null;
 
-  reader.onload = () => {
-    resolve(reader.result);
-  };
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
 
-  reader.onerror = (error) => {
-    reject(error);
-  };
+    reader.onload = () => {
+      resolve(reader.result);
+    };
 
-  reader.readAsDataURL(file);
-});
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(file);
+  });
+};

@@ -30,6 +30,7 @@ function ProjectsProvider({ children }) {
   const projectsContextValue = useMemo(() => ({
     projectsInfo,
     tags,
+    fetchProjects,
   }), [projectsInfo]);
 
   return (

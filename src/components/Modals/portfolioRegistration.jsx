@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { toast, ToastContainer } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
 import DefaultButton from '../default-button';
 import ImageUpload from '../../images/Upload.svg';
@@ -12,12 +13,15 @@ import { postProject } from '../../service/api';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 import TagTextField from './tagModalField';
 import imageTo64 from '../../helpers/imageTo64';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');
 
 export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
   const [imageFile, setImageFile] = useState(null);
-  const { tags } = useContext(ProjectsContext);
+  const { tags, fetchProjects } = useContext(ProjectsContext);
+  const { user } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
     lastTags: [],
@@ -27,20 +31,28 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const createProject = async () => {
-    await postProject(
+    const base64Image = imageFile ? await imageTo64(imageFile) : null;
+    const response = await postProject(
       {
         description: formValues.LastDescricao,
         link: formValues.LastLink,
         tags: formValues.lastTags,
         name: formValues.lastTitulo,
-        image: await imageTo64(imageFile),
+        image: base64Image,
       },
     );
-    toggleModal();
-    formValues.lastTitulo = '';
-    formValues.lastTags = [];
-    formValues.LastLink = '';
-    formValues.LastDescricao = '';
+    if (response.status === 201) {
+      toggleModal();
+      formValues.lastTitulo = '';
+      formValues.lastTags = [];
+      formValues.LastLink = '';
+      formValues.LastDescricao = '';
+      setImageFile(null);
+      toast.success('Projeto cadastrado com sucesso!');
+      fetchProjects(user.id);
+    } else {
+      toast.error(response.data.message || 'Erro ao cadastrar projeto!');
+    }
   };
   useEffect(() => {
     const handleResize = () => {
@@ -63,12 +75,10 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
   };
 
   const handleImageClick = () => {
-    // Aciona o clique no input de arquivo ao clicar na imagem
     document.getElementById('uploadImageInput').click();
   };
 
   const handleImageChange = (event) => {
-    // Atualiza o estado do arquivo de imagem quando um novo arquivo é selecionado
     const file = event.target.files[0];
     setImageFile(file);
   };
@@ -225,6 +235,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
           </Box>
         </Modal>
       )}
+      <ToastContainer />
     </Box>
   );
 }

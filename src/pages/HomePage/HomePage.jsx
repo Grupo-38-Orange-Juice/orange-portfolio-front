@@ -13,7 +13,6 @@ import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { projectsInfo } = useContext(ProjectsContext);
-  console.log('projectsInfo', projectsInfo);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
