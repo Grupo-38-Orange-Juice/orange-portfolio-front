@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Menu, MenuItem } from '@mui/material';
-import iconEdit from '../../assets/icon_edit.svg';
-import arrow from '../../assets/arrow1.svg';
+import { Menu, MenuItem, Box } from '@mui/material';
+import iconEdit from '../../../assets/icon_edit.svg';
+import arrow from '../../../assets/arrow1.svg';
 import './style.css';
 
 function MenuEditAndDelete() {
@@ -23,13 +23,18 @@ function MenuEditAndDelete() {
   };
 
   return (
-    <>
-      <div
+    <Box
+      sx={{
+        zIndex: '1', position: 'absolute', right: '10px', top: '10px',
+      }}
+    >
+      <Box
         id="iconEdit"
         role="button"
         tabIndex={0}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
+
       >
         <img
           src={iconEdit}
@@ -37,7 +42,7 @@ function MenuEditAndDelete() {
         />
 
         <img className="arrow" src={arrow} alt="" />
-      </div>
+      </Box>
       <Menu
         id="edit-menu"
         anchorEl={anchorElement}
@@ -50,7 +55,7 @@ function MenuEditAndDelete() {
         <MenuItem onClick={handleClose}>Editar</MenuItem>
         <MenuItem onClick={handleClose}>Excluir</MenuItem>
       </Menu>
-    </>
+    </Box>
   );
 }
 

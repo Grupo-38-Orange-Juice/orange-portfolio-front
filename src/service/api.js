@@ -22,6 +22,7 @@ Api.interceptors.request.use(
 export async function loginResquest({ email, password }) {
   try {
     const request = await Api.post('login', { email, password });
+    console.log('login', request);
     return { data: request.data, status: request.status };
   } catch (error) {
     return { data: error.response.data, status: error.response.status };
@@ -44,6 +45,15 @@ export async function createUser({
 export async function meRequest() {
   try {
     const request = await Api.get('me');
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
+export async function getProjectsByUserId(userId) {
+  try {
+    const request = await Api.get(`projects/users/${userId}`);
     return { data: request.data, status: request.status };
   } catch (error) {
     return { data: error.response.data, status: error.response.status };

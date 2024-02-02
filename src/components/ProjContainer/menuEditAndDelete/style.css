@@ -1,17 +1,3 @@
-.edit-menu {
-    display: flex;
-    padding: 16px 0;
-    gap: 8px;
-
-    position: absolute;
-    right: 16px;
-    top: 50px;
-
-    border-radius: 8px;
-    background: var(--Neutral-Colors-Neutral-60, #FCFDFF);
-    box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.30);
-}
-
 .arrow {
     display: none; /* descobrir como fazer aparecer apenas quando o menu aparecer */
 

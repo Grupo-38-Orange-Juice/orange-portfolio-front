@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Explore from './pages/Explore/Explore';
 // import AdicionarProjeto from './components/PortfolioRegistration/portfolioRegistration';
 import AuthProvider from './context/AuthProvider/authProvider';
+import ProjectsProvider from './context/AuthProvider/projectsProvider';
 
 function Router() {
   return (
@@ -17,7 +18,9 @@ function Router() {
           path="/"
           element={(
             <AuthProvider>
-              <HomePage />
+              <ProjectsProvider>
+                <HomePage />
+              </ProjectsProvider>
             </AuthProvider>
         )}
         />
