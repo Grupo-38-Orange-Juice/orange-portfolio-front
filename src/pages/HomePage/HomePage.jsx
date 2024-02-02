@@ -94,7 +94,7 @@ function HomePage() {
           </Box>
           <Box>
             <Grid container spacing={8} sx={{ '@media (max-width: 700px)': { alignItems: 'center', justifyContent: 'center' } }}>
-              {projectsInfo.length > 0 ? (
+              {projectsInfo && projectsInfo.length > 0 ? (
                 projectsInfo.map((info) => (
                   <Grid
                     item

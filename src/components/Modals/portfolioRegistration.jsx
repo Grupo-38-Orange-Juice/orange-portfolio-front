@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
@@ -9,10 +11,12 @@ import ImageUpload from '../../images/Upload.svg';
 import { postProject } from '../../service/api';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 import TagTextField from './tagModalField';
+import imageTo64 from '../../helpers/imageTo64';
 
 Modal.setAppElement('#root');
 
 export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
+  const [imageFile, setImageFile] = useState(null);
   const { tags } = useContext(ProjectsContext);
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
@@ -29,6 +33,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
         link: formValues.LastLink,
         tags: formValues.lastTags,
         name: formValues.lastTitulo,
+        image: await imageTo64(imageFile),
       },
     );
     toggleModal();
@@ -57,6 +62,16 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     }));
   };
 
+  const handleImageClick = () => {
+    // Aciona o clique no input de arquivo ao clicar na imagem
+    document.getElementById('uploadImageInput').click();
+  };
+
+  const handleImageChange = (event) => {
+    // Atualiza o estado do arquivo de imagem quando um novo arquivo é selecionado
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       {modalIsOpen && (
@@ -170,9 +185,17 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
             }}
           >
             <img
-              src={ImageUpload}
+              src={imageFile ? URL.createObjectURL(imageFile) : ImageUpload}
               alt="Imagem de registro"
-              style={{ maxWidth: '100%' }}
+              style={{ maxWidth: '100%', cursor: 'pointer' }}
+              onClick={handleImageClick}
+            />
+            <input
+              type="file"
+              id="uploadImageInput"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleImageChange}
             />
           </Box>
           <Box
