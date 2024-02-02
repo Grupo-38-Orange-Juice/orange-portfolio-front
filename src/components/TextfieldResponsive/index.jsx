@@ -7,7 +7,7 @@ function TextfieldResponsive() {
   // função para atualizar o estado de acordo com largura
   useEffect(() => {
     const handleResize = () => {
-      setTextFieldWidth(window.innerWidth < 600 ? 288 : 513);
+      setTextFieldWidth(window.innerWidth < 700 ? 320 : 513);
     };
 
     // ouvinte de evento de redimensionamento
