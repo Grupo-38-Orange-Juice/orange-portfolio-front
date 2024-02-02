@@ -1,18 +1,14 @@
-import React, { useState, useContext } from 'react';
-import { Box, Container, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
-import ProjContainer from '../../components/ProjContainer/index';
-import DefaultContainer from '../../components/DefaultContainer/index';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
-// import projectsInfoMock from '../../mocks/projects';
-import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import GridProjs from '../../components/GridProjs/index';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { projectsInfo } = useContext(ProjectsContext);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
@@ -20,18 +16,20 @@ function HomePage() {
   return (
     <main>
       <Header />
-      <Container
+      <Box
+        className="main-box"
+        maxWidth="l"
         disableGutters
         sx={{
-          display: 'flex',
+          display: 'inline-flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: 'auto',
+          padding: '30px',
           width: '100%',
-          maxWidth: 1980,
+          maxWidth: '1980px',
           // media
-          '@media (max-width: 700px)': {
+          '@media screen and (max-width: 700px)': {
             alignItems: 'center',
           },
         }}
@@ -42,10 +40,10 @@ function HomePage() {
           alignItems: 'end',
           justifyContent: 'center',
           // media
-          '@media (max-width: 700px)': {
+          '@media screen and (max-width: 700px)': {
             height: '0',
             display: 'flex',
-            margin: '40px auto 0 auto',
+            margin: '0 auto 0 auto',
           },
         }}
         >
@@ -53,19 +51,17 @@ function HomePage() {
         </Box>
         <Box
           className="box_proj"
-          mt={3}
-          sx={{
-            marginLeft: { xs: 0, md: 'auto' },
-          }}
+          alignItems="center"
+          width="auto"
         >
           <Box sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
-            marginTop: '18px',
+            marginTop: '34px',
             marginBottom: '30px',
             // media
-            '@media (max-width: 700px)': {
+            '@media screen and (max-width: 700px)': {
               alignItems: 'center',
               justifyContent: 'start',
             },
@@ -91,41 +87,9 @@ function HomePage() {
             </Typography>
             <TextfieldResponsive />
           </Box>
-          <Box>
-            <Grid container spacing={8} sx={{ '@media (max-width: 700px)': { alignItems: 'center', justifyContent: 'center' } }}>
-              {projectsInfo && projectsInfo.length > 0 ? (
-                projectsInfo.map((info) => (
-                  <Grid
-                    item
-                    key={info.project.id}
-                    xs={12}
-                    sm={6}
-                    md={4}
-                    lg={4}
-                    sx={{
-                      width: '100%',
-                      // media
-                      '@media (max-width: 700px)': {
-                        display: 'flex',
-                        justifyContent: 'center',
-                      },
-                    }}
-                  >
-                    <ProjContainer
-                      projectId={info.project.id}
-                      image={info.project.image}
-                      tags={info.tags}
-                      createdAt={info.project.createdAt}
-                    />
-                  </Grid>
-                ))
-              ) : (
-                <DefaultContainer />
-              )}
-            </Grid>
-          </Box>
+          <GridProjs />
         </Box>
-      </Container>
+      </Box>
       <AdicionarProjeto modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
     </main>
   );

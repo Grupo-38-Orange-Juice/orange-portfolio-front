@@ -7,7 +7,7 @@ function TextfieldResponsive() {
   // função para atualizar o estado de acordo com largura
   useEffect(() => {
     const handleResize = () => {
-      setTextFieldWidth(window.innerWidth < 600 ? 288 : 513);
+      setTextFieldWidth(window.innerWidth < 800 ? 320 : 513);
     };
 
     // ouvinte de evento de redimensionamento
@@ -24,7 +24,7 @@ function TextfieldResponsive() {
       className="tag_text_field"
       id="outlined-basic"
       label="Buscar tags"
-      sx={{ width: textFieldWidth, zIndex: -1 }}
+      sx={{ width: textFieldWidth }}
     />
   );
 }
