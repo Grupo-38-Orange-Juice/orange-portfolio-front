@@ -115,7 +115,7 @@ function HomePage() {
                     <ProjContainer
                       projectId={info.project.id}
                       image={info.project.image}
-                      tags={info.project.tags}
+                      tags={info.tags}
                       createdAt={info.project.createdAt}
                     />
                   </Grid>

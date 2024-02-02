@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-// import imgProj from '../../assets/img.png';
 import ProjInfoFrame from './ProjInfoFrame';
 
 import './style.css';
