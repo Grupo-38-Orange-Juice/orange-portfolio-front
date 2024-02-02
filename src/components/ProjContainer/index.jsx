@@ -13,7 +13,7 @@ function ProjContainer({
   return (
     <Box className="proj_container">
       <Box>
-        <img className="img_proj" src={imgProj} alt="" />
+        <img className="img_proj" src={image} alt="" />
       </Box>
       <Box className="bottom_proj">
         <ProjInfoFrame tags={tags} createdAt={createdAt} />
