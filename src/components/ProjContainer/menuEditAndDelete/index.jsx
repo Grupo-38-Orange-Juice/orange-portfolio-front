@@ -51,7 +51,6 @@ function MenuEditAndDelete() {
         MenuListProps={{
           'aria-labelledby': 'iconEdit',
         }}
-        position="relative"
       >
         <MenuItem onClick={handleClose}>Editar</MenuItem>
         <MenuItem onClick={handleClose}>Excluir</MenuItem>

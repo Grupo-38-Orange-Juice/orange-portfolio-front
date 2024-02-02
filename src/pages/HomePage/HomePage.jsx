@@ -48,7 +48,7 @@ function HomePage() {
           '@media screen and (max-width: 700px)': {
             height: '0',
             display: 'flex',
-            margin: '20px auto 0 auto',
+            margin: '0 auto 0 auto',
           },
         }}
         >
