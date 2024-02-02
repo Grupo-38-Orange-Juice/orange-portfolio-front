@@ -43,7 +43,7 @@ h5 {
     margin-top: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .box__card_perfil {
         width: auto;
         height: auto;
