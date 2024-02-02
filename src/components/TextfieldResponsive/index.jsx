@@ -2,12 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
 
 function TextfieldResponsive() {
-  const [textFieldWidth, setTextFieldWidth] = useState(window.innerWidth < 600 ? 288 : 513);
+  const getTextfieldWidth = () => {
+    if (window.innerWidth < 360) {
+      return 270;
+    }
+    if (window.innerWidth < 800) {
+      return 320;
+    }
+    return 513;
+  };
 
-  // função para atualizar o estado de acordo com largura
+  const [textFieldWidth, setTextFieldWidth] = useState(getTextfieldWidth());
+
+  // função para atualizar o estado de acordo com a largura
   useEffect(() => {
     const handleResize = () => {
-      setTextFieldWidth(window.innerWidth < 800 ? 320 : 513);
+      setTextFieldWidth(getTextfieldWidth());
     };
 
     // ouvinte de evento de redimensionamento
