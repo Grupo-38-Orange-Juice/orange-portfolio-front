@@ -1,23 +1,59 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { toast, ToastContainer } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
 import DefaultButton from '../default-button';
 import ImageUpload from '../../images/Upload.svg';
+import { postProject } from '../../service/api';
+import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import TagTextField from './tagModalField';
+import imageTo64 from '../../helpers/imageTo64';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');
 
 export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
+  const [imageFile, setImageFile] = useState(null);
+  const { tags, fetchProjects } = useContext(ProjectsContext);
+  const { user } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
-    lastTags: '',
+    lastTags: [],
     LastLink: '',
     LastDescricao: '',
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const createProject = async () => {
+    const base64Image = imageFile ? await imageTo64(imageFile) : null;
+    const response = await postProject(
+      {
+        description: formValues.LastDescricao,
+        link: formValues.LastLink,
+        tags: formValues.lastTags,
+        name: formValues.lastTitulo,
+        image: base64Image,
+      },
+    );
+    if (response.status === 201) {
+      toggleModal();
+      formValues.lastTitulo = '';
+      formValues.lastTags = [];
+      formValues.LastLink = '';
+      formValues.LastDescricao = '';
+      setImageFile(null);
+      toast.success('Projeto cadastrado com sucesso!');
+      fetchProjects(user.id);
+    } else {
+      toast.error(response.data.message || 'Erro ao cadastrar projeto!');
+    }
+  };
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -38,6 +74,14 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     }));
   };
 
+  const handleImageClick = () => {
+    document.getElementById('uploadImageInput').click();
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       {modalIsOpen && (
@@ -101,19 +145,13 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               style={{ marginBottom: '1rem' }}
 
             />
-            <TextField
-              label="Tags"
-              placeholder=" "
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={formValues.lastTags}
-              onChange={handleInputChanges}
-              name="lastTags"
-              fullWidth
-              style={{ marginBottom: '1rem' }}
+            {tags && tags.length > 0 && (
+            <TagTextField
+              tags={tags}
+              formValues={formValues}
+              handleInputChanges={handleInputChanges}
             />
+            )}
 
             <TextField
               label="Link"
@@ -157,9 +195,17 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
             }}
           >
             <img
-              src={ImageUpload}
+              src={imageFile ? URL.createObjectURL(imageFile) : ImageUpload}
               alt="Imagem de registro"
-              style={{ maxWidth: '100%' }}
+              style={{ maxWidth: '100%', cursor: 'pointer' }}
+              onClick={handleImageClick}
+            />
+            <input
+              type="file"
+              id="uploadImageInput"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleImageChange}
             />
           </Box>
           <Box
@@ -184,11 +230,12 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               margin: windowWidth <= 950 ? 'auto' : '10px 0px 0px 0px',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={toggleModal} style={{ margin: '0 0.5rem 0 0' }} />
+            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={createProject} style={{ margin: '0 0.5rem 0 0' }} />
             <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={toggleModal} style={{ margin: '0 0 0 0.5rem' }} />
           </Box>
         </Modal>
       )}
+      <ToastContainer />
     </Box>
   );
 }

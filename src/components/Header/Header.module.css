@@ -17,12 +17,6 @@
   cursor: pointer;
 }
 
-/* .container_logo_navigate {
-  display: flex;
-  align-items: center;
-  gap: 1000px;
-} */
-
 .container_logo {
   position: absolute;
   display: flex;
@@ -46,7 +40,7 @@
   margin-right: 16px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .container {
     padding: 0;
   }

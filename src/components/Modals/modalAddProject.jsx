@@ -60,6 +60,7 @@ export default function ModalAddProject({ modalIsOpen, toggleModal }) {
               margin: '5% auto auto auto',
             },
           }}
+          // zIndex="2"
         >
           <Box
             style={{
