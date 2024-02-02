@@ -129,7 +129,15 @@ function Header() {
           horizontal: 'right',
         }}
       >
-        <Paper sx={{ height: '50px', padding: '10px', alignItems: 'flex-start' }}>
+        <Paper sx={{
+          height: '50px',
+          padding: '10px',
+          alignItems: 'flex-start',
+          // '@media screen or (wax-width: 366)': {
+          //   boxShadow: 'none',
+          // },
+        }}
+        >
           <Typography variant="subtitle1">
             Você não possui notificações no momento.
           </Typography>

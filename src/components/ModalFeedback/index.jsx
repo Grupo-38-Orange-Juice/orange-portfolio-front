@@ -32,7 +32,7 @@ export default function FeedbackDelete() {
             },
             content: {
               maxWidth: '350px',
-              maxHeight: '250px',
+              maxHeight: '270px',
               margin: 'auto',
               display: 'flex',
               flexDirection: 'column',

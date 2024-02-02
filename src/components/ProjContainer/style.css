@@ -34,3 +34,10 @@
         height: 220px;
     }
 }
+
+@media (max-width: 360px) {
+    .proj_container {
+        width: 270px;
+        height: auto;
+    }
+}
