@@ -13,6 +13,7 @@ const formatDate = (date) => {
 };
 
 function ProjInfoFrame({ createdAt, tags }) {
+  console.log(tags);
   const { user } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   useEffect(() => {
@@ -53,7 +54,7 @@ function ProjInfoFrame({ createdAt, tags }) {
         )}
       <Box className="tags">
         {tags && tags.length > 0 && tags.map((tag) => (
-          <Chip tag={tag} key={tag} />
+          <Chip label={tag} key={tag} />
         ))}
       </Box>
     </Box>

@@ -60,4 +60,26 @@ export async function getProjectsByUserId(userId) {
   }
 }
 
+export async function getAllTags() {
+  try {
+    const request = await Api.get('tags');
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
+export async function postProject({
+  description, image, link, name, tags,
+}) {
+  try {
+    const request = await Api.post('projects', {
+      description, image, link, name, tags,
+    });
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
 export default Api;

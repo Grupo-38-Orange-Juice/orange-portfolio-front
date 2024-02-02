@@ -8,6 +8,8 @@ function ProjContainer({
   // eslint-disable-next-line no-unused-vars
   projectId, image, tags, createdAt,
 }) {
+  console.log(projectId, image);
+
   return (
     <Box className="proj_container">
       <Box>

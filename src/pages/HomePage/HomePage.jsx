@@ -1,17 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
-// import projectsInfoMock from '../../mocks/projects';
-import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 import GridProjs from '../../components/GridProjs/index';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { projectsInfo } = useContext(ProjectsContext);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };

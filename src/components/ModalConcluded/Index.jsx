@@ -8,7 +8,7 @@ import DefaultButton from '../default-button';
 
 Modal.setAppElement('#root');
 
-export default function FeedbackDelete() {
+export default function Concluded() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -50,7 +50,7 @@ export default function FeedbackDelete() {
               alignItems: 'center',
             }}
           >
-            <h1>Projeto deletado com sucesso!</h1>
+            <h1>Edição concluída com sucesso!</h1>
           </Box>
           <box
             style={{ margin: '30px' }}
