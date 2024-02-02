@@ -154,6 +154,20 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
             )}
 
             <TextField
+              label="Tags"
+              placeholder=" "
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={tags && tags.length > 0 ? tags.join(', ') : formValues.LastLink}
+              onChange={handleInputChanges}
+              name="LastTags"
+              fullWidth
+              style={{ marginBottom: '1rem' }}
+            />
+
+            <TextField
               label="Link"
               placeholder=" "
               type="url"
