@@ -13,6 +13,7 @@ import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { projectsInfo } = useContext(ProjectsContext);
+  console.log('projectsInfo', projectsInfo);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
@@ -114,7 +115,7 @@ function HomePage() {
                     <ProjContainer
                       projectId={info.project.id}
                       image={info.project.image}
-                      tags={[]}
+                      tags={info.project.tags}
                       createdAt={info.project.createdAt}
                     />
                   </Grid>

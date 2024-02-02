@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -6,18 +6,37 @@ import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
 import DefaultButton from '../default-button';
 import ImageUpload from '../../images/Upload.svg';
+import { postProject } from '../../service/api';
+import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import TagTextField from './tagModalField';
 
 Modal.setAppElement('#root');
 
 export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
+  const { tags } = useContext(ProjectsContext);
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
-    lastTags: '',
+    lastTags: [],
     LastLink: '',
     LastDescricao: '',
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const createProject = async () => {
+    await postProject(
+      {
+        description: formValues.LastDescricao,
+        link: formValues.LastLink,
+        tags: formValues.lastTags,
+        name: formValues.lastTitulo,
+      },
+    );
+    toggleModal();
+    formValues.lastTitulo = '';
+    formValues.lastTags = [];
+    formValues.LastLink = '';
+    formValues.LastDescricao = '';
+  };
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -101,19 +120,13 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               style={{ marginBottom: '1rem' }}
 
             />
-            <TextField
-              label="Tags"
-              placeholder=" "
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={formValues.lastTags}
-              onChange={handleInputChanges}
-              name="lastTags"
-              fullWidth
-              style={{ marginBottom: '1rem' }}
+            {tags && tags.length > 0 && (
+            <TagTextField
+              tags={tags}
+              formValues={formValues}
+              handleInputChanges={handleInputChanges}
             />
+            )}
 
             <TextField
               label="Link"
@@ -184,7 +197,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               margin: windowWidth <= 950 ? 'auto' : '10px 0px 0px 0px',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={toggleModal} style={{ margin: '0 0.5rem 0 0' }} />
+            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={createProject} style={{ margin: '0 0.5rem 0 0' }} />
             <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={toggleModal} style={{ margin: '0 0 0 0.5rem' }} />
           </Box>
         </Modal>
