@@ -9,6 +9,7 @@ import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 // import projectsInfoMock from '../../mocks/projects';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import GridProjs from '../../components/GridProjs/index';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -91,47 +92,7 @@ function HomePage() {
             </Typography>
             <TextfieldResponsive />
           </Box>
-          <Box
-            id="container-wrapper"
-            sx={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gridGap: '1.5em',
-              '@media screen and (max-width: 700px)': {
-                gridTemplateColumns: '1fr',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '60px',
-              },
-            }}
-          >
-
-            {projects.length > 0 ? (
-              projects.map((project) => (
-                <Box
-                  className="container"
-                  sx={{
-                    '@media screen and (max-width: 700px': {
-                    },
-                  }}
-                >
-                  <ProjContainer
-                    id={project.id}
-                    imgSrc={project.imgSrc}
-                    user={project.user}
-                    location={project.location}
-                  />
-                </Box>
-              ))
-            ) : (
-              <Box className="container">
-                <DefaultContainer />
-              </Box>
-            )}
-
-          </Box>
+          <GridProjs />
         </Box>
       </Box>
       <AdicionarProjeto modalIsOpen={modalIsOpen} toggleModal={toggleModal} />

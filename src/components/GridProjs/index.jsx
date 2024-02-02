@@ -6,6 +6,7 @@ import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function GridProjs() {
   const { projectsInfo } = useContext(ProjectsContext);
+  console.log('Projeto', projectsInfo);
   return (
     <Box
       id="container-wrapper"
@@ -24,10 +25,10 @@ function GridProjs() {
       }}
     >
 
-      {projectsInfo.length > 0 ? (
+      {projectsInfo && projectsInfo.length > 0 ? (
         projectsInfo.map((info) => (
           <Box
-            className="container"
+            className="containerProjs"
             item
             key={info.project.id}
           >
