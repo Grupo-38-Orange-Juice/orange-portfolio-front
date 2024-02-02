@@ -1,12 +1,14 @@
 import React from 'react';
 import { Box } from '@mui/material';
-// import ModalDelete from '../../components/ModalDelete/index';
-import Feedback from '../../components/ModalFeedback';
+// import ModalDelete from '../../components/ModalDelete';
+// import FeedbackDelete from '../../components/ModalFeedback';
+// import Concluded from '../../components/ModalConcluded/Index';
+import Added from '../../components/ModalAdd';
 
 export default function TesteDeModais() {
   return (
     <Box>
-      <Feedback />
+      <Added />
     </Box>
   );
 }
