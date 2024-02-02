@@ -39,15 +39,15 @@ function Explore() {
           display: 'flex',
           flexDirection: 'column',
           // media
-          '@media screen and (max-width: 700px)': {
+          '@media screen and (max-width: 800px)': {
             width: '400px',
             display: 'flex',
             margin: '0 auto 0 auto',
           },
-          '@media screen and (max-width: 400px)': {
+          '@media screen and (max-width: 450px)': {
             width: '200px',
             display: 'flex',
-            margin: '0 auto 0 auto',
+            margin: '0',
           },
         }}
         >
@@ -100,7 +100,7 @@ function Explore() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'start',
-            gap: '20px',
+            gap: '30px',
           }}
         >
           <TextfieldResponsive />

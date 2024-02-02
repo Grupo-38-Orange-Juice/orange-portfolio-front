@@ -3,7 +3,7 @@ import { TextField } from '@mui/material';
 
 function TextfieldResponsive() {
   const getTextfieldWidth = () => {
-    if (window.innerWidth < 360) {
+    if (window.innerWidth < 361) {
       return 270;
     }
     if (window.innerWidth < 800) {
