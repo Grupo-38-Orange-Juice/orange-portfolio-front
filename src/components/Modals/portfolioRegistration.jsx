@@ -95,7 +95,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
             },
             content: {
               maxWidth: '900px',
-              margin: '5% auto auto auto',
+              margin: '3% auto auto auto',
 
             },
             zIndex: 1000,
@@ -116,7 +116,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               fontFamily: 'Roboto, sans-serif',
               fontSize: '15px',
               color: '#515255',
-              margin: '10px 0px 0px 0px',
+              margin: '20px 0px 0px 0px',
               maxWidth: '100%',
             }}
           >
@@ -143,8 +143,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               name="lastTitulo"
               fullWidth
               style={{ marginBottom: '1rem' }}
-
             />
+
             {tags && tags.length > 0 && (
             <TagTextField
               tags={tags}
@@ -155,16 +155,17 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
 
             <TextField
               label="Tags"
-              placeholder=" "
+              placeholder=" Preenchido automaticamente "
               type="text"
               InputLabelProps={{
                 shrink: true,
               }}
-              value={tags && tags.length > 0 ? tags.join(', ') : formValues.LastLink}
+              value={tags && tags.length > 0 ? tags.join(', ') : ''}
               onChange={handleInputChanges}
               name="LastTags"
               fullWidth
               style={{ marginBottom: '1rem' }}
+              readOnly
             />
 
             <TextField
@@ -196,6 +197,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               multiline
               rows={3}
             />
+
           </Box>
           <Box
             style={{
@@ -205,7 +207,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               display: 'grid',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: windowWidth <= 950 ? '40px auto 0px auto' : '-340px 0px 0px 0px',
+              margin: windowWidth <= 950 ? '40px auto 0px auto' : '-350px 0px 0px 0px',
             }}
           >
             <img
