@@ -1,146 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
-import { Box, Typography } from '@mui/material';
-import { toast, ToastContainer } from 'react-toastify';
-import DefaultButton from '../../components/default-button';
-import { primaryButtonTheme } from '../../mui-theme/buttons';
-import { loginResquest } from '../../service/api';
-import loginImage from '../../images/img_login.svg';
-import 'react-toastify/dist/ReactToastify.css';
-import { setTokenLocalStorage } from '../../context/AuthProvider/util';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import Box from '@mui/material/Box';
+import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
+import DefaultButton from '../default-button';
 
-function Login() {
-  const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
-  });
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const navigate = useNavigate();
+Modal.setAppElement('#root');
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+export default function ModalDelete() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const handleInputChanges = (event) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
+  const openModal = () => {
+    setModalIsOpen(true);
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const { email, password } = formValues;
-
-    const response = await loginResquest({ email, password });
-    if (response.status === 200) {
-      setTokenLocalStorage(response.data.token);
-      toast.success('Login efetuado!');
-      setTimeout(() => {
-        navigate('/');
-      }, 1000);
-    } else {
-      toast.error(response.data.message || 'Erro ao cadastrar usuário!');
-    }
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
-    <Container
-      maxWidth={false}
-      style={{
-        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
-      }}
-    >
-      {
-  windowWidth > 700 && (
-  <Box
-    style={{
-      width: '100%',
-      maxWidth: '450px',
-      marginBottom: '0px',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '0px',
-      overflow: 'hidden',
-    }}
-  >
-    <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
-  </Box>
-  )
-    }
-      <Box style={{
-        display: 'flex', flexDirection: 'column', justifyContent: 'center',
-      }}
+    <div>
+      {modalIsOpen && (
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Adicionando Projeto"
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            },
+            content: {
+              maxWidth: '400px',
+              maxHeight: '250px',
+              margin: 'auto',
+            },
+          }}
+        >
+          <Box
+            style={{
+              width: '90%',
+              maxWidth: '500px',
+              flexDirection: 'column',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              overflow: 'hidden',
+            }}
+          >
+            <Box
+              style={{
+                fontFamily: 'Roboto, sans-serif',
+                fontSize: '30px',
+                color: '#515255',
+                margin: '5% auto auto 5%',
+              }}
+            >
+              <h1>Deseja Excluir?</h1>
+            </Box>
+            <Box
+              style={{
+                fontFamily: 'Roboto, sans-serif',
+                fontSize: '16px',
+                color: '#515255',
+                margin: '12% auto auto 5%',
+              }}
+            >
+              <h3>Se você prosseguir irá excluir o projeto do seu portfólio</h3>
+            </Box>
+          </Box>
+          <Box
+            style={{
+              width: 'auto',
+              maxWidth: '250px',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+              gap: '20px',
+              margin: '10% auto auto 5%',
+            }}
+          >
+            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+          </Box>
+        </Modal>
+      )}
+
+      <Box
+        style={{
+          width: 'auto',
+          maxWidth: '300px',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '20px',
+        }}
       >
-        <Typography
-          style={{
-            color: '#222244', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '8rem', fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
-          }}
-        >
-          Entre no Orange Portfólio
-        </Typography>
-
-        <Typography
-          style={{
-            fontSize: '1.2rem', color: 'rgba(169, 169, 169, 1)', textAlign: 'left', fontWeight: 400, lineHeight: '40px', marginTop: '5rem',
-          }}
-        >
-          Faça login com Email
-        </Typography>
-
-        <form onSubmit={handleFormSubmit} style={{ marginTop: '1rem', width: '100%', maxWidth: '500px' }}>
-          <TextField
-            label="Email address"
-            placeholder="email@email.com"
-            type="email"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={formValues.email}
-            onChange={handleInputChanges}
-            name="email"
-            style={{ marginBottom: '1rem' }}
-          />
-          <TextField
-            label="Password"
-            placeholder="*************"
-            defaultValue=""
-            type="password"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={formValues.password}
-            onChange={handleInputChanges}
-            name="password"
-            style={{ marginBottom: '1rem' }}
-          />
-          <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
-        </form>
-        <Typography
-          style={{
-            marginTop: '0rem', fontSize: '1.2rem', textDecoration: 'none', color: 'rgba(34, 34, 68, 1)', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
-          }}
-        >
-          <a href="/register" style={{ textDecoration: 'none', color: 'inherit' }}>Cadastre-se</a>
-        </Typography>
+        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
       </Box>
-      <ToastContainer />
-    </Container>
+    </div>
   );
 }
-
-export default Login;

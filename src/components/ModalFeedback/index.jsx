@@ -1,31 +1,89 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
-import DefaultButton from '../default-button';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import Box from '@mui/material/Box';
+import { green } from '@mui/material/colors';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
+import DefaultButton from '../default-button';
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />;
+Modal.setAppElement('#root');
 
-function ModalFeedback({
-  Feedback,
-}) {
+export default function Feedback() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <Box sx={{
-      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px',
-    }}
-    >
-      <Typography>
-        {Feedback}
-      </Typography>
-      <img className="check" src="" alt="" />
-      <DefaultButton theme={primaryButtonTheme} label="Voltar para projetos" />
-    </Box>
+    <div>
+      {modalIsOpen && (
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Adicionando Projeto"
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            },
+            content: {
+              maxWidth: '350px',
+              maxHeight: '250px',
+              margin: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+            },
+          }}
+        >
+          <Box
+            style={{
+              fontFamily: 'Roboto, sans-serif',
+              fontSize: '30px',
+              color: '#515255',
+              alignItems: 'center',
+            }}
+          >
+            <h1>Projeto deletado com sucesso!</h1>
+          </Box>
+          <box
+            style={{ margin: '30px' }}
+          >
+            <CheckCircleIcon sx={{ color: green[700], fontSize: 45 }} />
+          </box>
+          <Box
+            style={{
+              width: 'auto',
+              maxWidth: '250px',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              gap: '20px',
+              margin: 'auto',
+            }}
+          >
+            <DefaultButton theme={primaryButtonTheme} label="voltar para projetos" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+          </Box>
+        </Modal>
+      )}
+
+      <Box
+        style={{
+          width: 'auto',
+          maxWidth: '300px',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '20px',
+        }}
+      >
+        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
+      </Box>
+    </div>
   );
 }
-
-ModalFeedback.propTypes = {
-  Feedback: PropTypes.string.isRequired,
-};
-
-export default ModalFeedback;
