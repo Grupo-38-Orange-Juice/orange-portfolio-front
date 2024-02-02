@@ -40,7 +40,12 @@ function Explore() {
           flexDirection: 'column',
           // media
           '@media screen and (max-width: 700px)': {
-            height: '0',
+            width: '400px',
+            display: 'flex',
+            margin: '0 auto 0 auto',
+          },
+          '@media screen and (max-width: 400px)': {
+            width: '200px',
             display: 'flex',
             margin: '0 auto 0 auto',
           },
@@ -54,15 +59,16 @@ function Explore() {
             <ThemeProvider theme={typographyResponsive}>
               <Typography
                 variant="h4"
+                style={{ wordWrap: 'break-word' }}
                 sx={{
                   fontSize: {
-                    xs: '24px',
+                    xs: '20px',
                     sm: '24px',
                     md: '28px',
                     lg: '34px',
                   },
                   lineHeight: {
-                    xs: '24px',
+                    xs: '20px',
                     sm: '24px',
                     md: '28px',
                     lg: '34px',
@@ -72,15 +78,12 @@ function Explore() {
                   textAlign: 'center',
                   fontWeight: '400',
                   letterSpacing: '0.25px',
-                  wordWrap: 'break-word',
-
-                  // [theme.breakpoints.up('md')]: {
-                  //   fontSize: '1rem',
-                  // },
                   '@media screen and (max-width: 700px)': {
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    margin: '40px 10px 50px 10px',
                   },
+                  '@media screen and (max-width: 300px)': {
+                    margin: '10px 5px 20px 5px',
+                  }
                 }}
               >
                 Junte-se à comunidade de inovação,
