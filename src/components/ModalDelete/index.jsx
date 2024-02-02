@@ -50,7 +50,7 @@ export default function ModalDelete() {
                 fontFamily: 'Roboto, sans-serif',
                 fontSize: '30px',
                 color: '#515255',
-                margin: '5% auto auto 5%',
+                margin: '4% auto auto 5%',
               }}
             >
               <h1>Deseja Excluir?</h1>
@@ -60,7 +60,7 @@ export default function ModalDelete() {
                 fontFamily: 'Roboto, sans-serif',
                 fontSize: '16px',
                 color: '#515255',
-                margin: '12% auto auto 5%',
+                margin: '10% auto auto 5%',
               }}
             >
               <h3>Se você prosseguir irá excluir o projeto do seu portfólio</h3>

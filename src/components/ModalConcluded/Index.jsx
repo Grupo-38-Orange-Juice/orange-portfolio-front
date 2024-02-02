@@ -32,7 +32,7 @@ export default function Concluded() {
             },
             content: {
               maxWidth: '350px',
-              maxHeight: '250px',
+              maxHeight: '280px',
               margin: 'auto',
               display: 'flex',
               flexDirection: 'column',
