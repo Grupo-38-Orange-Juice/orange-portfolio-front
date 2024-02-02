@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
 function GridProjs() {
   const { projectsInfo } = useContext(ProjectsContext);
@@ -15,12 +16,12 @@ function GridProjs() {
         alignItems: 'center',
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
-        gridGap: '1.5em',
+        gridGap: '60px',
         '@media screen and (max-width: 800px)': {
           gridTemplateColumns: '1fr',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '60px',
+          gap: '140px',
         },
       }}
     >
@@ -31,7 +32,9 @@ function GridProjs() {
             className="containerProjs"
             item
             key={info.project.id}
+            sx={{ position: 'relative' }}
           >
+            <MenuEditAndDelete />
             <ProjContainer
               projectId={info.project.id}
               image={info.project.image}

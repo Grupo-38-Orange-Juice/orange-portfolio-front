@@ -3,13 +3,16 @@
 }
 
 .proj_container {
-    width: 90%;
+    width: 100%;
     height: 280px;
     gap: 1px;
-    margin: 0 16px 0 16px;
-
+    margin: 0 0 0 0;
     display: flex;
     flex-direction: column;
+}
+
+.proj_container:hover .edit-menu {
+    visibility: visible;
 }
 
 .img_proj {
