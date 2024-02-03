@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Chip } from '@mui/material';
 import PropTypes from 'prop-types';
 import Profile from '../../Profile/Profile';
 import './style.css';
-import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
 const formatDate = (date) => {
   const newDate = new Date(date);
@@ -12,11 +11,9 @@ const formatDate = (date) => {
   return `${month}/${year}`;
 };
 
-function ProjInfoFrame({ createdAt, tags }) {
-  const { user } = useContext(AuthContext);
+function ProjInfoFrame({ createdAt, tags, user }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   useEffect(() => {
-    console.log(tags);
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
     };
@@ -52,7 +49,7 @@ function ProjInfoFrame({ createdAt, tags }) {
           </p>
         </>
         )}
-      <Box className="tags">
+      <Box className="tags" sx={{ display: 'flex', gap: '4px', mt: '2px' }}>
         {tags && tags.length > 0 && tags.map((tag) => (
           <Chip label={tag} key={tag} />
         ))}
@@ -64,6 +61,7 @@ function ProjInfoFrame({ createdAt, tags }) {
 ProjInfoFrame.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   createdAt: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default ProjInfoFrame;

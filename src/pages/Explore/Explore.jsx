@@ -29,9 +29,14 @@ function Explore() {
   };
 
   useEffect(() => {
-    setFilteredProjects(
-      projectsInfo.filter((project) => project.project.tags.includes(search)),
-    );
+    if (projectsInfo && projectsInfo.length > 0) {
+      const newFilteredProjects = projectsInfo
+        .filter((project) => project.tags.some((tag) => tag.toLowerCase()
+          .includes(search.toLowerCase())));
+      setFilteredProjects(
+        newFilteredProjects,
+      );
+    }
   }, [search, projectsInfo]);
 
   return (
