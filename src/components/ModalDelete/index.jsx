@@ -29,8 +29,8 @@ export default function ModalDelete() {
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
             },
             content: {
-              maxWidth: '400px',
-              maxHeight: '250px',
+              maxWidth: '440px',
+              maxHeight: '280px',
               margin: 'auto',
             },
           }}
