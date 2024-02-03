@@ -13,10 +13,10 @@ const formatDate = (date) => {
 };
 
 function ProjInfoFrame({ createdAt, tags }) {
-  console.log(tags);
   const { user } = useContext(AuthContext);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   useEffect(() => {
+    console.log(tags);
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
     };

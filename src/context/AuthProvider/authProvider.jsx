@@ -16,10 +16,10 @@ function AuthProvider({ children }) {
 
   const fetchUser = async () => {
     const token = getTokenStorage();
-    // if (!token) navigate('/login');
+    if (!token) navigate('/login');
 
     const { data, status } = await meRequest(token);
-    // if (status !== 200) navigate('/login');
+    if (status !== 200) navigate('/login');
     setUser(data);
   };
 
