@@ -23,7 +23,7 @@ function HomePage() {
   };
 
   useEffect(() => {
-    if (projectsInfo.length > 0) {
+    if (projectsInfo && projectsInfo.length > 0) {
       const newFilteredProjects = projectsInfo
         .filter((project) => project.tags.some((tag) => tag.toLowerCase()
           .includes(search.toLowerCase())));

@@ -44,6 +44,7 @@ function GridProjs({ projectsInfo }) {
               image={info.project.image}
               tags={info.tags}
               createdAt={info.project.createdAt}
+              user={info.user}
             />
           </Box>
         ))
