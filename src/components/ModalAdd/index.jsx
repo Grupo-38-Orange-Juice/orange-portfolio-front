@@ -31,8 +31,8 @@ export default function Added() {
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
             },
             content: {
-              maxWidth: '370px',
-              maxHeight: '280px',
+              maxWidth: '400px',
+              maxHeight: '300px',
               margin: 'auto',
               display: 'flex',
               flexDirection: 'column',
