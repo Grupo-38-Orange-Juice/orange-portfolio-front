@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+}
+
+.grid_projects {
+    display: flex;
+    flex-direction: row;
+}
+
+.title_proj {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.15px;
+  }
+
+.tag_text_field {
+    display: flex;
+    min-height: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media (max-width: 600px) {
+    .tag_text_field {
+        width: 288px;
+        align-self: stretch;
+    }
+}

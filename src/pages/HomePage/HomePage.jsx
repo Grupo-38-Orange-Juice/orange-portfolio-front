@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
@@ -6,12 +6,32 @@ import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 import GridProjs from '../../components/GridProjs/index';
+import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [search, setValue] = useState('');
+
+  const { projectsInfo } = useContext(ProjectsContext);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
+
+  const handleSearch = (event) => {
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    if (projectsInfo && projectsInfo.length > 0) {
+      const newFilteredProjects = projectsInfo
+        .filter((project) => project.tags.some((tag) => tag.toLowerCase()
+          .includes(search.toLowerCase())));
+      setFilteredProjects(
+        newFilteredProjects,
+      );
+    }
+  }, [search, projectsInfo]);
 
   return (
     <main>
@@ -85,9 +105,9 @@ function HomePage() {
             >
               Meus projetos
             </Typography>
-            <TextfieldResponsive />
+            <TextfieldResponsive setValue={handleSearch} value={search} />
           </Box>
-          <GridProjs />
+          <GridProjs projectsInfo={filteredProjects} />
         </Box>
       </Box>
       <AdicionarProjeto modalIsOpen={modalIsOpen} toggleModal={toggleModal} />

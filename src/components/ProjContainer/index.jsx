@@ -6,7 +6,7 @@ import './style.css';
 
 function ProjContainer({
   // eslint-disable-next-line no-unused-vars
-  projectId, image, tags, createdAt,
+  projectId, image, tags, createdAt, user,
 }) {
   return (
     <Box className="proj_container">
@@ -14,7 +14,7 @@ function ProjContainer({
         <img className="img_proj" src={image} alt="" />
       </Box>
       <Box className="bottom_proj">
-        <ProjInfoFrame tags={tags} createdAt={createdAt} />
+        <ProjInfoFrame tags={tags} createdAt={createdAt} user={user} />
       </Box>
     </Box>
   );
@@ -25,6 +25,7 @@ ProjContainer.propTypes = {
   image: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   createdAt: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default ProjContainer;

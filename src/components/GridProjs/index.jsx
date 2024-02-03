@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
+import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
-import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
-function GridProjs() {
-  const { projectsInfo } = useContext(ProjectsContext);
-  // console.log('Projeto', projectsInfo);
+function GridProjs({ projectsInfo }) {
   return (
     <Box
       id="container-wrapper"
@@ -44,8 +42,9 @@ function GridProjs() {
             <ProjContainer
               projectId={info.project.id}
               image={info.project.image}
-              tags={[]}
+              tags={info.tags}
               createdAt={info.project.createdAt}
+              user={info.user}
             />
           </Box>
         ))
@@ -58,5 +57,8 @@ function GridProjs() {
     </Box>
   );
 }
+GridProjs.propTypes = {
+  projectsInfo: PropTypes.array.isRequired,
+};
 
 export default GridProjs;

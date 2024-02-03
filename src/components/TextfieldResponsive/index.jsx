@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
+import PropTypes from 'prop-types';
 
-function TextfieldResponsive() {
+function TextfieldResponsive({ setValue, value }) {
   const getTextfieldWidth = () => {
-    if (window.innerWidth < 360) {
+    if (window.innerWidth < 361) {
       return 270;
     }
     if (window.innerWidth < 800) {
@@ -14,16 +15,13 @@ function TextfieldResponsive() {
 
   const [textFieldWidth, setTextFieldWidth] = useState(getTextfieldWidth());
 
-  // função para atualizar o estado de acordo com a largura
   useEffect(() => {
     const handleResize = () => {
       setTextFieldWidth(getTextfieldWidth());
     };
 
-    // ouvinte de evento de redimensionamento
     window.addEventListener('resize', handleResize);
 
-    // remove ouvinte ao desmontar o componente
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -34,9 +32,16 @@ function TextfieldResponsive() {
       className="tag_text_field"
       id="outlined-basic"
       label="Buscar tags"
-      sx={{ width: textFieldWidth, zIndex: -1 }}
+      sx={{ width: textFieldWidth, zIndex: 0 }}
+      onChange={setValue}
+      value={value}
     />
   );
 }
+
+TextfieldResponsive.propTypes = {
+  setValue: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default TextfieldResponsive;
