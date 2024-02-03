@@ -3,10 +3,13 @@ import { Menu, MenuItem, Box } from '@mui/material';
 import iconEdit from '../../../assets/icon_edit.svg';
 import arrow from '../../../assets/arrow1.svg';
 import './style.css';
+import ModalDelete from '../../ModalDelete';
 
 function MenuEditAndDelete() {
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -22,10 +25,15 @@ function MenuEditAndDelete() {
     }
   };
 
+  const handleDeleteClick = () => {
+    setModalOpen(true);
+    handleClose();
+  };
+
   return (
     <Box
       sx={{
-        zIndex: '1', position: 'absolute', right: '10px', top: '10px',
+        position: 'absolute', right: '10px', top: '10px',
       }}
     >
       <Box
@@ -34,7 +42,7 @@ function MenuEditAndDelete() {
         tabIndex={0}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-
+        sx={{ zIndex: '1' }}
       >
         <img
           src={iconEdit}
@@ -53,8 +61,9 @@ function MenuEditAndDelete() {
         }}
       >
         <MenuItem onClick={handleClose}>Editar</MenuItem>
-        <MenuItem onClick={handleClose}>Excluir</MenuItem>
+        <MenuItem className="item-delete" onClick={handleDeleteClick}>Excluir</MenuItem>
       </Menu>
+      <ModalDelete isOpen={modalOpen} closeModal={() => setModalOpen(false)} />
     </Box>
   );
 }
