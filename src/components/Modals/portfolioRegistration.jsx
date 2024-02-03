@@ -15,6 +15,7 @@ import TagTextField from './tagModalField';
 import imageTo64 from '../../helpers/imageTo64';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
+import ImgAlternativ from '../../images/Proj.png';
 
 Modal.setAppElement('#root');
 
@@ -31,7 +32,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const createProject = async () => {
-    const base64Image = imageFile ? await imageTo64(imageFile) : null;
+    const base64Image = imageFile ? await imageTo64(imageFile) : ImgAlternativ;
     const response = await postProject(
       {
         description: formValues.LastDescricao,
