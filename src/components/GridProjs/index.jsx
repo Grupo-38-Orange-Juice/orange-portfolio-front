@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
@@ -7,7 +8,9 @@ import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
 function GridProjs() {
   const { projectsInfo } = useContext(ProjectsContext);
+  const location = useLocation();
   // console.log('Projeto', projectsInfo);
+
   return (
     <Box
       id="container-wrapper"
@@ -40,7 +43,7 @@ function GridProjs() {
             key={info.project.id}
             sx={{ position: 'relative' }}
           >
-            <MenuEditAndDelete />
+            {location.pathname === '/' && <MenuEditAndDelete />}
             <ProjContainer
               projectId={info.project.id}
               image={info.project.image}
