@@ -34,14 +34,21 @@ export const validateEmail = (email) => validate(emailValidators, 'E-mail', emai
 
 const nameValidators = [
   requiredValidator,
-  lengthRangeValidator(1, 12),
+  lengthRangeValidator(2, 18),
 ];
 
 export const validateName = (name) => validate(nameValidators, 'Nome', name);
 
-const lastNameValidators = [
-  requiredValidator,
-  lengthRangeValidator(1, 12),
-];
+export const validateLastName = (lastName) => validate(nameValidators, 'Sobrenome', lastName);
 
-export const validateLastName = (lastName) => validate(lastNameValidators, 'Sobrenome', lastName);
+export const registerValidators = {
+  name: validateName,
+  lastName: validateLastName,
+  email: validateEmail,
+  password: validatePassword,
+};
+
+export const loginValidators = {
+  email: validateEmail,
+  password: validatePassword,
+};
