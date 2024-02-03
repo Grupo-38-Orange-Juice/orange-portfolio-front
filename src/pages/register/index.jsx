@@ -59,7 +59,7 @@ function Register() {
     <Container
       maxWidth={false}
       style={{
-        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
+        margin: '0', display: 'flex', justifyContent: 'center', width: '100%', height: '100vh', fontFamily: 'Roboto',
       }}
     >
       {windowWidth > 700 && (
@@ -87,44 +87,57 @@ function Register() {
         flexDirection: 'column', justifyContent: 'center',
       }}
       >
-        <Typography
+        <Box
           variant="h3"
           style={{
-            fontSize: '2.9rem', color: 'rgba(34, 34, 68, 1)', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '10rem', marginBottom: '3rem',
+            fontSize: '2.9rem', color: '#222244', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '10rem', marginBottom: '3rem',
           }}
         >
           Cadastre-se
-        </Typography>
+        </Box>
 
-        <form onSubmit={handleFormSubmit} style={{ width: '100%', maxWidth: '500px', margin: 'auto' }}>
-          <TextField
-            label="Nome"
-            placeholder="Digite seu nome"
-            type="text"
-            InputLabelProps={{
-              shrink: true,
+        <form
+          onSubmit={handleFormSubmit}
+          style={{
+            width: '100%', maxWidth: '500px',
+          }}
+        >
+          <Box
+            style={{
+              display: 'flex',
+              flexDirection: window.innerWidth <= 700 ? 'column' : 'row',
+              justifyContent: window.innerWidth <= 700 ? 'center' : 'space-between',
             }}
-            value={formValues.name}
-            onChange={handleInputChanges}
-            name="name"
-            fullWidth
-            style={{ marginBottom: '1rem' }}
-          />
+          >
+            <TextField
+              label="Nome"
+              placeholder="Digite seu nome"
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={formValues.name}
+              onChange={handleInputChanges}
+              name="name"
+              fullWidth
+              style={{ margin: window.innerWidth <= 700 ? 'auto auto 15px auto' : 'auto 15px auto auto' }}
+            />
+            <TextField
+              label="Sobrenome"
+              placeholder="Digite seu sobrenome"
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={formValues.lastName}
+              onChange={handleInputChanges}
+              name="lastName"
+              fullWidth
+              style={{ marginBottom: '0px' }}
+            />
+          </Box>
           <TextField
-            label="Sobrenome"
-            placeholder="Digite seu sobrenome"
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={formValues.lastName}
-            onChange={handleInputChanges}
-            name="lastName"
-            fullWidth
-            style={{ marginBottom: '1rem' }}
-          />
-          <TextField
-            label="Email address"
+            label="E-mail"
             placeholder="email@email.com"
             type="email"
             fullWidth
@@ -138,7 +151,7 @@ function Register() {
             style={{ marginBottom: '1rem' }}
           />
           <TextField
-            label="Password"
+            label="Senha"
             placeholder="*************"
             defaultValue=""
             type="password"

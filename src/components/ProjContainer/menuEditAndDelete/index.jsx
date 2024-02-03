@@ -25,7 +25,7 @@ function MenuEditAndDelete() {
   return (
     <Box
       sx={{
-        zIndex: '1', position: 'absolute', right: '10px', top: '10px',
+        position: 'absolute', right: '10px', top: '10px',
       }}
     >
       <Box
