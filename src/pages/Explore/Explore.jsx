@@ -1,17 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import Header from '../../components/Header/Header';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
-import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import { getProjects } from '../../service/api';
 
 const theme = createTheme();
 const typographyResponsive = responsiveFontSizes(theme);
 
 function Explore() {
-  const { projectsInfo } = useContext(ProjectsContext);
+  const [projectsInfo, setProjectsInfo] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [search, setValue] = useState('');
+
+  const fetchProjects = async () => {
+    const response = await getProjects();
+    setProjectsInfo(response.data);
+  };
+
+  useEffect(() => {
+    setProjectsInfo(fetchProjects());
+  }, []);
+
+  const handleSearch = (event) => {
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    if (projectsInfo && projectsInfo.length > 0) {
+      const newFilteredProjects = projectsInfo
+        .filter((project) => project.tags.some((tag) => tag.toLowerCase()
+          .includes(search.toLowerCase())));
+      setFilteredProjects(
+        newFilteredProjects,
+      );
+    }
+  }, [search, projectsInfo]);
 
   return (
     <main>
@@ -83,7 +109,7 @@ function Explore() {
                   },
                   '@media screen and (max-width: 300px)': {
                     margin: '10px 5px 20px 5px',
-                  }
+                  },
                 }}
               >
                 Junte-se à comunidade de inovação,
@@ -103,8 +129,8 @@ function Explore() {
             gap: '30px',
           }}
         >
-          <TextfieldResponsive />
-          <GridProjs />
+          <TextfieldResponsive value={search} setValue={handleSearch} />
+          <GridProjs projectsInfo={filteredProjects} />
         </Box>
       </Box>
     </main>
