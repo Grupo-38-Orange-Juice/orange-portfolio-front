@@ -10,7 +10,7 @@ import { loginResquest } from '../../service/api';
 import loginImage from '../../images/img_login.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
-import { validateEmail, validatePassword } from '../../validators/validators';
+import { loginValidators } from '../../validators/validators';
 
 function Login() {
   const [formValues, setFormValues] = useState({
@@ -41,20 +41,19 @@ function Login() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = formValues;
     setErrors({ email: '', password: '' });
 
-    const passwordValidation = validatePassword(password);
-    const emailValidation = validateEmail(email);
-    if (emailValidation) {
-      setErrors({ ...errors, email: emailValidation });
-      return;
-    }
-    if (passwordValidation) {
-      setErrors({ ...errors, password: passwordValidation });
-      return;
+    for (const field in loginValidators) {
+      const validation = loginValidators[field](formValues[field]);
+      if (validation) {
+        updateErrors({ [field]: validation });
+        return;
+      }
     }
 
     const response = await loginResquest({ email, password });
