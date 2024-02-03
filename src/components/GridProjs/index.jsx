@@ -19,6 +19,7 @@ function GridProjs({ projectsInfo, toggleDeleteModal }) {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gridGap: '60px',
+        marginBottom: 4,
         '@media screen and (max-width: 800px)': {
           gridTemplateColumns: '1fr',
           alignItems: 'center',
@@ -65,7 +66,6 @@ function GridProjs({ projectsInfo, toggleDeleteModal }) {
 GridProjs.propTypes = {
   projectsInfo: PropTypes.func.isRequired,
   toggleDeleteModal: PropTypes.func.isRequired,
-
-}
+};
 
 export default GridProjs;
