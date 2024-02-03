@@ -1,28 +1,19 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
 import DefaultButton from '../default-button';
 
 Modal.setAppElement('#root');
 
-export default function ModalDelete() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
+export default function ModalDelete({ modalDeleteIsOpen, toggleDeleteModal }) {
   return (
     <div>
-      {modalIsOpen && (
+      {modalDeleteIsOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          isOpen={modalDeleteIsOpen}
+          onRequestClose={toggleDeleteModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -33,6 +24,7 @@ export default function ModalDelete() {
               maxHeight: '280px',
               margin: 'auto',
             },
+            zIndex: 1000,
           }}
         >
           <Box
@@ -77,23 +69,16 @@ export default function ModalDelete() {
               margin: '10% auto auto 5%',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
-            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={toggleDeleteModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={toggleDeleteModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
           </Box>
         </Modal>
       )}
-
-      <Box
-        style={{
-          width: 'auto',
-          maxWidth: '300px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-        }}
-      >
-        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
-      </Box>
     </div>
   );
 }
+
+ModalDelete.propTypes = {
+  modalDeleteIsOpen: PropTypes.bool.isRequired,
+  toggleDeleteModal: PropTypes.func.isRequired,
+};

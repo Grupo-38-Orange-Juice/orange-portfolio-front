@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
+import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
-function GridProjs() {
+function GridProjs({ toggleDeleteModal }) {
   const { projectsInfo } = useContext(ProjectsContext);
   const location = useLocation();
   // console.log('Projeto', projectsInfo);
@@ -43,7 +44,7 @@ function GridProjs() {
             key={info.project.id}
             sx={{ position: 'relative' }}
           >
-            {location.pathname === '/' && <MenuEditAndDelete />}
+            {location.pathname === '/' && <MenuEditAndDelete toggleDeleteModal={toggleDeleteModal} />}
             <ProjContainer
               projectId={info.project.id}
               image={info.project.image}
@@ -61,5 +62,9 @@ function GridProjs() {
     </Box>
   );
 }
+
+GridProjs.propTypes = {
+  toggleDeleteModal: PropTypes.func.isRequired,
+};
 
 export default GridProjs;

@@ -6,12 +6,19 @@ import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 import GridProjs from '../../components/GridProjs/index';
+import ModalDelete from '../../components/ModalDelete';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
+
+  const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
+  const toggleDeleteModal = () => {
+    setModalDeleteIsOpen(!modalDeleteIsOpen);
+  };
+  
 
   return (
     <main>
@@ -87,10 +94,11 @@ function HomePage() {
             </Typography>
             <TextfieldResponsive />
           </Box>
-          <GridProjs />
+          <GridProjs toggleDeleteModal={toggleDeleteModal} />
         </Box>
       </Box>
       <AdicionarProjeto modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
+      <ModalDelete modalDeleteIsOpen={modalDeleteIsOpen} toggleDeleteModal={toggleDeleteModal} />
     </main>
   );
 }

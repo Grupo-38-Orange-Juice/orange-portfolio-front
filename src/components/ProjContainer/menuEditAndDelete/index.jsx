@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Menu, MenuItem, Box } from '@mui/material';
+import PropTypes from 'prop-types';
 import iconEdit from '../../../assets/icon_edit.svg';
 import arrow from '../../../assets/arrow1.svg';
 import './style.css';
-import ModalDelete from '../../ModalDelete';
 
-function MenuEditAndDelete() {
+function MenuEditAndDelete({ toggleDeleteModal }) {
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
-
-  const [modalOpen, setModalOpen] = useState(false);
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -23,11 +21,6 @@ function MenuEditAndDelete() {
     if (event.key === 'Enter' || event.key === ' ') {
       handleClick(event);
     }
-  };
-
-  const handleDeleteClick = () => {
-    setModalOpen(true);
-    handleClose();
   };
 
   return (
@@ -59,13 +52,21 @@ function MenuEditAndDelete() {
         MenuListProps={{
           'aria-labelledby': 'iconEdit',
         }}
+        sx={{
+          ':hover & .MuiMenu-List': {
+            background: '#FFEECC',
+          },
+        }}
       >
         <MenuItem onClick={handleClose}>Editar</MenuItem>
-        <MenuItem className="item-delete" onClick={handleDeleteClick}>Excluir</MenuItem>
+        <MenuItem role="button" className="item-delete" onClick={() => { toggleDeleteModal(); handleClose(); }}>Excluir</MenuItem>
       </Menu>
-      <ModalDelete isOpen={modalOpen} closeModal={() => setModalOpen(false)} />
     </Box>
   );
 }
+
+MenuEditAndDelete.propTypes = {
+  toggleDeleteModal: PropTypes.func.isRequired,
+};
 
 export default MenuEditAndDelete;

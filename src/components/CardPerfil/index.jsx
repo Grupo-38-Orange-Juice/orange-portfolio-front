@@ -10,7 +10,6 @@ import { AuthContext } from '../../context/AuthProvider/authProvider';
 function CardPerfil({
   location,
   toggleModal,
-
 }) {
   const { user } = useContext(AuthContext);
   return (
