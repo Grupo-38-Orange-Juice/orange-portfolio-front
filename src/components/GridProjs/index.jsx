@@ -6,7 +6,7 @@ import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
-function GridProjs({ projectsInfo, toggleDeleteModal }) {
+function GridProjs({ projectsInfo, toggleDeleteModal, toggleEditModal }) {
   const location = useLocation();
   // console.log('Projeto', projectsInfo);
 
@@ -43,7 +43,7 @@ function GridProjs({ projectsInfo, toggleDeleteModal }) {
             key={info.project.id}
             sx={{ position: 'relative' }}
           >
-            {location.pathname === '/' && <MenuEditAndDelete toggleDeleteModal={toggleDeleteModal} />}
+            {location.pathname === '/' && <MenuEditAndDelete toggleDeleteModal={toggleDeleteModal} toggleEditModal={toggleEditModal} />}
             <ProjContainer
               projectId={info.project.id}
               image={info.project.image}
@@ -66,6 +66,7 @@ function GridProjs({ projectsInfo, toggleDeleteModal }) {
 GridProjs.propTypes = {
   projectsInfo: PropTypes.func.isRequired,
   toggleDeleteModal: PropTypes.func.isRequired,
+  toggleEditModal: PropTypes.func.isRequired,
 };
 
 export default GridProjs;

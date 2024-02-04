@@ -4,9 +4,9 @@ import Typography from '@mui/material/Typography';
 import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
-import AdicionarProjeto from '../../components/Modals/portfolioRegistration';
 import GridProjs from '../../components/GridProjs/index';
-import ModalDelete from '../../components/ModalDelete';
+import ModalDelete from '../../components/Modals/ModalDelete';
+import ModalProj from '../../components/Modals/ModalProj/modalProj';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
 function HomePage() {
@@ -26,6 +26,11 @@ function HomePage() {
 
   const handleSearch = (event) => {
     setValue(event.target.value);
+  };
+
+  const [modalEditIsOpen, setmodalEditIsOpen] = useState(false);
+  const toggleEditModal = () => {
+    setmodalEditIsOpen(!modalEditIsOpen);
   };
 
   useEffect(() => {
@@ -113,11 +118,16 @@ function HomePage() {
             </Typography>
             <TextfieldResponsive setValue={handleSearch} value={search} />
           </Box>
-          <GridProjs toggleDeleteModal={toggleDeleteModal} projectsInfo={filteredProjects} />
+          <GridProjs
+            toggleDeleteModal={toggleDeleteModal}
+            projectsInfo={filteredProjects}
+            toggleEditModal={toggleEditModal}
+          />
         </Box>
       </Box>
-      <AdicionarProjeto modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
+      <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
       <ModalDelete modalDeleteIsOpen={modalDeleteIsOpen} toggleDeleteModal={toggleDeleteModal} />
+      <ModalProj modalEditIsOpen={modalEditIsOpen} toggleEditModal={toggleEditModal} />
     </main>
   );
 }

@@ -3,8 +3,8 @@ import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import { green } from '@mui/material/colors';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
+import { primaryButtonTheme } from '../../../../mui-theme/buttons';
+import DefaultButton from '../../../default-button';
 
 Modal.setAppElement('#root');
 

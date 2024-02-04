@@ -4,16 +4,16 @@ import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { primaryButtonTheme } from '../../mui-theme/buttons';
-import Header from '../Header/Header';
-import DefaultButton from '../default-button';
+import { primaryButtonTheme } from '../../../mui-theme/buttons';
+import Header from '../../Header/Header';
+import DefaultButton from '../../default-button';
 import save from '../../images/img_save.svg';
-import CardPerfil from '../CardPerfil';
+import CardPerfil from '../../CardPerfil';
 import foto from '../../images/Circle.svg';
 
 Modal.setAppElement('#root');
 
-export default function ModalAddProject({ modalIsOpen, toggleModal }) {
+export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
     lastTags: '',
@@ -144,7 +144,7 @@ export default function ModalAddProject({ modalIsOpen, toggleModal }) {
   );
 }
 
-ModalAddProject.propTypes = {
+ModalViewSavedProj.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };

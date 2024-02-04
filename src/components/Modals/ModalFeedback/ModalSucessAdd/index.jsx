@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import { green } from '@mui/material/colors';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
+import { primaryButtonTheme } from '../../../../mui-theme/buttons';
+import DefaultButton from '../../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function Added() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
+export default function ModalSuccessAdd({ modalSuccessAddIsOpen, toggleSuccessAddModal }) {
+  const handleCancelClick = () => {
+    toggleSuccessAddModal();
   };
 
   return (
     <div>
-      {modalIsOpen && (
+      {modalSuccessAddIsOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          isOpen={modalSuccessAddIsOpen}
+          onRequestClose={handleCancelClick}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -52,11 +47,11 @@ export default function Added() {
           >
             <h1>Projeto adicionado com sucesso!</h1>
           </Box>
-          <box
+          <Box
             style={{ margin: '30px' }}
           >
             <CheckCircleIcon sx={{ color: green[700], fontSize: 45 }} />
-          </box>
+          </Box>
           <Box
             style={{
               width: 'auto',
@@ -68,22 +63,15 @@ export default function Added() {
               margin: 'auto',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="voltar para projetos" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={primaryButtonTheme} label="Voltar para projetos" onClick={handleCancelClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
           </Box>
         </Modal>
       )}
-
-      <Box
-        style={{
-          width: 'auto',
-          maxWidth: '300px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-        }}
-      >
-        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
-      </Box>
     </div>
   );
+}
+
+ModalSuccessAdd.propTypes = {
+  modalSuccessAddIsOpen: PropTypes.bool.isRequired,
+  toggleSuccessAddModal: PropTypes.func.isRequired,
 }

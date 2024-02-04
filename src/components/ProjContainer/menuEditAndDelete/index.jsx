@@ -5,7 +5,7 @@ import iconEdit from '../../../assets/icon_edit.svg';
 import arrow from '../../../assets/arrow1.svg';
 import './style.css';
 
-function MenuEditAndDelete({ toggleDeleteModal }) {
+function MenuEditAndDelete({ toggleDeleteModal, toggleEditModal }) {
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
 
@@ -58,7 +58,7 @@ function MenuEditAndDelete({ toggleDeleteModal }) {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Editar</MenuItem>
+        <MenuItem role="button" onClick={() => { toggleEditModal(); handleClose(); }}>Editar</MenuItem>
         <MenuItem role="button" className="item-delete" onClick={() => { toggleDeleteModal(); handleClose(); }}>Excluir</MenuItem>
       </Menu>
     </Box>
@@ -67,6 +67,7 @@ function MenuEditAndDelete({ toggleDeleteModal }) {
 
 MenuEditAndDelete.propTypes = {
   toggleDeleteModal: PropTypes.func.isRequired,
+  toggleEditModal: PropTypes.func.isRequired,
 };
 
 export default MenuEditAndDelete;

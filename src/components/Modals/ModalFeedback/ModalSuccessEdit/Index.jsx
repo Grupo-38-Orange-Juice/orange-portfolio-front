@@ -3,12 +3,12 @@ import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import { green } from '@mui/material/colors';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
+import { primaryButtonTheme } from '../../../../mui-theme/buttons';
+import DefaultButton from '../../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function Concluded() {
+export default function SuccessEdit() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
@@ -72,18 +72,6 @@ export default function Concluded() {
           </Box>
         </Modal>
       )}
-
-      <Box
-        style={{
-          width: 'auto',
-          maxWidth: '300px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-        }}
-      >
-        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
-      </Box>
     </div>
   );
 }

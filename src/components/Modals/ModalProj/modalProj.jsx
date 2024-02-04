@@ -6,20 +6,20 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { toast, ToastContainer } from 'react-toastify';
-import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
-import ImageUpload from '../../images/Upload.svg';
-import { postProject } from '../../service/api';
-import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
-import TagTextField from './tagModalField';
-import imageTo64 from '../../helpers/imageTo64';
+import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
+import DefaultButton from '../../default-button';
+import ImageUpload from '../../../images/Upload.svg';
+import { postProject } from '../../../service/api';
+import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
+import TagTextField from '../tagModalField';
+import imageTo64 from '../../../helpers/imageTo64';
 import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from '../../context/AuthProvider/authProvider';
-import ImgAlternativ from '../../images/Proj.png';
+import { AuthContext } from '../../../context/AuthProvider/authProvider';
+import ImgAlternativ from '../../../images/Proj.png';
 
 Modal.setAppElement('#root');
 
-export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
+export default function ModalProj({ modalIsOpen, toggleModal }) {
   const [imageFile, setImageFile] = useState(null);
   const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
@@ -121,7 +121,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               maxWidth: '100%',
             }}
           >
-            <h3>Selecione um conteudo que vc deseja fazer upload</h3>
+            <h3>Selecione um conteudo que você deseja fazer upload</h3>
           </Box>
           <Box
             style={{
@@ -240,7 +240,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     </Box>
   );
 }
-AdicionarProjeto.propTypes = {
+
+ModalProj.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };

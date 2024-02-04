@@ -2,12 +2,28 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
+import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
+import DefaultButton from '../../default-button';
+import SuccessEdit from '../ModalFeedback/ModalSucessAdd';
 
 Modal.setAppElement('#root');
 
-export default function ModalDelete({ modalDeleteIsOpen, toggleDeleteModal }) {
+export default function ModalDelete({
+  modalDeleteIsOpen,
+  toggleDeleteModal,
+}) {
+  const [successEditModalIsOpen, setSuccessEditModalIsOpen] = useState(false);
+
+  const handleDeleteButtonClick = () => {
+    toggleDeleteModal();
+    setSuccessEditModalIsOpen(true);
+  };
+
+  const handleCancelClick = () => {
+    toggleDeleteModal();
+    setSuccessEditModalIsOpen(false);
+  };
+
   return (
     <div>
       {modalDeleteIsOpen && (
@@ -69,11 +85,13 @@ export default function ModalDelete({ modalDeleteIsOpen, toggleDeleteModal }) {
               margin: '10% auto auto 5%',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={toggleDeleteModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
-            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={toggleDeleteModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={handleDeleteButtonClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={handleCancelClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
           </Box>
         </Modal>
       )}
+      {successEditModalIsOpen
+      && <SuccessEdit setSuccessEditModalIsOpen={setSuccessEditModalIsOpen} />}
     </div>
   );
 }
