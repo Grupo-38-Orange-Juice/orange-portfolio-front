@@ -127,7 +127,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
             },
             content: {
               maxWidth: '900px',
-              margin: '5% auto auto auto',
+              margin: 'auto',
 
             },
             zIndex: 1000,

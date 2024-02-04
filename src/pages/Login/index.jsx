@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
@@ -72,7 +72,7 @@ function Login() {
     <Container
       maxWidth={false}
       style={{
-        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh',
+        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh', fontFamily: 'Roboto',
       }}
     >
       {
@@ -99,25 +99,30 @@ function Login() {
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
       }}
       >
-        <Typography
+        <Box
           style={{
-            color: '#222244', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '8rem', fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
+            textAlign: 'center',
+            fontWeight: 400,
+            lineHeight: '40px',
+            marginTop: '8rem',
+            fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
+            color: '#222244',
           }}
         >
           Entre no Orange Portfólio
-        </Typography>
+        </Box>
 
-        <Typography
+        <Box
           style={{
-            fontSize: '1.2rem', color: 'rgba(169, 169, 169, 1)', textAlign: 'left', fontWeight: 400, lineHeight: '40px', marginTop: '5rem',
+            fontSize: '1.2rem', color: '#515255', textAlign: 'left', fontWeight: 400, lineHeight: '40px', marginTop: '5rem',
           }}
         >
           Faça login com Email
-        </Typography>
+        </Box>
 
         <form onSubmit={handleFormSubmit} style={{ marginTop: '1rem', width: '100%', maxWidth: '500px' }}>
           <TextField
-            label="Email address"
+            label="E-mail"
             placeholder="email@email.com"
             type="email"
             fullWidth
@@ -133,7 +138,7 @@ function Login() {
             helperText={errors.email}
           />
           <TextField
-            label="Password"
+            label="Senha"
             placeholder="*************"
             defaultValue=""
             type="password"
@@ -150,13 +155,13 @@ function Login() {
           />
           <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
         </form>
-        <Typography
+        <Box
           style={{
-            marginTop: '0rem', fontSize: '1.2rem', textDecoration: 'none', color: 'rgba(34, 34, 68, 1)', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
+            marginTop: '0rem', fontSize: '1.2rem', textDecoration: 'none', color: '#818388', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
           }}
         >
           <a href="/register" style={{ textDecoration: 'none', color: 'inherit' }}>Cadastre-se</a>
-        </Typography>
+        </Box>
       </Box>
       <ToastContainer />
     </Container>
