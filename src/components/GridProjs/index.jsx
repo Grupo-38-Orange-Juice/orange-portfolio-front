@@ -5,7 +5,7 @@ import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 
 function GridProjs({
-  projectsInfo, fetchProjects, toggleFeedbackModal, toggleViewModal, toggleCreateModal,
+  projectsInfo, fetchProjects, toggleFeedbackModal, toggleCreateModal,
   displayDefault,
 }) {
   return (
@@ -41,12 +41,7 @@ function GridProjs({
             sx={{ position: 'relative' }}
           >
             <ProjContainer
-              projectId={info.project.id}
-              image={info.project.image}
-              tags={info.tags}
-              createdAt={info.project.createdAt}
-              user={info.user}
-              toggleViewModal={toggleViewModal}
+              projectInfo={info}
               fetchProjects={fetchProjects}
               toggleFeedbackModal={toggleFeedbackModal}
             />
@@ -61,7 +56,6 @@ function GridProjs({
 }
 
 GridProjs.propTypes = {
-  toggleViewModal: PropTypes.func.isRequired,
   toggleCreateModal: PropTypes.func.isRequired,
   projectsInfo: PropTypes.array.isRequired,
   fetchProjects: PropTypes.func.isRequired,

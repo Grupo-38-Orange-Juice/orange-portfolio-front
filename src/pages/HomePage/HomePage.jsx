@@ -8,7 +8,6 @@ import GridProjs from '../../components/GridProjs/index';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 import CreateModalProject from '../../components/Modals/CreateModalProject';
 import FeedbackModal from '../../components/Modals/FeedbackModal';
-import ModalViewSavedProj from '../../components/Modals/ModalViewSavedProj/modalViewSavedProj';
 
 function HomePage() {
   const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
@@ -17,7 +16,6 @@ function HomePage() {
   const [feedbackModal, setFeedbackModal] = useState({ open: false, text: '' });
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
-  const [modalViewIsOpen, setModalViewIsOpen] = useState(false);
 
   const toggleCreateModal = () => {
     setCreateModalIsOpen(!createModalIsOpen);
@@ -33,10 +31,6 @@ function HomePage() {
 
   const toggleEditModal = () => {
     setEditModal(!editModalIsOpen);
-  };
-
-  const toggleViewModal = () => {
-    setModalViewIsOpen(!modalViewIsOpen);
   };
 
   useEffect(() => {
@@ -132,7 +126,6 @@ function HomePage() {
             toggleEditModal={toggleEditModal}
             fetchProjects={fetchProjects}
             toggleFeedbackModal={toggleFeedbackModal}
-            toggleViewModal={toggleViewModal}
             toggleCreateModal={toggleCreateModal}
             displayDefault={projectsInfo.length === 0}
           />
@@ -153,7 +146,6 @@ function HomePage() {
         toggle={toggleFeedbackModal}
         text={feedbackModal.text}
       />
-      <ModalViewSavedProj modalViewIsOpen={modalViewIsOpen} toggleViewModal={toggleViewModal} />
     </main>
   );
 }
