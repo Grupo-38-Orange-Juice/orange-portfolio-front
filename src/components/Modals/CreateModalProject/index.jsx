@@ -73,7 +73,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     );
     if (response.status === 201) {
       toggleCreateModal();
-      toggleFeedbackModal('Projeto adcionado com sucesso!');
+      toggleFeedbackModal('Projeto adicionado com sucesso!');
       formValues.title = '';
       formValues.tags = [];
       formValues.link = '';

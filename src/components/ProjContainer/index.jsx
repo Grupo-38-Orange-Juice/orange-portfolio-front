@@ -15,9 +15,14 @@ function ProjContainer({
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
 
-  const handleClick = () => {
-    // console.log('Clique registrado');
-    toggleViewModal();
+  const handleClick = (e) => {
+    console.log('Menu registrado');
+    const isMenuEditClick = e.target.classList.contains('menu-edit');
+
+    if (!isMenuEditClick) {
+      console.log('Proj registrado');
+      toggleViewModal();
+    }
   };
 
   const toggleDeleteModal = () => {
@@ -33,11 +38,11 @@ function ProjContainer({
       {location.pathname === '/' && <MenuEditAndDelete toggleDeleteModal={toggleDeleteModal} toggleEditModal={toggleEditModal} />}
       <Box>
         <img className="img_proj" src={image} alt="Imagem do Projeto" />
+        <ModalViewSavedProj toggleViewModal={toggleViewModal} />
       </Box>
       <Box className="bottom_proj">
         <ProjInfoFrame tags={tags} createdAt={createdAt} user={user} />
       </Box>
-      <ModalViewSavedProj toggleViewModal={toggleViewModal} />
       <DeleteModal
         isOpen={deleteModalIsOpen}
         toggleDeleteModal={toggleDeleteModal}
