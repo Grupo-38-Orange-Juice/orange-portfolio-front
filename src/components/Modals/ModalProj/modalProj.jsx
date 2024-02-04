@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { toast, ToastContainer } from 'react-toastify';
+import { Typography } from '@mui/material/Typography';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
@@ -55,6 +56,7 @@ export default function ModalProj({ modalIsOpen, toggleModal }) {
       toast.error(response.data.message || 'Erro ao cadastrar projeto!');
     }
   };
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -83,6 +85,12 @@ export default function ModalProj({ modalIsOpen, toggleModal }) {
     const file = event.target.files[0];
     setImageFile(file);
   };
+
+  const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
+  const handleClickLabel = () => {
+    setViewModalIsOpen(true);
+  };
+
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       {modalIsOpen && (
@@ -121,7 +129,7 @@ export default function ModalProj({ modalIsOpen, toggleModal }) {
               maxWidth: '100%',
             }}
           >
-            <h3>Selecione um conteudo que você deseja fazer upload</h3>
+            <h3>Selecione um conteúdo que você deseja fazer upload</h3>
           </Box>
           <Box
             style={{
@@ -217,7 +225,7 @@ export default function ModalProj({ modalIsOpen, toggleModal }) {
               margin: windowWidth <= 950 ? '10px auto 5px 15%' : '10px 0px 0px 0px',
             }}
           >
-            <h1> Visualizar Publicação</h1>
+            <Typography variant="h1" role="button" onClick={handleClickLabel}>Visualizar Publicação</Typography>
           </Box>
 
           <Box
