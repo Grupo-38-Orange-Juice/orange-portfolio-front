@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import {
+  arrayLengthRangeValidator,
   emailValidator,
   lengthRangeValidator, lowerCaseValidator, numberValidator, requiredValidator, upperCaseValidator,
 } from './helpers';
@@ -21,25 +22,45 @@ const passwordValidators = [
   upperCaseValidator,
   numberValidator,
 ];
-
-export const validatePassword = (password) => validate(passwordValidators, 'Senha', password);
+const validatePassword = (password) => validate(passwordValidators, 'Senha', password);
 
 const emailValidators = [
   requiredValidator,
   lengthRangeValidator(4, 64),
   emailValidator,
 ];
-
-export const validateEmail = (email) => validate(emailValidators, 'E-mail', email);
+const validateEmail = (email) => validate(emailValidators, 'E-mail', email);
 
 const nameValidators = [
   requiredValidator,
   lengthRangeValidator(2, 18),
 ];
+const validateName = (name) => validate(nameValidators, 'Nome', name);
+const validateLastName = (lastName) => validate(nameValidators, 'Sobrenome', lastName);
 
-export const validateName = (name) => validate(nameValidators, 'Nome', name);
+const titleValidators = [
+  requiredValidator,
+  lengthRangeValidator(3, 25),
+];
+const validateTitle = (title) => validate(titleValidators, 'Título', title);
 
-export const validateLastName = (lastName) => validate(nameValidators, 'Sobrenome', lastName);
+const linkValidators = [
+  lengthRangeValidator(2, 255),
+];
+const validateLink = (link) => validate(linkValidators, 'Link', link);
+
+const descriptionValidators = [
+  requiredValidator,
+  lengthRangeValidator(3, 100),
+];
+const validateDescription = (description) => validate(descriptionValidators, 'Descrição', description);
+
+const tagValidators = [
+  requiredValidator,
+  arrayLengthRangeValidator(1, 2),
+];
+
+const validateTags = (tags) => validate(tagValidators, 'Tags', tags);
 
 export const registerValidators = {
   name: validateName,
@@ -51,4 +72,11 @@ export const registerValidators = {
 export const loginValidators = {
   email: validateEmail,
   password: validatePassword,
+};
+
+export const postProjectValidators = {
+  lastTitulo: validateTitle,
+  lastTags: validateTags,
+  LastLink: validateDescription,
+  LastDescricao: validateLink,
 };

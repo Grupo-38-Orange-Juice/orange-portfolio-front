@@ -15,6 +15,7 @@ import TagTextField from './tagModalField';
 import imageTo64 from '../../helpers/imageTo64';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
+import { postProjectValidators } from '../../validators/validators';
 
 Modal.setAppElement('#root');
 
@@ -28,10 +29,35 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     LastLink: '',
     LastDescricao: '',
   });
+
+  const [errors, setErrors] = useState({
+    lastTitulo: '',
+    lastTags: '',
+    LastLink: '',
+    LastDescricao: '',
+  });
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
 
   const createProject = async () => {
     const base64Image = imageFile ? await imageTo64(imageFile) : null;
+
+    setErrors({
+      lastTitulo: '',
+      lastTags: '',
+      LastLink: '',
+      LastDescricao: '',
+    });
+
+    for (const field in postProjectValidators) {
+      const validation = postProjectValidators[field](formValues[field]);
+      if (validation) {
+        updateErrors({ [field]: validation });
+        return;
+      }
+    }
     const response = await postProject(
       {
         description: formValues.LastDescricao,
@@ -143,6 +169,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               name="lastTitulo"
               fullWidth
               style={{ marginBottom: '1rem' }}
+              error={Boolean(errors.lastTitulo)}
+              helperText={errors.lastTitulo}
 
             />
             {tags && tags.length > 0 && (
@@ -150,6 +178,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               tags={tags}
               formValues={formValues}
               handleInputChanges={handleInputChanges}
+              errors={Boolean(errors.lastTags)}
+              helperText={errors.lastTags}
             />
             )}
 
@@ -165,6 +195,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               name="LastLink"
               fullWidth
               style={{ marginBottom: '1rem' }}
+              error={Boolean(errors.LastLink)}
+              helperText={errors.LastLink}
             />
 
             <TextField
@@ -181,6 +213,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               style={{ marginBottom: '1rem' }}
               multiline
               rows={3}
+              error={Boolean(errors.LastDescricao)}
+              helperText={errors.LastDescricao}
             />
           </Box>
           <Box
