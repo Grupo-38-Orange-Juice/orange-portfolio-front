@@ -9,7 +9,7 @@ import MenuEditAndDelete from './menuEditAndDelete';
 import './style.css';
 
 function ProjContainer({
-  projectId, image, tags, createdAt, user, toggleViewModal, fetchProjects, toggleFeedbackModal
+  projectId, image, tags, createdAt, user, toggleViewModal, fetchProjects, toggleFeedbackModal,
 }) {
   const location = useLocation();
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
@@ -19,7 +19,7 @@ function ProjContainer({
     // console.log('Clique registrado');
     toggleViewModal();
   };
-  
+
   const toggleDeleteModal = () => {
     setDeleteModalIsOpen(!deleteModalIsOpen);
   };

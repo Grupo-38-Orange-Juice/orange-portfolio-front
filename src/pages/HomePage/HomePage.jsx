@@ -17,13 +17,10 @@ function HomePage() {
   const [feedbackModal, setFeedbackModal] = useState({ open: false, text: '' });
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
+  const [modalViewIsOpen, setModalViewIsOpen] = useState(false);
 
   const toggleCreateModal = () => {
     setCreateModalIsOpen(!createModalIsOpen);
-  };
-
-  const toggleEditModal = () => {
-    setEditModal(!editModalIsOpen);
   };
 
   const toggleFeedbackModal = (text) => {
@@ -34,12 +31,10 @@ function HomePage() {
     setValue(event.target.value);
   };
 
-  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
   const toggleEditModal = () => {
-    setModalEditIsOpen(!modalEditIsOpen);
+    setEditModal(!editModalIsOpen);
   };
 
-  const [modalViewIsOpen, setModalViewIsOpen] = useState(false);
   const toggleViewModal = () => {
     setModalViewIsOpen(!modalViewIsOpen);
   };
@@ -137,8 +132,22 @@ function HomePage() {
           />
         </Box>
       </Box>
-      <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
-      <ModalProj modalEditIsOpen={modalEditIsOpen} toggleEditModal={toggleEditModal} />
+      <CreateModalProject
+        isOpen={createModalIsOpen}
+        toggleCreateModal={toggleCreateModal}
+        toggleFeedbackModal={toggleFeedbackModal}
+      />
+      <CreateModalProject
+        isOpen={editModalIsOpen}
+        toggleCreateModal={toggleEditModal}
+        toggleFeedbackModal={toggleFeedbackModal}
+      />
+      <FeedbackModal
+        isOpen={feedbackModal.open}
+        toggle={toggleFeedbackModal}
+        text={feedbackModal.text}
+      />
+      <ModalViewSavedProj modalViewIsOpen={modalViewIsOpen} toggleViewModal={toggleViewModal} />
     </main>
   );
 }
