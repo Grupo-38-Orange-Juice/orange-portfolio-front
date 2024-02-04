@@ -17,11 +17,11 @@ function ProjContainer({
   const [modalViewIsOpen, setModalViewIsOpen] = useState(false);
 
   const toggleViewModal = () => {
-    console.log('toggleViewModal');
     setModalViewIsOpen(!modalViewIsOpen);
   };
 
   const toggleDeleteModal = () => {
+    console.log('chamei');
     setDeleteModalIsOpen(!deleteModalIsOpen);
   };
 
