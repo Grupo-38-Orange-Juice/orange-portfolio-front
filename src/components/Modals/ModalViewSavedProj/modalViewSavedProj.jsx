@@ -98,9 +98,9 @@ export default function ModalViewSavedProj({ modalViewIsOpen, toggleViewModal })
                 whiteSpace: 'nowrap',
               }}
             >
-              <h1>
+              <Typography variant="h1">
                 {formValues.lastTitulo}
-              </h1>
+              </Typography>
             </Box>
             <Box
               sx={{

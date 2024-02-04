@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import collections from '../../assets/collections.svg';
 import './style.css';
 
-function DefaultContainer({toggleViewModal}) {
+function DefaultContainer({ toggleViewModal }) {
   const handleClick = () => {
     // console.log('Clique registrado');
     toggleViewModal();
