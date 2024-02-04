@@ -50,7 +50,7 @@ function GridProjs({ projectsInfo, toggleViewModal }) {
         ))
       ) : (
         <Box className="container">
-          <DefaultContainer />
+          <DefaultContainer toggleViewModal={toggleViewModal} />
         </Box>
       )}
     </Box>
