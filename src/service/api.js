@@ -90,4 +90,13 @@ export async function postProject({
   }
 }
 
+export async function deleteProject(projectId) {
+  try {
+    const request = await Api.delete(`projects/${projectId}`);
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
 export default Api;

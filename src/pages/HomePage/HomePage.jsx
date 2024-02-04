@@ -5,7 +5,6 @@ import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
-import ModalDelete from '../../components/Modals/ModalDelete';
 import ModalProj from '../../components/Modals/ModalProj/modalProj';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
 
@@ -17,11 +16,6 @@ function HomePage() {
   const { projectsInfo } = useContext(ProjectsContext);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
-  };
-
-  const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
-  const toggleDeleteModal = () => {
-    setModalDeleteIsOpen(!modalDeleteIsOpen);
   };
 
   const handleSearch = (event) => {
@@ -119,14 +113,12 @@ function HomePage() {
             <TextfieldResponsive setValue={handleSearch} value={search} />
           </Box>
           <GridProjs
-            toggleDeleteModal={toggleDeleteModal}
             projectsInfo={filteredProjects}
             toggleEditModal={toggleEditModal}
           />
         </Box>
       </Box>
       <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
-      <ModalDelete modalDeleteIsOpen={modalDeleteIsOpen} toggleDeleteModal={toggleDeleteModal} />
       <ModalProj modalEditIsOpen={modalEditIsOpen} toggleEditModal={toggleEditModal} />
     </main>
   );

@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import FeedbackDelete from '../ModalFeedback/ModalSuccessDelete';
+import { deleteProject } from '../../../service/api';
+import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
+import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');
 
 export default function ModalDelete({
+  projectId,
   modalDeleteIsOpen,
   toggleDeleteModal,
 }) {
+  const { fetchProjects } = useContext(ProjectsContext);
+  const { user } = useContext(AuthContext);
   const [feedbackModal, setFeedbackModal] = useState(false);
 
-  const handleClickDelete = () => {
+  const handleClickDelete = async () => {
     toggleDeleteModal();
     setFeedbackModal(true);
-    console.log('deletado');
+    await deleteProject(projectId);
+    await fetchProjects(user.id);
   };
 
   const handleClickCancel = () => {
@@ -108,4 +115,5 @@ export default function ModalDelete({
 ModalDelete.propTypes = {
   modalDeleteIsOpen: PropTypes.bool.isRequired,
   toggleDeleteModal: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
