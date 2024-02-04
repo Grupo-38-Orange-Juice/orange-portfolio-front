@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import ProjInfoFrame from '../../ProjContainer/ProjInfoFrame';
 import save from '../../../images/img_save.svg';
 import foto from '../../../images/Circle.svg';
 

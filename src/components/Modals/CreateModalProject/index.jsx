@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { toast, ToastContainer } from 'react-toastify';
-import { Typography } from '@mui/material/Typography';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
@@ -129,10 +128,10 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     setImageFile(file);
   };
 
-  const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
-  const handleClickLabel = () => {
-    setViewModalIsOpen(true);
-  };
+  // const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
+  // const handleClickLabel = () => {
+  //   setViewModalIsOpen(true);
+  // };
 
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
@@ -276,7 +275,8 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               margin: windowWidth <= 950 ? '10px auto 5px 15%' : '10px 0px 0px 0px',
             }}
           >
-            <Typography variant="h1" role="button" onClick={handleClickLabel}>Visualizar Publicação</Typography>
+            {/* <Typography variant="h1" role="button" onClick={handleClickLabel}>
+            Visualizar Publicação</Typography> */}
           </Box>
 
           <Box

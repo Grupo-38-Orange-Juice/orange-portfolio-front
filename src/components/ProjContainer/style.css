@@ -15,6 +15,9 @@
     visibility: visible;
 }
 
+.image_box:hover {
+  cursor: pointer;
+}
 .img_proj {
     width: 380px;
     height: 280px;

@@ -5,7 +5,8 @@ import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 
 function GridProjs({
-  projectsInfo, fetchProjects, toggleFeedbackModal, toggleViewModal,
+  projectsInfo, fetchProjects, toggleFeedbackModal, toggleViewModal, toggleCreateModal,
+  displayDefault,
 }) {
   return (
     <Box
@@ -32,7 +33,7 @@ function GridProjs({
       }}
     >
 
-      {projectsInfo && projectsInfo.length > 0 ? (
+      {projectsInfo && (
         projectsInfo.map((info) => (
           <Box
             className="containerProjs"
@@ -51,20 +52,21 @@ function GridProjs({
             />
           </Box>
         ))
-      ) : (
-        <Box className="container">
-          <DefaultContainer toggleViewModal={toggleViewModal} />
-        </Box>
       )}
+      <Box className="container">
+        <DefaultContainer toggleCreateModal={toggleCreateModal} displayDefault={displayDefault} />
+      </Box>
     </Box>
   );
 }
 
 GridProjs.propTypes = {
   toggleViewModal: PropTypes.func.isRequired,
+  toggleCreateModal: PropTypes.func.isRequired,
   projectsInfo: PropTypes.array.isRequired,
   fetchProjects: PropTypes.func.isRequired,
   toggleFeedbackModal: PropTypes.func.isRequired,
+  displayDefault: PropTypes.bool.isRequired,
 };
 
 export default GridProjs;
