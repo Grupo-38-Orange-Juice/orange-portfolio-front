@@ -75,8 +75,8 @@ export const loginValidators = {
 };
 
 export const postProjectValidators = {
-  lastTitulo: validateTitle,
-  lastTags: validateTags,
-  LastLink: validateDescription,
-  LastDescricao: validateLink,
+  title: validateTitle,
+  tags: validateTags,
+  link: validateDescription,
+  description: validateLink,
 };

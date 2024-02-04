@@ -16,7 +16,7 @@ function TagTextField({
   const handleTagChange = (event, value) => {
     if (value) {
       const tagIds = value.map((tag) => tag.id);
-      handleInputChanges({ target: { name: 'lastTags', value: tagIds } });
+      handleInputChanges({ target: { name: 'tags', value: tagIds } });
     }
   };
 
