@@ -60,82 +60,85 @@ export default function ModalViewSavedProj({ modalViewIsOpen, toggleViewModal })
           <Box
             style={{
               position: 'absolute',
-              top: '10px',
-              right: '10px',
+              top: '15px',
+              right: '15px',
               cursor: 'pointer',
             }}
             onClick={toggleViewModal}
           >
             <CloseIcon />
           </Box>
-          <Box
-            style={{
-              width: '100px',
-              maxWidth: '100%',
-              margin: 'auto',
-              display: 'grid',
-              position: 'absolute',
-            }}
-          >
-            <img
-              src={foto}
-              alt="Imagem de registro"
-              style={{ maxWidth: '30%', height: 'auto' }}
+          <Box sx={{ margin: 3 }}>
+            <Box
+              style={{
+                width: '100px',
+                maxWidth: '100%',
+                margin: 'auto',
+                display: 'grid',
+                position: 'absolute',
+              }}
+            >
+              <img
+                src={foto}
+                alt="Imagem de registro"
+                style={{ maxWidth: '30%', height: 'auto' }}
+              />
+            </Box>
+            <Box
+              style={{
+                fontFamily: 'Roboto, sans-serif',
+                fontSize: '20px',
+                color: '#303133',
+                margin: 'auto',
+                width: '100px',
+                maxWidth: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <h1>
+                {formValues.lastTitulo}
+              </h1>
+            </Box>
+            <Box
+              sx={{
+                width: '100%',
+                maxWidth: '700px',
+                flexDirection: 'column',
+                display: 'grid',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '16px auto auto auto',
+                objectFit: 'contain',
+              }}
+            >
+              <img
+                src={save}
+                alt="Imagem de registro"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+            </Box>
+            <TextField
+              placeholder=" "
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={formValues.LastDescricao}
+              onChange={handleInputChanges}
+              name="LastDescricao"
+              fullWidth
+              style={{
+                margin: '30px auto auto auto', alignItems: 'center',
+              }}
+              multiline
+              rows={3}
             />
+            <Typography variant="h6">Download</Typography>
+            <Link href={formValues.lastTitulo} />
           </Box>
-          <Box
-            style={{
-              fontFamily: 'Roboto, sans-serif',
-              fontSize: '20px',
-              color: '#303133',
-              margin: 'auto',
-              width: '100px',
-              maxWidth: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            <h1>
-              {formValues.lastTitulo}
-            </h1>
-          </Box>
-          <Box
-            style={{
-              width: '100%',
-              maxWidth: '700px',
-              flexDirection: 'column',
-              display: 'grid',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '30px auto auto auto',
-            }}
-          >
-            <img
-              src={save}
-              alt="Imagem de registro"
-              style={{ maxWidth: '100%', height: 'auto' }}
-            />
-          </Box>
-          <TextField
-            placeholder=" "
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={formValues.LastDescricao}
-            onChange={handleInputChanges}
-            name="LastDescricao"
-            fullWidth
-            style={{
-              margin: '30px auto auto auto', alignItems: 'center',
-            }}
-            multiline
-            rows={3}
-          />
-          <Typography variant="h6">Download</Typography>
-          <Link href={formValues.lastTitulo} />
         </Modal>
       )}
     </Box>
