@@ -13,7 +13,7 @@ function HomePage() {
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
 
-  const { projectsInfo } = useContext(ProjectsContext);
+  const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
@@ -28,7 +28,7 @@ function HomePage() {
   };
 
   useEffect(() => {
-    if (projectsInfo && projectsInfo.length > 0) {
+    if (projectsInfo) {
       const newFilteredProjects = projectsInfo
         .filter((project) => project.tags.some((tag) => tag.toLowerCase()
           .includes(search.toLowerCase())));
@@ -44,7 +44,6 @@ function HomePage() {
       <Box
         className="main-box"
         maxWidth="l"
-        disableGutters
         sx={{
           display: 'inline-flex',
           flexDirection: 'column',
@@ -115,11 +114,12 @@ function HomePage() {
           <GridProjs
             projectsInfo={filteredProjects}
             toggleEditModal={toggleEditModal}
+            fetchProjects={fetchProjects}
           />
         </Box>
       </Box>
       <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
-      <ModalProj modalEditIsOpen={modalEditIsOpen} toggleEditModal={toggleEditModal} />
+      <ModalProj modalIsOpen={modalEditIsOpen} toggleModal={toggleEditModal} />
     </main>
   );
 }

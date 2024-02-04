@@ -8,7 +8,7 @@ import './style.css';
 import MenuEditAndDelete from './menuEditAndDelete';
 
 function ProjContainer({
-  projectId, image, tags, createdAt, user,
+  projectId, image, tags, createdAt, user, fetchProjects,
 }) {
   const location = useLocation();
 
@@ -36,6 +36,7 @@ function ProjContainer({
         modalDeleteIsOpen={modalDeleteIsOpen}
         toggleDeleteModal={toggleDeleteModal}
         projectId={projectId}
+        fetchProjects={fetchProjects}
       />
     </Box>
   );
@@ -47,6 +48,7 @@ ProjContainer.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   createdAt: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
 };
 
 export default ProjContainer;

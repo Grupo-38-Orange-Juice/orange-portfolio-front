@@ -52,11 +52,11 @@ export default function SuccessEdit() {
           >
             <h1>Edição concluída com sucesso!</h1>
           </Box>
-          <box
+          <Box
             style={{ margin: '30px' }}
           >
             <CheckCircleIcon sx={{ color: green[700], fontSize: 45 }} />
-          </box>
+          </Box>
           <Box
             style={{
               width: 'auto',

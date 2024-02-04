@@ -47,11 +47,11 @@ export default function FeedbackDelete({ isOpen, toogle }) {
           >
             <h1>Projeto deletado com sucesso!</h1>
           </Box>
-          <box
+          <Box
             style={{ margin: '30px' }}
           >
             <CheckCircleIcon sx={{ color: green[700], fontSize: 45 }} />
-          </box>
+          </Box>
           <Box
             style={{
               width: 'auto',

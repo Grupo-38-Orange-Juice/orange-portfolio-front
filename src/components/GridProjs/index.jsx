@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 
-function GridProjs({ projectsInfo }) {
+function GridProjs({ projectsInfo, fetchProjects }) {
   return (
     <Box
       id="container-wrapper"
@@ -34,7 +34,6 @@ function GridProjs({ projectsInfo }) {
         projectsInfo.map((info) => (
           <Box
             className="containerProjs"
-            item
             key={info.project.id}
             sx={{ position: 'relative' }}
           >
@@ -44,6 +43,7 @@ function GridProjs({ projectsInfo }) {
               tags={info.tags}
               createdAt={info.project.createdAt}
               user={info.user}
+              fetchProjects={fetchProjects}
             />
           </Box>
         ))
@@ -57,7 +57,8 @@ function GridProjs({ projectsInfo }) {
 }
 
 GridProjs.propTypes = {
-  projectsInfo: PropTypes.func.isRequired,
+  projectsInfo: PropTypes.array.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
 };
 
 export default GridProjs;

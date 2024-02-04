@@ -43,7 +43,6 @@ function Explore() {
     <main>
       <Header />
       <Box
-        disableGutters
         maxWidth="l"
         sx={{
           display: 'inline-flex',
@@ -121,7 +120,6 @@ function Explore() {
         </Box>
         <Box
           className="box_projs"
-          disableGutters
           sx={{
             display: 'flex',
             flexDirection: 'column',

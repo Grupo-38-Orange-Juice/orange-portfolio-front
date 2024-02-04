@@ -6,7 +6,6 @@ import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/but
 import DefaultButton from '../../default-button';
 import FeedbackDelete from '../ModalFeedback/ModalSuccessDelete';
 import { deleteProject } from '../../../service/api';
-import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');
@@ -15,16 +14,27 @@ export default function ModalDelete({
   projectId,
   modalDeleteIsOpen,
   toggleDeleteModal,
+  fetchProjects,
 }) {
-  const { fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
   const [feedbackModal, setFeedbackModal] = useState(false);
 
   const handleClickDelete = async () => {
     toggleDeleteModal();
-    setFeedbackModal(true);
-    await deleteProject(projectId);
-    await fetchProjects(user.id);
+
+    try {
+      // Aguardar a exclusão do projeto antes de prosseguir
+      await deleteProject(projectId);
+
+      // Aguardar o término da exclusão antes de buscar os projetos atualizados
+      await fetchProjects(user.id);
+
+      // Atualizar o estado local após o sucesso da operação
+      setFeedbackModal(true);
+    } catch (error) {
+      console.error('Erro ao excluir projeto:', error);
+      // Lidar com erros, se necessário
+    }
   };
 
   const handleClickCancel = () => {
@@ -116,4 +126,5 @@ ModalDelete.propTypes = {
   modalDeleteIsOpen: PropTypes.bool.isRequired,
   toggleDeleteModal: PropTypes.func.isRequired,
   projectId: PropTypes.string.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
 };
