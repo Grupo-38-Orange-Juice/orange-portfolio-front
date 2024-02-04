@@ -15,7 +15,8 @@ import TagTextField from './tagModalField';
 import imageTo64 from '../../helpers/imageTo64';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
-import ImgAlternativ from '../../images/Proj.png';
+import { postProjectValidators } from '../../validators/validators';
+import { isImageBroken } from '../../validators/helpers';
 
 Modal.setAppElement('#root');
 
@@ -24,30 +25,56 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
   const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({
-    lastTitulo: '',
-    lastTags: [],
-    LastLink: '',
-    LastDescricao: '',
+    title: '',
+    tags: [],
+    link: '',
+    description: '',
   });
+
+  const [errors, setErrors] = useState({
+    title: '',
+    tags: '',
+    link: '',
+    description: '',
+  });
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
+
   const createProject = async () => {
-    const base64Image = imageFile ? await imageTo64(imageFile) : ImgAlternativ;
+    const base64Image = imageFile ? await imageTo64(imageFile) : null;
+
+    setErrors({
+      title: '',
+      tags: '',
+      link: '',
+      description: '',
+      image: '',
+    });
+
+    for (const field in postProjectValidators) {
+      const validation = postProjectValidators[field](formValues[field]);
+      if (validation) {
+        updateErrors({ [field]: validation });
+        return;
+      }
+    }
     const response = await postProject(
       {
-        description: formValues.LastDescricao,
-        link: formValues.LastLink,
-        tags: formValues.lastTags,
-        name: formValues.lastTitulo,
+        description: formValues.description,
+        link: formValues.link,
+        tags: formValues.tags,
+        name: formValues.title,
         image: base64Image,
       },
     );
     if (response.status === 201) {
       toggleModal();
-      formValues.lastTitulo = '';
-      formValues.lastTags = [];
-      formValues.LastLink = '';
-      formValues.LastDescricao = '';
+      formValues.title = '';
+      formValues.tags = [];
+      formValues.link = '';
+      formValues.description = '';
       setImageFile(null);
       toast.success('Projeto cadastrado com sucesso!');
       fetchProjects(user.id);
@@ -79,8 +106,12 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     document.getElementById('uploadImageInput').click();
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
+    if (await isImageBroken(file)) {
+      toast.error('Imagem inválida');
+      return;
+    }
     setImageFile(file);
   };
   return (
@@ -139,11 +170,13 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               InputLabelProps={{
                 shrink: true,
               }}
-              value={formValues.lastTitulo}
+              value={formValues.title}
               onChange={handleInputChanges}
-              name="lastTitulo"
+              name="title"
               fullWidth
               style={{ marginBottom: '1rem' }}
+              error={Boolean(errors.title)}
+              helperText={errors.title}
 
             />
             {tags && tags.length > 0 && (
@@ -151,6 +184,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               tags={tags}
               formValues={formValues}
               handleInputChanges={handleInputChanges}
+              errors={Boolean(errors.tags)}
+              helperText={errors.tags}
             />
             )}
 
@@ -161,11 +196,13 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               InputLabelProps={{
                 shrink: true,
               }}
-              value={formValues.LastLink}
+              value={formValues.link}
               onChange={handleInputChanges}
-              name="LastLink"
+              name="link"
               fullWidth
               style={{ marginBottom: '1rem' }}
+              error={Boolean(errors.link)}
+              helperText={errors.link}
             />
 
             <TextField
@@ -175,13 +212,15 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               InputLabelProps={{
                 shrink: true,
               }}
-              value={formValues.LastDescricao}
+              value={formValues.description}
               onChange={handleInputChanges}
-              name="LastDescricao"
+              name="description"
               fullWidth
               style={{ marginBottom: '1rem' }}
               multiline
               rows={3}
+              error={Boolean(errors.description)}
+              helperText={errors.description}
             />
           </Box>
           <Box
