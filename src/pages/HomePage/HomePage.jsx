@@ -5,18 +5,29 @@ import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
-import ModalProj from '../../components/Modals/ModalProj/modalProj';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import CreateModalProject from '../../components/Modals/CreateModalProject';
+import FeedbackModal from '../../components/Modals/FeedbackModal';
 import ModalViewSavedProj from '../../components/Modals/ModalViewSavedProj/modalViewSavedProj';
 
 function HomePage() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
+  const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
+  const [editModalIsOpen, setEditModal] = useState(false);
+  const [feedbackModal, setFeedbackModal] = useState({ open: false, text: '' });
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
 
-  const { projectsInfo } = useContext(ProjectsContext);
-  const toggleModal = () => {
-    setModalIsOpen(!modalIsOpen);
+  const toggleCreateModal = () => {
+    setCreateModalIsOpen(!createModalIsOpen);
+  };
+
+  const toggleEditModal = () => {
+    setEditModal(!editModalIsOpen);
+  };
+
+  const toggleFeedbackModal = (text) => {
+    setFeedbackModal({ open: !feedbackModal.open, text });
   };
 
   const handleSearch = (event) => {
@@ -34,7 +45,7 @@ function HomePage() {
   };
 
   useEffect(() => {
-    if (projectsInfo && projectsInfo.length > 0) {
+    if (projectsInfo) {
       const newFilteredProjects = projectsInfo
         .filter((project) => project.tags.some((tag) => tag.toLowerCase()
           .includes(search.toLowerCase())));
@@ -50,7 +61,6 @@ function HomePage() {
       <Box
         className="main-box"
         maxWidth="l"
-        disableGutters
         sx={{
           display: 'inline-flex',
           flexDirection: 'column',
@@ -78,7 +88,7 @@ function HomePage() {
           },
         }}
         >
-          <CardPerfil toggleModal={toggleModal} />
+          <CardPerfil toggleCreateModal={toggleCreateModal} />
         </Box>
         <Box
           className="box_proj"
@@ -121,13 +131,14 @@ function HomePage() {
           <GridProjs
             projectsInfo={filteredProjects}
             toggleEditModal={toggleEditModal}
+            fetchProjects={fetchProjects}
+            toggleFeedbackModal={toggleFeedbackModal}
             toggleViewModal={toggleViewModal}
           />
         </Box>
       </Box>
       <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
       <ModalProj modalEditIsOpen={modalEditIsOpen} toggleEditModal={toggleEditModal} />
-      <ModalViewSavedProj modalViewIsOpen={modalViewIsOpen} toggleViewModal={toggleViewModal} />
     </main>
   );
 }

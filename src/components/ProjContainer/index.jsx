@@ -3,26 +3,25 @@ import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import ProjInfoFrame from './ProjInfoFrame';
-import ModalDelete from '../Modals/ModalDelete';
+import DeleteModal from '../Modals/DeleteModalProject';
 import ModalViewSavedProj from '../Modals/ModalViewSavedProj/modalViewSavedProj';
-import './style.css';
 import MenuEditAndDelete from './menuEditAndDelete';
+import './style.css';
 
 function ProjContainer({
-  projectId, image, tags, createdAt, user, toggleViewModal,
+  projectId, image, tags, createdAt, user, toggleViewModal, fetchProjects, toggleFeedbackModal
 }) {
   const location = useLocation();
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
 
   const handleClick = () => {
     // console.log('Clique registrado');
     toggleViewModal();
   };
-
-  const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
-  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
-
+  
   const toggleDeleteModal = () => {
-    setModalDeleteIsOpen(!modalDeleteIsOpen);
+    setDeleteModalIsOpen(!deleteModalIsOpen);
   };
 
   const toggleEditModal = () => {
@@ -39,10 +38,12 @@ function ProjContainer({
         <ProjInfoFrame tags={tags} createdAt={createdAt} user={user} />
       </Box>
       <ModalViewSavedProj toggleViewModal={toggleViewModal} />
-      <ModalDelete
-        modalDeleteIsOpen={modalDeleteIsOpen}
+      <DeleteModal
+        isOpen={deleteModalIsOpen}
         toggleDeleteModal={toggleDeleteModal}
         projectId={projectId}
+        fetchProjects={fetchProjects}
+        toggleFeedbackModal={toggleFeedbackModal}
       />
     </Box>
   );
@@ -55,6 +56,8 @@ ProjContainer.propTypes = {
   createdAt: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
   toggleViewModal: PropTypes.func.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };
 
 export default ProjContainer;

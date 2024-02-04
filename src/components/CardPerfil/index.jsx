@@ -9,7 +9,7 @@ import { AuthContext } from '../../context/AuthProvider/authProvider';
 
 function CardPerfil({
   location,
-  toggleModal,
+  toggleCreateModal,
 }) {
   const { user } = useContext(AuthContext);
   return (
@@ -22,7 +22,7 @@ function CardPerfil({
           <h5>{user ? user.fullName : 'Loading...'}</h5>
           <p className="location">{location}</p>
         </Box>
-        <DefaultButton className="button_add" theme={primaryButtonTheme} label="Adicionar projeto" onClick={toggleModal} size="sm" />
+        <DefaultButton className="button_add" theme={primaryButtonTheme} label="Adicionar projeto" onClick={toggleCreateModal} size="sm" />
       </Box>
     </Box>
   );
@@ -30,7 +30,7 @@ function CardPerfil({
 
 CardPerfil.propTypes = {
   location: PropTypes.string,
-  toggleModal: PropTypes.func.isRequired,
+  toggleCreateModal: PropTypes.func.isRequired,
 };
 
 CardPerfil.defaultProps = {

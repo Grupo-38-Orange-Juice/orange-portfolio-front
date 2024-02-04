@@ -14,7 +14,8 @@ function ProjectsProvider({ children }) {
 
   const fetchProjects = async (userId) => {
     const { data } = await getProjectsByUserId(userId);
-    setProjects(data);
+    if (data) setProjects(data);
+    else setProjects([]);
   };
 
   const fetchTags = async () => {

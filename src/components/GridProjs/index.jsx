@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 
-function GridProjs({ projectsInfo, toggleViewModal }) {
+function GridProjs({
+  projectsInfo, fetchProjects, toggleFeedbackModal, toggleViewModal,
+}) {
   return (
     <Box
       id="container-wrapper"
@@ -34,7 +36,6 @@ function GridProjs({ projectsInfo, toggleViewModal }) {
         projectsInfo.map((info) => (
           <Box
             className="containerProjs"
-            item
             key={info.project.id}
             sx={{ position: 'relative' }}
           >
@@ -45,6 +46,8 @@ function GridProjs({ projectsInfo, toggleViewModal }) {
               createdAt={info.project.createdAt}
               user={info.user}
               toggleViewModal={toggleViewModal}
+              fetchProjects={fetchProjects}
+              toggleFeedbackModal={toggleFeedbackModal}
             />
           </Box>
         ))
@@ -58,8 +61,10 @@ function GridProjs({ projectsInfo, toggleViewModal }) {
 }
 
 GridProjs.propTypes = {
-  projectsInfo: PropTypes.func.isRequired,
   toggleViewModal: PropTypes.func.isRequired,
+  projectsInfo: PropTypes.array.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };
 
 export default GridProjs;
