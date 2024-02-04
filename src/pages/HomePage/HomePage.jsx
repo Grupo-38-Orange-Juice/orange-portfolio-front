@@ -16,9 +16,9 @@ function HomePage() {
 
   const { projectsInfo } = useContext(ProjectsContext);
   const toggleModal = () => {
-    setModalIsOpen(!modalIsOpen);
+    setModalIsOpen(!modalIsOpen); 
   };
-
+ 
   const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
   const toggleDeleteModal = () => {
     setModalDeleteIsOpen(!modalDeleteIsOpen);

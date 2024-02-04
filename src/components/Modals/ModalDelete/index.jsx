@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
-import SuccessEdit from '../ModalFeedback/ModalSucessAdd';
+import FeedbackDelete from '../ModalFeedback/ModalSuccessDelete';
 
 Modal.setAppElement('#root');
 
@@ -22,6 +22,15 @@ export default function ModalDelete({
   const handleCancelClick = () => {
     toggleDeleteModal();
     setSuccessEditModalIsOpen(false);
+  };
+
+  const handleFeedbackModalClose = () => {
+    setSuccessEditModalIsOpen(false);
+  };
+
+  const [modalFDeleteIsOpen, setModalFDeleteIsOpen] = useState(false);
+  const toggleFDeleteModal = () => {
+    setModalFDeleteIsOpen(!modalFDeleteIsOpen);
   };
 
   return (
@@ -91,7 +100,13 @@ export default function ModalDelete({
         </Modal>
       )}
       {successEditModalIsOpen
-      && <SuccessEdit setSuccessEditModalIsOpen={setSuccessEditModalIsOpen} />}
+      && (
+      <FeedbackDelete
+        modalFDeleteIsOpen={modalFDeleteIsOpen}
+        toggleFDeleteModal={toggleFDeleteModal}
+        setSuccessEditModalIsOpen={handleFeedbackModalClose}
+      />
+      )}
     </div>
   );
 }

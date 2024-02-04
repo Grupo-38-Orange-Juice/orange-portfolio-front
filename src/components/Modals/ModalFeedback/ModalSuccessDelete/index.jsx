@@ -8,23 +8,20 @@ import DefaultButton from '../../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function FeedbackDelete() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export default function FeedbackDelete(modalFDeleteIsOpen, toggleFDeleteModal) {
+  const [modalFeedbackIsOpen, setmodalFeedbackIsOpen] = useState(true);
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const handleBackHomeButtonClick = () => {
+    toggleFDeleteModal();
+    setmodalFeedbackIsOpen(false);
   };
 
   return (
     <div>
-      {modalIsOpen && (
+      {modalFeedbackIsOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          isOpen={modalFeedbackIsOpen}
+          onRequestClose={toggleFDeleteModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -68,22 +65,11 @@ export default function FeedbackDelete() {
               margin: 'auto',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="voltar para projetos" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={primaryButtonTheme} label="voltar para projetos" onClick={handleBackHomeButtonClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
           </Box>
         </Modal>
       )}
 
-      <Box
-        style={{
-          width: 'auto',
-          maxWidth: '300px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-        }}
-      >
-        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
-      </Box>
     </div>
   );
 }
