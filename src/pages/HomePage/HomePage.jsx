@@ -6,13 +6,13 @@ import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
-import ModalCreateProject from '../../components/Modals/ModalCreateProject';
-import ModalFeedback from '../../components/Modals/ModalFeedback';
+import CreateModalProject from '../../components/Modals/CreateModalProject';
+import FeedbackModal from '../../components/Modals/FeedbackModal';
 
 function HomePage() {
   const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
-  const [modalEditIsOpen, setmodalEditIsOpen] = useState(false);
+  const [editModalIsOpen, setEditModal] = useState(false);
   const [feedbackModal, setFeedbackModal] = useState({ open: false, text: '' });
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
@@ -21,7 +21,7 @@ function HomePage() {
     setCreateModalIsOpen(!createModalIsOpen);
   };
   const toggleEditModal = () => {
-    setmodalEditIsOpen(!modalEditIsOpen);
+    setEditModal(!editModalIsOpen);
   };
   const toggleFeedbackModal = (text) => {
     setFeedbackModal({ open: !feedbackModal.open, text });
@@ -75,7 +75,7 @@ function HomePage() {
           },
         }}
         >
-          <CardPerfil toggleModal={toggleCreateModal} />
+          <CardPerfil toggleCreateModal={toggleCreateModal} />
         </Box>
         <Box
           className="box_proj"
@@ -123,9 +123,17 @@ function HomePage() {
           />
         </Box>
       </Box>
-      <ModalCreateProject modalIsOpen={createModalIsOpen} toggleModal={toggleCreateModal} />
-      <ModalCreateProject modalIsOpen={modalEditIsOpen} toggleModal={toggleEditModal} />
-      <ModalFeedback
+      <CreateModalProject
+        isOpen={createModalIsOpen}
+        toggleCreateModal={toggleCreateModal}
+        toggleFeedbackModal={toggleFeedbackModal}
+      />
+      <CreateModalProject
+        isOpen={editModalIsOpen}
+        toggleCreateModal={toggleEditModal}
+        toggleFeedbackModal={toggleFeedbackModal}
+      />
+      <FeedbackModal
         isOpen={feedbackModal.open}
         toggle={toggleFeedbackModal}
         text={feedbackModal.text}

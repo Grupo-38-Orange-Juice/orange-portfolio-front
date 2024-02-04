@@ -9,9 +9,9 @@ import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');
 
-export default function ModalDelete({
+export default function DeleteModal({
   projectId,
-  modalDeleteIsOpen,
+  isOpen,
   toggleDeleteModal,
   toggleFeedbackModal,
   fetchProjects,
@@ -31,9 +31,9 @@ export default function ModalDelete({
 
   return (
     <div>
-      {modalDeleteIsOpen && (
+      {isOpen && (
         <Modal
-          isOpen={modalDeleteIsOpen}
+          isOpen={isOpen}
           onRequestClose={toggleDeleteModal}
           contentLabel="Adicionando Projeto"
           style={{
@@ -99,8 +99,8 @@ export default function ModalDelete({
   );
 }
 
-ModalDelete.propTypes = {
-  modalDeleteIsOpen: PropTypes.bool.isRequired,
+DeleteModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
   toggleDeleteModal: PropTypes.func.isRequired,
   projectId: PropTypes.string.isRequired,
   fetchProjects: PropTypes.func.isRequired,

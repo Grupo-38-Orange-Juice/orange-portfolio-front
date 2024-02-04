@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import ProjInfoFrame from './ProjInfoFrame';
-import ModalDelete from '../Modals/ModalDelete';
+import DeleteModal from '../Modals/DeleteModalProject';
 import './style.css';
 import MenuEditAndDelete from './menuEditAndDelete';
 
@@ -12,11 +12,11 @@ function ProjContainer({
 }) {
   const location = useLocation();
 
-  const [modalDeleteIsOpen, setModalDeleteIsOpen] = useState(false);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
 
   const toggleDeleteModal = () => {
-    setModalDeleteIsOpen(!modalDeleteIsOpen);
+    setDeleteModalIsOpen(!deleteModalIsOpen);
   };
 
   const toggleEditModal = () => {
@@ -32,8 +32,8 @@ function ProjContainer({
       <Box className="bottom_proj">
         <ProjInfoFrame tags={tags} createdAt={createdAt} user={user} />
       </Box>
-      <ModalDelete
-        modalDeleteIsOpen={modalDeleteIsOpen}
+      <DeleteModal
+        isOpen={deleteModalIsOpen}
         toggleDeleteModal={toggleDeleteModal}
         projectId={projectId}
         fetchProjects={fetchProjects}

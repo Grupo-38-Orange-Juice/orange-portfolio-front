@@ -9,7 +9,7 @@ import DefaultButton from '../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function ModalFeedback({ isOpen, toggle, text }) {
+export default function FeedbackModal({ isOpen, toggle, text }) {
   const handleBackHomeButtonClick = () => {
     toggle();
   };
@@ -18,6 +18,7 @@ export default function ModalFeedback({ isOpen, toggle, text }) {
     <div>
       {isOpen && (
         <Modal
+          onRequestClose={toggle}
           isOpen={isOpen}
           style={{
             overlay: {
@@ -69,8 +70,12 @@ export default function ModalFeedback({ isOpen, toggle, text }) {
   );
 }
 
-ModalFeedback.propTypes = {
+FeedbackModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
+};
+
+FeedbackModal.defaultProps = {
+  text: '',
 };

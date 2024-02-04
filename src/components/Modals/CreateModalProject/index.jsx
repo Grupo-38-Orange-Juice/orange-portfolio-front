@@ -20,7 +20,7 @@ import { isImageBroken } from '../../../validators/helpers';
 
 Modal.setAppElement('#root');
 
-export default function ModalCreateProject({ modalIsOpen, toggleModal }) {
+export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFeedbackModal }) {
   const [imageFile, setImageFile] = useState(null);
   const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
@@ -70,7 +70,8 @@ export default function ModalCreateProject({ modalIsOpen, toggleModal }) {
       },
     );
     if (response.status === 201) {
-      toggleModal();
+      toggleCreateModal();
+      toggleFeedbackModal('Projeto adcionado com sucesso!');
       formValues.title = '';
       formValues.tags = [];
       formValues.link = '';
@@ -83,7 +84,7 @@ export default function ModalCreateProject({ modalIsOpen, toggleModal }) {
   };
 
   const onCancelClick = () => {
-    toggleModal();
+    toggleCreateModal();
     setFormValues({
       title: '',
       tags: [],
@@ -126,10 +127,10 @@ export default function ModalCreateProject({ modalIsOpen, toggleModal }) {
   };
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
-      {modalIsOpen && (
+      {isOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={toggleModal}
+          isOpen={isOpen}
+          onRequestClose={toggleCreateModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -290,7 +291,8 @@ export default function ModalCreateProject({ modalIsOpen, toggleModal }) {
   );
 }
 
-ModalCreateProject.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
+CreateModalProject.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggleCreateModal: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };
