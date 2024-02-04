@@ -22,7 +22,7 @@ export default function ModalDelete({
     toggleDeleteModal();
     await deleteProject(projectId);
     await fetchProjects(user.id);
-    toggleFeedbackModal();
+    toggleFeedbackModal('Projeto deletado com sucesso!');
   };
 
   const handleClickCancel = () => {

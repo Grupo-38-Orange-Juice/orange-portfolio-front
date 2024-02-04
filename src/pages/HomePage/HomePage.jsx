@@ -13,7 +13,7 @@ function HomePage() {
   const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
   const [modalEditIsOpen, setmodalEditIsOpen] = useState(false);
-  const [feedbackModal, setFeedbackModal] = useState(false);
+  const [feedbackModal, setFeedbackModal] = useState({ open: false, text: '' });
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
 
@@ -23,8 +23,8 @@ function HomePage() {
   const toggleEditModal = () => {
     setmodalEditIsOpen(!modalEditIsOpen);
   };
-  const toggleFeedbackModal = () => {
-    setFeedbackModal(!feedbackModal);
+  const toggleFeedbackModal = (text) => {
+    setFeedbackModal({ open: !feedbackModal.open, text });
   };
 
   const handleSearch = (event) => {
@@ -126,9 +126,9 @@ function HomePage() {
       <ModalCreateProject modalIsOpen={createModalIsOpen} toggleModal={toggleCreateModal} />
       <ModalCreateProject modalIsOpen={modalEditIsOpen} toggleModal={toggleEditModal} />
       <ModalFeedback
-        isOpen={feedbackModal}
+        isOpen={feedbackModal.open}
         toggle={toggleFeedbackModal}
-        text="Projeto excluído com sucesso!"
+        text={feedbackModal.text}
       />
     </main>
   );
