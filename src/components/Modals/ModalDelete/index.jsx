@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
-import FeedbackDelete from '../ModalFeedback/ModalSuccessDelete';
 import { deleteProject } from '../../../service/api';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
@@ -14,24 +13,20 @@ export default function ModalDelete({
   projectId,
   modalDeleteIsOpen,
   toggleDeleteModal,
+  toggleFeedbackModal,
   fetchProjects,
 }) {
   const { user } = useContext(AuthContext);
-  const [feedbackModal, setFeedbackModal] = useState(false);
 
   const handleClickDelete = async () => {
     toggleDeleteModal();
     await deleteProject(projectId);
     await fetchProjects(user.id);
-    setFeedbackModal(true);
+    toggleFeedbackModal();
   };
 
   const handleClickCancel = () => {
     toggleDeleteModal();
-  };
-
-  const toggleFeedbackModal = () => {
-    setFeedbackModal(!feedbackModal);
   };
 
   return (
@@ -100,13 +95,6 @@ export default function ModalDelete({
           </Box>
         </Modal>
       )}
-      {feedbackModal
-      && (
-      <FeedbackDelete
-        isOpen={feedbackModal}
-        toogle={toggleFeedbackModal}
-      />
-      )}
     </div>
   );
 }
@@ -116,4 +104,5 @@ ModalDelete.propTypes = {
   toggleDeleteModal: PropTypes.func.isRequired,
   projectId: PropTypes.string.isRequired,
   fetchProjects: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };

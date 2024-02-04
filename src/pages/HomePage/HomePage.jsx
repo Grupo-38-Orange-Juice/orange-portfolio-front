@@ -5,26 +5,30 @@ import Header from '../../components/Header/Header';
 import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
-import ModalProj from '../../components/Modals/ModalProj/modalProj';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import ModalCreateProject from '../../components/Modals/ModalCreateProject';
+import ModalFeedback from '../../components/Modals/ModalFeedback';
 
 function HomePage() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
+  const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
+  const [modalEditIsOpen, setmodalEditIsOpen] = useState(false);
+  const [feedbackModal, setFeedbackModal] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [search, setValue] = useState('');
 
-  const { projectsInfo, fetchProjects } = useContext(ProjectsContext);
-  const toggleModal = () => {
-    setModalIsOpen(!modalIsOpen);
+  const toggleCreateModal = () => {
+    setCreateModalIsOpen(!createModalIsOpen);
+  };
+  const toggleEditModal = () => {
+    setmodalEditIsOpen(!modalEditIsOpen);
+  };
+  const toggleFeedbackModal = () => {
+    setFeedbackModal(!feedbackModal);
   };
 
   const handleSearch = (event) => {
     setValue(event.target.value);
-  };
-
-  const [modalEditIsOpen, setmodalEditIsOpen] = useState(false);
-  const toggleEditModal = () => {
-    setmodalEditIsOpen(!modalEditIsOpen);
   };
 
   useEffect(() => {
@@ -71,7 +75,7 @@ function HomePage() {
           },
         }}
         >
-          <CardPerfil toggleModal={toggleModal} />
+          <CardPerfil toggleModal={toggleCreateModal} />
         </Box>
         <Box
           className="box_proj"
@@ -115,11 +119,17 @@ function HomePage() {
             projectsInfo={filteredProjects}
             toggleEditModal={toggleEditModal}
             fetchProjects={fetchProjects}
+            toggleFeedbackModal={toggleFeedbackModal}
           />
         </Box>
       </Box>
-      <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
-      <ModalProj modalIsOpen={modalEditIsOpen} toggleModal={toggleEditModal} />
+      <ModalCreateProject modalIsOpen={createModalIsOpen} toggleModal={toggleCreateModal} />
+      <ModalCreateProject modalIsOpen={modalEditIsOpen} toggleModal={toggleEditModal} />
+      <ModalFeedback
+        isOpen={feedbackModal}
+        toggle={toggleFeedbackModal}
+        text="Projeto excluído com sucesso!"
+      />
     </main>
   );
 }

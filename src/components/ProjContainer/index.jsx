@@ -8,7 +8,7 @@ import './style.css';
 import MenuEditAndDelete from './menuEditAndDelete';
 
 function ProjContainer({
-  projectId, image, tags, createdAt, user, fetchProjects,
+  projectId, image, tags, createdAt, user, fetchProjects, toggleFeedbackModal,
 }) {
   const location = useLocation();
 
@@ -37,6 +37,7 @@ function ProjContainer({
         toggleDeleteModal={toggleDeleteModal}
         projectId={projectId}
         fetchProjects={fetchProjects}
+        toggleFeedbackModal={toggleFeedbackModal}
       />
     </Box>
   );
@@ -49,6 +50,7 @@ ProjContainer.propTypes = {
   createdAt: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
   fetchProjects: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };
 
 export default ProjContainer;

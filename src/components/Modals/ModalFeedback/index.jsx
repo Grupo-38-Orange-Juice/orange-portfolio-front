@@ -4,14 +4,14 @@ import Box from '@mui/material/Box';
 import { green } from '@mui/material/colors';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PropTypes from 'prop-types';
-import { primaryButtonTheme } from '../../../../mui-theme/buttons';
-import DefaultButton from '../../../default-button';
+import { primaryButtonTheme } from '../../../mui-theme/buttons';
+import DefaultButton from '../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function FeedbackDelete({ isOpen, toogle }) {
+export default function ModalFeedback({ isOpen, toggle, text }) {
   const handleBackHomeButtonClick = () => {
-    toogle();
+    toggle();
   };
 
   return (
@@ -19,8 +19,6 @@ export default function FeedbackDelete({ isOpen, toogle }) {
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          onRequestClose={toogle}
-          contentLabel="Adicionando Projeto"
           style={{
             overlay: {
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -45,7 +43,7 @@ export default function FeedbackDelete({ isOpen, toogle }) {
               alignItems: 'center',
             }}
           >
-            <h1>Projeto deletado com sucesso!</h1>
+            <h1>{text}</h1>
           </Box>
           <Box
             style={{ margin: '30px' }}
@@ -71,7 +69,8 @@ export default function FeedbackDelete({ isOpen, toogle }) {
   );
 }
 
-FeedbackDelete.propTypes = {
+ModalFeedback.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toogle: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
 };

@@ -20,7 +20,7 @@ import { isImageBroken } from '../../../validators/helpers';
 
 Modal.setAppElement('#root');
 
-export default function ModalProj({ modalIsOpen, toggleModal }) {
+export default function ModalCreateProject({ modalIsOpen, toggleModal }) {
   const [imageFile, setImageFile] = useState(null);
   const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
@@ -290,7 +290,7 @@ export default function ModalProj({ modalIsOpen, toggleModal }) {
   );
 }
 
-ModalProj.propTypes = {
+ModalCreateProject.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };

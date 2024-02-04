@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 
-function GridProjs({ projectsInfo, fetchProjects }) {
+function GridProjs({
+  projectsInfo, fetchProjects, toggleFeedbackModal,
+}) {
   return (
     <Box
       id="container-wrapper"
@@ -44,6 +46,7 @@ function GridProjs({ projectsInfo, fetchProjects }) {
               createdAt={info.project.createdAt}
               user={info.user}
               fetchProjects={fetchProjects}
+              toggleFeedbackModal={toggleFeedbackModal}
             />
           </Box>
         ))
@@ -59,6 +62,7 @@ function GridProjs({ projectsInfo, fetchProjects }) {
 GridProjs.propTypes = {
   projectsInfo: PropTypes.array.isRequired,
   fetchProjects: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };
 
 export default GridProjs;
