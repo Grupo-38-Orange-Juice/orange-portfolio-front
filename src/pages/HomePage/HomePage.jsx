@@ -7,6 +7,7 @@ import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
 import ModalProj from '../../components/Modals/ModalProj/modalProj';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
+import ModalViewSavedProj from '../../components/Modals/ModalViewSavedProj/modalViewSavedProj';
 
 function HomePage() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -22,9 +23,14 @@ function HomePage() {
     setValue(event.target.value);
   };
 
-  const [modalEditIsOpen, setmodalEditIsOpen] = useState(false);
+  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
   const toggleEditModal = () => {
-    setmodalEditIsOpen(!modalEditIsOpen);
+    setModalEditIsOpen(!modalEditIsOpen);
+  };
+
+  const [modalViewIsOpen, setModalViewIsOpen] = useState(false);
+  const toggleViewModal = () => {
+    setModalViewIsOpen(!modalViewIsOpen);
   };
 
   useEffect(() => {
@@ -115,11 +121,13 @@ function HomePage() {
           <GridProjs
             projectsInfo={filteredProjects}
             toggleEditModal={toggleEditModal}
+            toggleViewModal={toggleViewModal}
           />
         </Box>
       </Box>
       <ModalProj modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
       <ModalProj modalEditIsOpen={modalEditIsOpen} toggleEditModal={toggleEditModal} />
+      <ModalViewSavedProj modalViewIsOpen={modalViewIsOpen} toggleViewModal={toggleViewModal} />
     </main>
   );
 }

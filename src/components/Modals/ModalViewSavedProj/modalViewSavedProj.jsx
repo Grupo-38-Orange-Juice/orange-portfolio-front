@@ -4,16 +4,15 @@ import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { primaryButtonTheme } from '../../../mui-theme/buttons';
-import Header from '../../Header/Header';
-import DefaultButton from '../../default-button';
-import save from '../../images/img_save.svg';
-import CardPerfil from '../../CardPerfil';
-import foto from '../../images/Circle.svg';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import ProjInfoFrame from '../../ProjContainer/ProjInfoFrame';
+import save from '../../../images/img_save.svg';
+import foto from '../../../images/Circle.svg';
 
 Modal.setAppElement('#root');
 
-export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
+export default function ModalViewSavedProj({ modalViewIsOpen, toggleViewModal }) {
   const [formValues, setFormValues] = useState({
     lastTitulo: '',
     lastTags: '',
@@ -42,14 +41,10 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
 
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
-      <Header />
-      <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={toggleModal} fullWidth />
-      <CardPerfil />
-
-      {modalIsOpen && (
+      {modalViewIsOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={toggleModal}
+          isOpen={modalViewIsOpen}
+          onRequestClose={toggleViewModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -69,7 +64,7 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
               right: '10px',
               cursor: 'pointer',
             }}
-            onClick={toggleModal}
+            onClick={toggleViewModal}
           >
             <CloseIcon />
           </Box>
@@ -102,7 +97,9 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
               whiteSpace: 'nowrap',
             }}
           >
-            <h1> Ecommerce One Page</h1>
+            <h1>
+              {formValues.lastTitulo}
+            </h1>
           </Box>
           <Box
             style={{
@@ -137,7 +134,8 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
             multiline
             rows={3}
           />
-
+          <Typography variant="h6">Download</Typography>
+          <Link href={formValues.lastTitulo} />
         </Modal>
       )}
     </Box>
@@ -145,6 +143,6 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
 }
 
 ModalViewSavedProj.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
+  modalViewIsOpen: PropTypes.bool.isRequired,
+  toggleViewModal: PropTypes.func.isRequired,
 };

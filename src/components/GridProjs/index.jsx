@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
 
-function GridProjs({ projectsInfo }) {
+function GridProjs({ projectsInfo, toggleViewModal }) {
   return (
     <Box
       id="container-wrapper"
@@ -44,6 +44,7 @@ function GridProjs({ projectsInfo }) {
               tags={info.tags}
               createdAt={info.project.createdAt}
               user={info.user}
+              toggleViewModal={toggleViewModal}
             />
           </Box>
         ))
@@ -58,6 +59,7 @@ function GridProjs({ projectsInfo }) {
 
 GridProjs.propTypes = {
   projectsInfo: PropTypes.func.isRequired,
+  toggleViewModal: PropTypes.func.isRequired,
 };
 
 export default GridProjs;
