@@ -21,20 +21,9 @@ export default function ModalDelete({
 
   const handleClickDelete = async () => {
     toggleDeleteModal();
-
-    try {
-      // Aguardar a exclusão do projeto antes de prosseguir
-      await deleteProject(projectId);
-
-      // Aguardar o término da exclusão antes de buscar os projetos atualizados
-      await fetchProjects(user.id);
-
-      // Atualizar o estado local após o sucesso da operação
-      setFeedbackModal(true);
-    } catch (error) {
-      console.error('Erro ao excluir projeto:', error);
-      // Lidar com erros, se necessário
-    }
+    await deleteProject(projectId);
+    await fetchProjects(user.id);
+    setFeedbackModal(true);
   };
 
   const handleClickCancel = () => {

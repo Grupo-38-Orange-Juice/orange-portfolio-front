@@ -13,13 +13,9 @@ function ProjectsProvider({ children }) {
   const { user } = useContext(AuthContext);
 
   const fetchProjects = async (userId) => {
-    try {
-      const { data } = await getProjectsByUserId(userId);
-      if (data) setProjects(data);
-      else setProjects([]);
-    } catch (error) {
-      console.error('Erro ao buscar projetos:', error);
-    }
+    const { data } = await getProjectsByUserId(userId);
+    if (data) setProjects(data);
+    else setProjects([]);
   };
 
   const fetchTags = async () => {
