@@ -16,6 +16,7 @@ import imageTo64 from '../../helpers/imageTo64';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
 import { postProjectValidators } from '../../validators/validators';
+import { isImageBroken } from '../../validators/helpers';
 
 Modal.setAppElement('#root');
 
@@ -49,6 +50,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
       tags: '',
       link: '',
       description: '',
+      image: '',
     });
 
     for (const field in postProjectValidators) {
@@ -104,8 +106,12 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     document.getElementById('uploadImageInput').click();
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
+    if (await isImageBroken(file)) {
+      toast.error('Imagem inválida');
+      return;
+    }
     setImageFile(file);
   };
   return (

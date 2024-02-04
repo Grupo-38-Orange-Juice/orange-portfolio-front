@@ -6,7 +6,6 @@ export const lengthRangeValidator = (min, max) => (field, value) => {
 };
 
 export const arrayLengthRangeValidator = (min, max) => (field, value) => {
-  console.log(value);
   if (value.length < min || value.length > max) {
     return `${field} deve ter entre ${min} e ${max} itens`;
   }
@@ -50,3 +49,18 @@ export const numberValidator = (field, value) => {
   }
   return '';
 };
+
+export const isImageBroken = (file) => new Promise((resolve) => {
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+
+  img.onload = () => {
+    // A imagem foi carregada com sucesso
+    resolve(false);
+  };
+
+  img.onerror = () => {
+    // A imagem está quebrada ou não pode ser carregada
+    resolve(true);
+  };
+});

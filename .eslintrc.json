@@ -19,6 +19,7 @@
     "window": true,
     "sessionStorage": true,
     "document": true,
-    "FileReader": true
+    "FileReader": true,
+    "Image": true
   }
 }
