@@ -12,25 +12,20 @@ export default function ModalDelete({
   modalDeleteIsOpen,
   toggleDeleteModal,
 }) {
-  const [successEditModalIsOpen, setSuccessEditModalIsOpen] = useState(false);
+  const [feedbackModal, setFeedbackModal] = useState(false);
 
-  const handleDeleteButtonClick = () => {
+  const handleClickDelete = () => {
     toggleDeleteModal();
-    setSuccessEditModalIsOpen(true);
+    setFeedbackModal(true);
+    console.log('deletado');
   };
 
-  const handleCancelClick = () => {
+  const handleClickCancel = () => {
     toggleDeleteModal();
-    setSuccessEditModalIsOpen(false);
   };
 
-  const handleFeedbackModalClose = () => {
-    setSuccessEditModalIsOpen(false);
-  };
-
-  const [modalFDeleteIsOpen, setModalFDeleteIsOpen] = useState(false);
-  const toggleFDeleteModal = () => {
-    setModalFDeleteIsOpen(!modalFDeleteIsOpen);
+  const toggleFeedbackModal = () => {
+    setFeedbackModal(!feedbackModal);
   };
 
   return (
@@ -94,17 +89,16 @@ export default function ModalDelete({
               margin: '10% auto auto 5%',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={handleDeleteButtonClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
-            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={handleCancelClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={handleClickDelete} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={handleClickCancel} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
           </Box>
         </Modal>
       )}
-      {successEditModalIsOpen
+      {feedbackModal
       && (
       <FeedbackDelete
-        modalFDeleteIsOpen={modalFDeleteIsOpen}
-        toggleFDeleteModal={toggleFDeleteModal}
-        setSuccessEditModalIsOpen={handleFeedbackModalClose}
+        isOpen={feedbackModal}
+        toogle={toggleFeedbackModal}
       />
       )}
     </div>

@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import { green } from '@mui/material/colors';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PropTypes from 'prop-types';
 import { primaryButtonTheme } from '../../../../mui-theme/buttons';
 import DefaultButton from '../../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function FeedbackDelete(modalFDeleteIsOpen, toggleFDeleteModal) {
-  const [modalFeedbackIsOpen, setmodalFeedbackIsOpen] = useState(true);
-
+export default function FeedbackDelete({ isOpen, toogle }) {
   const handleBackHomeButtonClick = () => {
-    toggleFDeleteModal();
-    setmodalFeedbackIsOpen(false);
+    toogle();
   };
 
   return (
     <div>
-      {modalFeedbackIsOpen && (
+      {isOpen && (
         <Modal
-          isOpen={modalFeedbackIsOpen}
-          onRequestClose={toggleFDeleteModal}
+          isOpen={isOpen}
+          onRequestClose={toogle}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -69,7 +67,11 @@ export default function FeedbackDelete(modalFDeleteIsOpen, toggleFDeleteModal) {
           </Box>
         </Modal>
       )}
-
     </div>
   );
 }
+
+FeedbackDelete.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toogle: PropTypes.func.isRequired,
+};
