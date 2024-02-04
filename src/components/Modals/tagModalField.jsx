@@ -4,7 +4,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import PropTypes from 'prop-types';
 
-function TagTextField({ tags, handleInputChanges }) {
+function TagTextField({
+  tags, handleInputChanges, error, helperText,
+}) {
   const [filteredTags, setFilteredTags] = useState(tags);
 
   useEffect(() => {
@@ -14,7 +16,7 @@ function TagTextField({ tags, handleInputChanges }) {
   const handleTagChange = (event, value) => {
     if (value) {
       const tagIds = value.map((tag) => tag.id);
-      handleInputChanges({ target: { name: 'lastTags', value: tagIds } });
+      handleInputChanges({ target: { name: 'tags', value: tagIds } });
     }
   };
 
@@ -33,6 +35,9 @@ function TagTextField({ tags, handleInputChanges }) {
           variant="outlined"
           label="Tags"
           placeholder="Tags"
+          error={error}
+          helperText={helperText}
+          FormHelperTextProps={{ style: { color: 'red' } }}
         />
       )}
     />
@@ -42,6 +47,8 @@ function TagTextField({ tags, handleInputChanges }) {
 TagTextField.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleInputChanges: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
+  helperText: PropTypes.string.isRequired,
 };
 
 export default TagTextField;

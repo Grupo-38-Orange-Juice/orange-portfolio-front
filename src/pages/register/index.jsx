@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -9,9 +10,16 @@ import { primaryButtonTheme } from '../../mui-theme/buttons';
 import { createUser } from '../../service/api';
 import registerImage from '../../images/img_cadastro.svg';
 import 'react-toastify/dist/ReactToastify.css';
+import { registerValidators } from '../../validators/validators';
 
 function Register() {
   const [formValues, setFormValues] = useState({
+    name: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({
     name: '',
     lastName: '',
     email: '',
@@ -38,11 +46,32 @@ function Register() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const {
       name, lastName, email, password,
     } = formValues;
+    setErrors({
+      name: '', lastName: '', email: '', password: '',
+    });
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      name: '',
+      lastName: '',
+      email: '',
+      password: '',
+    }));
+
+    for (const field in registerValidators) {
+      const validation = registerValidators[field](formValues[field]);
+      if (validation) {
+        updateErrors({ [field]: validation });
+        return;
+      }
+    }
 
     const response = await createUser({ fullName: `${name} ${lastName}`, email, password });
     if (response.status === 201) {
@@ -117,10 +146,12 @@ function Register() {
                 shrink: true,
               }}
               value={formValues.name}
-              onChange={handleInputChanges}
+              onInput={handleInputChanges}
               name="name"
               fullWidth
               style={{ margin: window.innerWidth <= 700 ? 'auto auto 15px auto' : 'auto 15px auto auto' }}
+              error={Boolean(errors.name)}
+              helperText={errors.name}
             />
             <TextField
               label="Sobrenome"
@@ -130,10 +161,12 @@ function Register() {
                 shrink: true,
               }}
               value={formValues.lastName}
-              onChange={handleInputChanges}
+              onInput={handleInputChanges}
               name="lastName"
               fullWidth
               style={{ marginBottom: '0px' }}
+              error={Boolean(errors.lastName)}
+              helperText={errors.lastName}
             />
           </Box>
           <TextField
@@ -146,9 +179,11 @@ function Register() {
               shrink: true,
             }}
             value={formValues.email}
-            onChange={handleInputChanges}
+            onInput={handleInputChanges}
             name="email"
             style={{ marginBottom: '1rem' }}
+            error={Boolean(errors.email)}
+            helperText={errors.email}
           />
           <TextField
             label="Senha"
@@ -160,9 +195,11 @@ function Register() {
               shrink: true,
             }}
             value={formValues.password}
-            onChange={handleInputChanges}
+            onInput={handleInputChanges}
             name="password"
             style={{ marginBottom: '1rem' }}
+            error={Boolean(errors.password)}
+            helperText={errors.password}
           />
           <DefaultButton theme={primaryButtonTheme} label="CADASTRAR" onClick={handleFormSubmit} fullWidth />
         </form>

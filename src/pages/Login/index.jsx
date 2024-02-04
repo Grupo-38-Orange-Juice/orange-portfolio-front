@@ -10,9 +10,14 @@ import { loginResquest } from '../../service/api';
 import loginImage from '../../images/img_login.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
+import { loginValidators } from '../../validators/validators';
 
 function Login() {
   const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({
     email: '',
     password: '',
   });
@@ -36,9 +41,20 @@ function Login() {
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = formValues;
+    setErrors({ email: '', password: '' });
+
+    for (const field in loginValidators) {
+      const validation = loginValidators[field](formValues[field]);
+      if (validation) {
+        updateErrors({ [field]: validation });
+        return;
+      }
+    }
 
     const response = await loginResquest({ email, password });
     if (response.status === 200) {
@@ -118,6 +134,8 @@ function Login() {
             onChange={handleInputChanges}
             name="email"
             style={{ marginBottom: '1rem' }}
+            error={Boolean(errors.email)}
+            helperText={errors.email}
           />
           <TextField
             label="Senha"
@@ -132,6 +150,8 @@ function Login() {
             onChange={handleInputChanges}
             name="password"
             style={{ marginBottom: '1rem' }}
+            error={Boolean(errors.password)}
+            helperText={errors.password}
           />
           <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
         </form>
