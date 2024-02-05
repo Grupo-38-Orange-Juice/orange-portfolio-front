@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
+import { GoogleLogin } from '@react-oauth/google';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import { loginResquest } from '../../service/orangeApi';
@@ -111,7 +112,15 @@ function Login() {
         >
           Entre no Orange Portfólio
         </Box>
-
+        <GoogleLogin
+          buttonText="Entrar com Google"
+          onSuccess={(response) => {
+            console.log('deu certo:', response);
+          }}
+          onFailure={(response) => {
+            console.log(response);
+          }}
+        />
         <Box
           style={{
             fontSize: '1.2rem', color: '#515255', textAlign: 'left', fontWeight: 400, lineHeight: '40px', marginTop: '5rem',
