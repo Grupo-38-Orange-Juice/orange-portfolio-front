@@ -11,6 +11,7 @@ import loginImage from '../../images/img_login.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
 import { loginValidators } from '../../validators/validators';
+import './style.css';
 
 function Login() {
   const [formValues, setFormValues] = useState({
@@ -72,7 +73,13 @@ function Login() {
     <Container
       maxWidth={false}
       style={{
-        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh', fontFamily: 'Roboto',
+        margin: '0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        height: '100vh',
+        padding: 0,
+        fontFamily: 'Roboto',
       }}
     >
       {
@@ -85,10 +92,11 @@ function Login() {
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '0px',
+      alignItems: 'flex-start',
+      justifyContent: 'left',
+      padding: 0,
       overflow: 'hidden',
+      marginRight: '0',
     }}
   >
     <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
