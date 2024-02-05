@@ -6,6 +6,7 @@ import ProjInfoFrame from './ProjInfoFrame';
 import DeleteModal from '../Modals/DeleteModalProject';
 import ModalViewSavedProj from '../Modals/ModalViewSavedProj/modalViewSavedProj';
 import MenuEditAndDelete from './menuEditAndDelete';
+import ImagDefault from '../../images/semImage.jpg';
 import './style.css';
 import CreateModalProject from '../Modals/CreateAndEditModal';
 
@@ -33,7 +34,7 @@ function ProjContainer({
     <Box className="proj_container">
       {location.pathname === '/' && <MenuEditAndDelete toggleDeleteModal={toggleDeleteModal} toggleEditModal={toggleEditModal} />}
       <Box className="image_box" onClick={toggleViewModal}>
-        <img className="img_proj" src={projectInfo.project.image} alt="Imagem do Projeto" />
+        <img className="img_proj" src={projectInfo.project.image || ImagDefault} alt="Imagem do Projeto" />
       </Box>
       <ModalViewSavedProj
         toggleViewModal={toggleViewModal}
