@@ -25,7 +25,7 @@ export default function CreateModalProject({
 }) {
   const { user } = useContext(AuthContext);
   const { tags, fetchProjects } = useContext(ProjectsContext);
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [imageFile, setImageFile] = useState(null);
   const [formValues, setFormValues] = useState({
     title: '',
@@ -51,7 +51,44 @@ export default function CreateModalProject({
     setImageFile(null);
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const handleResponse = async (response, message) => {
+    if (response.status === 201 || response.status === 200) {
+      toggleCreateModal();
+      toggleFeedbackModal(message);
+      fetchProjects(user.id);
+      clearForm();
+      return;
+    }
+    toast.error(response.data.message);
+  };
+
+  const validation = (formValues) => {
+    for (const field in postProjectValidators) {
+      const validation = postProjectValidators[field](formValues[field]);
+      if (validation) {
+        updateErrors({ [field]: validation });
+        return false;
+      }
+    }
+  };
+
+  const handleRequest = async () => {
+    const base64Image = imageFile ? await imageTo64(imageFile) : null;
+    if (isEditMode) {
+      const response = await updateProjectById(
+        projectInfo.project.id,
+        {
+          description: formValues.description,
+          link: formValues.link,
+          tags: formValues.tags,
+          name: formValues.title,
+          image: base64Image,
+        },
+      );
+      handleResponse(response, 'Projeto atualizado com sucesso!');
+      return;
+    }
+  }
 
   const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
 
