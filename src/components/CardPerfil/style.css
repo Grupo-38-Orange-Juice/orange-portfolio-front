@@ -50,8 +50,9 @@ h5 {
         flex-shrink: 0;
         display: inline-flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 16px;
+        margin-top: 32px;
     }
 
     .container__right {

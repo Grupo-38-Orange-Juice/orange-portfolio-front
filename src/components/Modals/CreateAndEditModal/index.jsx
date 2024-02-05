@@ -51,14 +51,31 @@ export default function CreateAndEditModalProject({
     setImageFile(null);
   };
 
+  const base64StringToBlob = (base64String) => {
+    const parts = base64String.split(';base64,');
+    const contentType = parts[0].split(':')[1];
+    const raw = window.atob(parts[1]);
+    const rawLength = raw.length;
+    const uInt8Array = new Uint8Array(rawLength);
+
+    for (let i = 0; i < rawLength; i += 1) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], { type: contentType });
+  };
+
   useEffect(() => {
     if (isEditMode) {
       setFormValues({
         title: projectInfo.project.name,
-        tags: projectInfo.tags,
+        tags: [],
         link: projectInfo.project.link,
         description: projectInfo.project.description,
       });
+      const imageData = projectInfo.project.image;
+      const imageBlob = imageData ? base64StringToBlob(imageData) : null;
+      setImageFile(imageBlob);
     }
   }, [isEditMode, projectInfo, isOpen]);
 
