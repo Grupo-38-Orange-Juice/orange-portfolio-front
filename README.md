@@ -25,19 +25,10 @@ Acesse o diretório do projeto e instale as dependências utilizando o npm:
 cd orange-portfolio-front
 npm install
 ```
-ou
-```bash
-cd orange-portfolio-front
-yarn install
-```
 
 ## Iniciando o Projeto
 ```bash
 npm start
-```
-Ou
-```bash
-yarn start
 ```
 ## Bibliotecas Utilizadas
 
