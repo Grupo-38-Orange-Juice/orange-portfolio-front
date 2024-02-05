@@ -9,7 +9,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
-import { postProject } from '../../../service/api';
 import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
 import TagTextField from '../tagModalField';
 import imageTo64 from '../../../helpers/imageTo64';
@@ -17,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 import { postProjectValidators } from '../../../validators/validators';
 import { isImageBroken } from '../../../validators/helpers';
+import { postProject } from '../../../service/orangeApi';
 
 Modal.setAppElement('#root');
 
@@ -60,6 +60,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
         return;
       }
     }
+
     const response = await postProject(
       {
         description: formValues.description,
@@ -71,7 +72,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     );
     if (response.status === 201) {
       toggleCreateModal();
-      toggleFeedbackModal('Projeto adcionado com sucesso!');
+      toggleFeedbackModal('Projeto adicionado com sucesso!');
       formValues.title = '';
       formValues.tags = [];
       formValues.link = '';
@@ -93,6 +94,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     });
     setImageFile(null);
   };
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -125,6 +127,12 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     }
     setImageFile(file);
   };
+
+  // const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
+  // const handleClickLabel = () => {
+  //   setViewModalIsOpen(true);
+  // };
+
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       {isOpen && (
@@ -163,7 +171,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               maxWidth: '100%',
             }}
           >
-            <h3>Selecione um conteudo que você deseja fazer upload</h3>
+            <h3>Selecione um conteúdo que você deseja fazer upload</h3>
           </Box>
           <Box
             style={{
@@ -267,7 +275,8 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               margin: windowWidth <= 950 ? '10px auto 5px 15%' : '10px 0px 0px 0px',
             }}
           >
-            <h1> Visualizar Publicação</h1>
+            {/* <Typography variant="h1" role="button" onClick={handleClickLabel}>
+            Visualizar Publicação</Typography> */}
           </Box>
 
           <Box

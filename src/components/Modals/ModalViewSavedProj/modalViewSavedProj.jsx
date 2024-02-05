@@ -1,26 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { primaryButtonTheme } from '../../../mui-theme/buttons';
-import Header from '../../Header/Header';
-import DefaultButton from '../../default-button';
-import save from '../../images/img_save.svg';
-import CardPerfil from '../../CardPerfil';
-import foto from '../../images/Circle.svg';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import foto from '../../../images/Circle.svg';
 
 Modal.setAppElement('#root');
 
-export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
-  const [formValues, setFormValues] = useState({
-    lastTitulo: '',
-    lastTags: '',
-    LastLink: '',
-    LastDescricao: '',
-  });
-
+export default function ModalViewSavedProj({ isOpen, toggleViewModal, projectInfo }) {
   useEffect(() => {
     const handleResize = () => {
     };
@@ -32,47 +22,33 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
     };
   }, []);
 
-  const handleInputChanges = (event) => {
-    const { name, value } = event.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
-      <Header />
-      <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={toggleModal} fullWidth />
-      <CardPerfil />
-
-      {modalIsOpen && (
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={toggleModal}
-          contentLabel="Adicionando Projeto"
+      <Modal
+        isOpen={isOpen}
+        contentLabel="Adicionando Projeto"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          },
+          content: {
+            maxWidth: '900px',
+            margin: '5% auto auto auto',
+          },
+        }}
+      >
+        <Box
           style={{
-            overlay: {
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            },
-            content: {
-              maxWidth: '900px',
-              margin: '5% auto auto auto',
-            },
+            position: 'absolute',
+            top: '15px',
+            right: '15px',
+            cursor: 'pointer',
           }}
-          // zIndex="2"
+          onClick={toggleViewModal}
         >
-          <Box
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-              cursor: 'pointer',
-            }}
-            onClick={toggleModal}
-          >
-            <CloseIcon />
-          </Box>
+          <CloseIcon />
+        </Box>
+        <Box sx={{ margin: 3 }}>
           <Box
             style={{
               width: '100px',
@@ -83,7 +59,7 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
             }}
           >
             <img
-              src={foto}
+              src={projectInfo.user.image || foto}
               alt="Imagem de registro"
               style={{ maxWidth: '30%', height: 'auto' }}
             />
@@ -102,21 +78,24 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
               whiteSpace: 'nowrap',
             }}
           >
-            <h1> Ecommerce One Page</h1>
+            <Typography variant="h1">
+              {projectInfo.project.name}
+            </Typography>
           </Box>
           <Box
-            style={{
+            sx={{
               width: '100%',
               maxWidth: '700px',
               flexDirection: 'column',
               display: 'grid',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: '30px auto auto auto',
+              margin: '16px auto auto auto',
+              objectFit: 'contain',
             }}
           >
             <img
-              src={save}
+              src={projectInfo.project.image}
               alt="Imagem de registro"
               style={{ maxWidth: '100%', height: 'auto' }}
             />
@@ -127,8 +106,7 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
             InputLabelProps={{
               shrink: true,
             }}
-            value={formValues.LastDescricao}
-            onChange={handleInputChanges}
+            value={projectInfo.project.description}
             name="LastDescricao"
             fullWidth
             style={{
@@ -137,14 +115,33 @@ export default function ModalViewSavedProj({ modalIsOpen, toggleModal }) {
             multiline
             rows={3}
           />
-
-        </Modal>
-      )}
+          <Typography variant="h6">Download</Typography>
+          <Link href={projectInfo.project.link} />
+        </Box>
+      </Modal>
     </Box>
   );
 }
 
 ModalViewSavedProj.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleViewModal: PropTypes.func.isRequired,
+  projectInfo: PropTypes.shape({
+    project: PropTypes.shape({
+      createdAt: PropTypes.string,
+      description: PropTypes.string,
+      id: PropTypes.string,
+      image: PropTypes.string,
+      link: PropTypes.string,
+      name: PropTypes.string,
+      updatedAt: PropTypes.string,
+    }).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    user: PropTypes.shape({
+      email: PropTypes.string,
+      id: PropTypes.string,
+      fullName: PropTypes.string,
+      image: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 };

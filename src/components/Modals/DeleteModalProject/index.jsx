@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
-import { deleteProject } from '../../../service/api';
+import { deleteProject } from '../../../service/orangeApi';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');
@@ -30,72 +30,72 @@ export default function DeleteModal({
   };
 
   return (
+    isOpen && (
     <div>
-      {isOpen && (
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={toggleDeleteModal}
-          contentLabel="Adicionando Projeto"
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleDeleteModal}
+        contentLabel="Adicionando Projeto"
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          },
+          content: {
+            maxWidth: '500px',
+            maxHeight: '300px',
+            margin: 'auto',
+          },
+          zIndex: 1000,
+        }}
+      >
+        <Box
           style={{
-            overlay: {
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            },
-            content: {
-              maxWidth: '500px',
-              maxHeight: '300px',
-              margin: 'auto',
-            },
-            zIndex: 1000,
+            width: '90%',
+            maxWidth: '500px',
+            flexDirection: 'column',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            overflow: 'hidden',
           }}
         >
           <Box
             style={{
-              width: '90%',
-              maxWidth: '500px',
-              flexDirection: 'column',
-              display: 'flex',
-              justifyContent: 'flex-end',
-              overflow: 'hidden',
+              fontFamily: 'Roboto, sans-serif',
+              fontSize: '30px',
+              color: '#515255',
+              margin: '5% auto auto 5%',
             }}
           >
-            <Box
-              style={{
-                fontFamily: 'Roboto, sans-serif',
-                fontSize: '30px',
-                color: '#515255',
-                margin: '5% auto auto 5%',
-              }}
-            >
-              <h1>Deseja Excluir?</h1>
-            </Box>
-            <Box
-              style={{
-                fontFamily: 'Roboto, sans-serif',
-                fontSize: '16px',
-                color: '#515255',
-                margin: '12% auto auto 5%',
-              }}
-            >
-              <h3>Se você prosseguir irá excluir o projeto do seu portfólio</h3>
-            </Box>
+            <h1>Deseja Excluir?</h1>
           </Box>
           <Box
             style={{
-              width: 'auto',
-              maxWidth: '250px',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              gap: '20px',
-              margin: '10% auto auto 5%',
+              fontFamily: 'Roboto, sans-serif',
+              fontSize: '16px',
+              color: '#515255',
+              margin: '12% auto auto 5%',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={handleClickDelete} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
-            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={handleClickCancel} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <h3>Se você prosseguir irá excluir o projeto do seu portfólio</h3>
           </Box>
-        </Modal>
-      )}
+        </Box>
+        <Box
+          style={{
+            width: 'auto',
+            maxWidth: '250px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            gap: '20px',
+            margin: '10% auto auto 5%',
+          }}
+        >
+          <DefaultButton theme={primaryButtonTheme} label="EXCLUIR" onClick={handleClickDelete} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+          <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={handleClickCancel} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+        </Box>
+      </Modal>
     </div>
+    )
   );
 }
 

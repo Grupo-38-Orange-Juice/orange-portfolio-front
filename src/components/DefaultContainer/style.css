@@ -1,7 +1,8 @@
+
+
 .div_proj {
     width: 380px;
     height: 280px;
-
     border-radius: 4px;
     background-color: #E6E9F2;
     color: #303133;
@@ -11,7 +12,9 @@
     align-items: center;
     gap: 10px;
 }
-
+.div_proj:hover {
+    cursor: pointer;
+}
 .collections_icon {
     width: 46px;
     height: 46px;

@@ -20,15 +20,17 @@ function HomePage() {
   const toggleCreateModal = () => {
     setCreateModalIsOpen(!createModalIsOpen);
   };
-  const toggleEditModal = () => {
-    setEditModal(!editModalIsOpen);
-  };
+
   const toggleFeedbackModal = (text) => {
     setFeedbackModal({ open: !feedbackModal.open, text });
   };
 
   const handleSearch = (event) => {
     setValue(event.target.value);
+  };
+
+  const toggleEditModal = () => {
+    setEditModal(!editModalIsOpen);
   };
 
   useEffect(() => {
@@ -68,7 +70,7 @@ function HomePage() {
           alignItems: 'end',
           justifyContent: 'center',
           // media
-          '@media screen and (max-width: 700px)': {
+          '@media screen and (max-width: 800px)': {
             height: '0',
             display: 'flex',
             margin: '0 auto 0 auto',
@@ -78,48 +80,54 @@ function HomePage() {
           <CardPerfil toggleCreateModal={toggleCreateModal} />
         </Box>
         <Box
-          className="box_proj"
-          alignItems="center"
-          width="auto"
-        >
-          <Box sx={{
+          className="search"
+          sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
             marginTop: '34px',
             marginBottom: '30px',
+            alignSelf: 'start',
             // media
-            '@media screen and (max-width: 700px)': {
+            '@media screen and (max-width: 800px)': {
               alignItems: 'center',
               justifyContent: 'start',
+              alignSelf: 'center',
             },
           }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: '20px',
+              fontStyle: 'normal',
+              fontWeight: '500',
+              letterSpacing: '0.15px',
+              opacity: '0.6',
+              // media
+              '@media (max-width: 700px)': {
+                display: 'flex',
+                alignItems: 'flex-start',
+                justifyContent: 'start',
+              },
+            }}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                fontSize: '20px',
-                fontStyle: 'normal',
-                fontWeight: '500',
-                letterSpacing: '0.15px',
-                opacity: '0.6',
-                // media
-                '@media (max-width: 700px)': {
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  justifyContent: 'start',
-                },
-              }}
-            >
-              Meus projetos
-            </Typography>
-            <TextfieldResponsive setValue={handleSearch} value={search} />
-          </Box>
+            Meus projetos
+          </Typography>
+          <TextfieldResponsive setValue={handleSearch} value={search} />
+        </Box>
+        <Box
+          className="box_proj"
+          alignItems="center"
+          width="auto"
+        >
           <GridProjs
             projectsInfo={filteredProjects}
             toggleEditModal={toggleEditModal}
             fetchProjects={fetchProjects}
             toggleFeedbackModal={toggleFeedbackModal}
+            toggleCreateModal={toggleCreateModal}
+            displayDefault={projectsInfo.length === 0}
           />
         </Box>
       </Box>

@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
-import { createUser } from '../../service/api';
+import { createUser } from '../../service/orangeApi';
 import registerImage from '../../images/img_cadastro.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerValidators } from '../../validators/validators';

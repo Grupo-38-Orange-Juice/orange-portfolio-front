@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
-import { loginResquest } from '../../service/api';
+import { loginResquest } from '../../service/orangeApi';
 import loginImage from '../../images/img_login.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
@@ -163,7 +163,6 @@ function Login() {
           <TextField
             label="Senha"
             placeholder="*************"
-            defaultValue=""
             type="password"
             fullWidth
             InputLabelProps={{
