@@ -6,21 +6,21 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { toast, ToastContainer } from 'react-toastify';
-import { secondaryButtonTheme, primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
-import ImageUpload from '../../images/Upload.svg';
-import { postProject } from '../../service/api';
-import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
-import TagTextField from './tagModalField';
-import imageTo64 from '../../helpers/imageTo64';
+import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
+import DefaultButton from '../../default-button';
+import ImageUpload from '../../../images/Upload.svg';
+import { postProject } from '../../../service/api';
+import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
+import TagTextField from '../tagModalField';
+import imageTo64 from '../../../helpers/imageTo64';
 import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from '../../context/AuthProvider/authProvider';
-import { postProjectValidators } from '../../validators/validators';
-import { isImageBroken } from '../../validators/helpers';
+import { AuthContext } from '../../../context/AuthProvider/authProvider';
+import { postProjectValidators } from '../../../validators/validators';
+import { isImageBroken } from '../../../validators/helpers';
 
 Modal.setAppElement('#root');
 
-export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
+export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFeedbackModal }) {
   const [imageFile, setImageFile] = useState(null);
   const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
@@ -60,6 +60,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
         return;
       }
     }
+
     const response = await postProject(
       {
         description: formValues.description,
@@ -70,18 +71,30 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
       },
     );
     if (response.status === 201) {
-      toggleModal();
+      toggleCreateModal();
+      toggleFeedbackModal('Projeto adicionado com sucesso!');
       formValues.title = '';
       formValues.tags = [];
       formValues.link = '';
       formValues.description = '';
       setImageFile(null);
-      toast.success('Projeto cadastrado com sucesso!');
       fetchProjects(user.id);
     } else {
       toast.error(response.data.message || 'Erro ao cadastrar projeto!');
     }
   };
+
+  const onCancelClick = () => {
+    toggleCreateModal();
+    setFormValues({
+      title: '',
+      tags: [],
+      link: '',
+      description: '',
+    });
+    setImageFile(null);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -114,12 +127,18 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     }
     setImageFile(file);
   };
+
+  // const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
+  // const handleClickLabel = () => {
+  //   setViewModalIsOpen(true);
+  // };
+
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
-      {modalIsOpen && (
+      {isOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={toggleModal}
+          isOpen={isOpen}
+          onRequestClose={toggleCreateModal}
           contentLabel="Adicionando Projeto"
           style={{
             overlay: {
@@ -152,7 +171,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               maxWidth: '100%',
             }}
           >
-            <h3>Selecione um conteudo que vc deseja fazer upload</h3>
+            <h3>Selecione um conteúdo que você deseja fazer upload</h3>
           </Box>
           <Box
             style={{
@@ -256,7 +275,8 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
               margin: windowWidth <= 950 ? '10px auto 5px 15%' : '10px 0px 0px 0px',
             }}
           >
-            <h1> Visualizar Publicação</h1>
+            {/* <Typography variant="h1" role="button" onClick={handleClickLabel}>
+            Visualizar Publicação</Typography> */}
           </Box>
 
           <Box
@@ -271,7 +291,7 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
             }}
           >
             <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={createProject} style={{ margin: '0 0.5rem 0 0' }} />
-            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={toggleModal} style={{ margin: '0 0 0 0.5rem' }} />
+            <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={onCancelClick} style={{ margin: '0 0 0 0.5rem' }} />
           </Box>
         </Modal>
       )}
@@ -279,7 +299,9 @@ export default function AdicionarProjeto({ modalIsOpen, toggleModal }) {
     </Box>
   );
 }
-AdicionarProjeto.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
+
+CreateModalProject.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggleCreateModal: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
 };
