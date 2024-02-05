@@ -11,6 +11,7 @@ import { createUser } from '../../service/orangeApi';
 import registerImage from '../../images/img_cadastro.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerValidators } from '../../validators/validators';
+import './style.css';
 
 function Register() {
   const [formValues, setFormValues] = useState({
