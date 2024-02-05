@@ -210,7 +210,6 @@ function Register() {
           <TextField
             label="Senha"
             placeholder="********"
-            defaultValue=""
             type="password"
             fullWidth
             InputLabelProps={{

@@ -57,7 +57,7 @@ function HomePage() {
           justifyContent: 'center',
           padding: '30px',
           width: '100%',
-          maxWidth: '1980px',
+          // maxWidth: '1980px',
           // media
           '@media screen and (max-width: 700px)': {
             alignItems: 'center',
@@ -82,23 +82,27 @@ function HomePage() {
         <Box
           className="search"
           sx={{
+            padding: '20px',
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
             marginTop: '34px',
             marginBottom: '30px',
+            marginLeft: '30px',
             alignSelf: 'start',
             // media
             '@media screen and (max-width: 800px)': {
               alignItems: 'center',
               justifyContent: 'start',
               alignSelf: 'center',
+              marginLeft: '0',
             },
           }}
         >
           <Typography
             variant="h6"
             sx={{
+              display: 'flex',
               fontSize: '20px',
               fontStyle: 'normal',
               fontWeight: '500',
@@ -114,12 +118,13 @@ function HomePage() {
           >
             Meus projetos
           </Typography>
-          <TextfieldResponsive setValue={handleSearch} value={search} />
+          <TextfieldResponsive sx={{ display: 'flex' }} setValue={handleSearch} value={search} />
         </Box>
         <Box
           className="box_proj"
           alignItems="center"
           width="auto"
+          sx={{ margin: '30px' }}
         >
           <GridProjs
             projectsInfo={filteredProjects}
