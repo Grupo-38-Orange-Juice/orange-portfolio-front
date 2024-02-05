@@ -16,14 +16,11 @@ import { AuthContext } from '../../context/AuthProvider/authProvider';
 function Header() {
   const { user } = useContext(AuthContext);
 
-  // menu
   const navigate = useNavigate();
   const [menuAnchor, setMenuAnchor] = useState(null);
 
-  // notification
   const [notificationAnchor, setNotificationAnchor] = useState(null);
 
-  // redirecionamentos
   function redirectToHome() {
     navigate('/');
   }
@@ -36,7 +33,6 @@ function Header() {
     navigate('/Settings');
   };
 
-  // handles menu
   const handleMenuClick = (event) => {
     setMenuAnchor(event.currentTarget);
   };
@@ -50,7 +46,6 @@ function Header() {
     handleMenuClose();
   };
 
-  // handles notification
   const handleNotificationClick = (event) => {
     setNotificationAnchor(event.currentTarget);
   };
@@ -133,9 +128,6 @@ function Header() {
           height: '50px',
           padding: '10px',
           alignItems: 'flex-start',
-          // '@media screen or (wax-width: 366)': {
-          //   boxShadow: 'none',
-          // },
         }}
         >
           <Typography variant="subtitle1">
