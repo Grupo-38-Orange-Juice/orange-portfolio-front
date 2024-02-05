@@ -41,7 +41,6 @@ function Login() {
   const googleLogin = async (response) => {
     const orangeResponse = await googleLoginRequest(response.credential);
     if (orangeResponse.status === 200) {
-      console.log(orangeResponse);
       setTokenLocalStorage(orangeResponse.data.token);
       toast.success('Login efetuado!');
       setTimeout(() => {
@@ -174,8 +173,7 @@ function Login() {
           onSuccess={async (response) => {
             await googleLogin(response);
           }}
-          onFailure={(response) => {
-            console.log(response);
+          onFailure={() => {
           }}
           cookiePolicy="single_host_origin"
         />
