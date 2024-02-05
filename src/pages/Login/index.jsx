@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { GoogleLogin } from '@react-oauth/google';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
-import { loginResquest } from '../../service/orangeApi';
+import { googleLoginRequest, loginResquest } from '../../service/orangeApi';
 import loginImage from '../../assets/loginImage.png';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
@@ -37,6 +37,20 @@ function Login() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const googleLogin = async (response) => {
+    const orangeResponse = await googleLoginRequest(response.credential);
+    if (orangeResponse.status === 200) {
+      console.log(orangeResponse);
+      setTokenLocalStorage(orangeResponse.data.token);
+      toast.success('Login efetuado!');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    } else {
+      toast.error(orangeResponse.data.message || 'Erro ao cadastrar usuário!');
+    }
+  };
 
   const handleInputChanges = (event) => {
     const { name, value } = event.target;
@@ -157,12 +171,13 @@ function Login() {
         </Box>
         <GoogleLogin
           buttonText="Entrar com Google"
-          onSuccess={(response) => {
-            console.log('deu certo:', response);
+          onSuccess={async (response) => {
+            await googleLogin(response);
           }}
           onFailure={(response) => {
             console.log(response);
           }}
+          cookiePolicy="single_host_origin"
         />
         <Box sx={{ gap: 1 }}>
           <Box>

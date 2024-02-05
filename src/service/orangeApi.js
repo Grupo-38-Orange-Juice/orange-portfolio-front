@@ -28,6 +28,15 @@ export async function loginResquest({ email, password }) {
   }
 }
 
+export async function googleLoginRequest(tokenId) {
+  try {
+    const request = await Api.post('google-login', { token: tokenId });
+    return { data: request.data, status: request.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
 export async function createUser({
   fullName, email, password,
 }) {
