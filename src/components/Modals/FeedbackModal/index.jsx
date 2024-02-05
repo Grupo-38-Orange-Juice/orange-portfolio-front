@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import { green } from '@mui/material/colors';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { primaryButtonTheme } from '../../mui-theme/buttons';
-import DefaultButton from '../default-button';
+import PropTypes from 'prop-types';
+import { primaryButtonTheme } from '../../../mui-theme/buttons';
+import DefaultButton from '../../default-button';
 
 Modal.setAppElement('#root');
 
-export default function Concluded() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
+export default function FeedbackModal({ isOpen, toggle, text }) {
+  const handleBackHomeButtonClick = () => {
+    toggle();
   };
 
   return (
     <div>
-      {modalIsOpen && (
+      {isOpen && (
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel="Adicionando Projeto"
+          onRequestClose={toggle}
+          isOpen={isOpen}
           style={{
             overlay: {
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -50,13 +44,13 @@ export default function Concluded() {
               alignItems: 'center',
             }}
           >
-            <h1>Edição concluída com sucesso!</h1>
+            <h1>{text}</h1>
           </Box>
-          <box
+          <Box
             style={{ margin: '30px' }}
           >
             <CheckCircleIcon sx={{ color: green[700], fontSize: 45 }} />
-          </box>
+          </Box>
           <Box
             style={{
               width: 'auto',
@@ -68,22 +62,20 @@ export default function Concluded() {
               margin: 'auto',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="voltar para projetos" onClick={closeModal} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
+            <DefaultButton theme={primaryButtonTheme} label="voltar para projetos" onClick={handleBackHomeButtonClick} fullWidth style={{ marginLeft: '1rem', maxWidth: 'xl' }} />
           </Box>
         </Modal>
       )}
-
-      <Box
-        style={{
-          width: 'auto',
-          maxWidth: '300px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-        }}
-      >
-        <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={openModal} fullWidth />
-      </Box>
     </div>
   );
 }
+
+FeedbackModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+  text: PropTypes.string,
+};
+
+FeedbackModal.defaultProps = {
+  text: '',
+};

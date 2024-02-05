@@ -3,9 +3,11 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import ProjContainer from '../ProjContainer';
 import DefaultContainer from '../DefaultContainer';
-import MenuEditAndDelete from '../ProjContainer/menuEditAndDelete';
 
-function GridProjs({ projectsInfo }) {
+function GridProjs({
+  projectsInfo, fetchProjects, toggleFeedbackModal, toggleCreateModal,
+  displayDefault,
+}) {
   return (
     <Box
       id="container-wrapper"
@@ -15,6 +17,7 @@ function GridProjs({ projectsInfo }) {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gridGap: '60px',
+        marginBottom: 4,
         '@media screen and (max-width: 800px)': {
           gridTemplateColumns: '1fr',
           alignItems: 'center',
@@ -30,35 +33,34 @@ function GridProjs({ projectsInfo }) {
       }}
     >
 
-      {projectsInfo && projectsInfo.length > 0 ? (
+      {projectsInfo && (
         projectsInfo.map((info) => (
           <Box
             className="containerProjs"
-            item
             key={info.project.id}
             sx={{ position: 'relative' }}
           >
-            <MenuEditAndDelete />
             <ProjContainer
-              projectId={info.project.id}
-              image={info.project.image}
-              tags={info.tags}
-              createdAt={info.project.createdAt}
-              user={info.user}
+              projectInfo={info}
+              fetchProjects={fetchProjects}
+              toggleFeedbackModal={toggleFeedbackModal}
             />
           </Box>
         ))
-      ) : (
-        <Box className="container">
-          <DefaultContainer />
-        </Box>
       )}
-
+      <Box className="container">
+        <DefaultContainer toggleCreateModal={toggleCreateModal} displayDefault={displayDefault} />
+      </Box>
     </Box>
   );
 }
+
 GridProjs.propTypes = {
+  toggleCreateModal: PropTypes.func.isRequired,
   projectsInfo: PropTypes.array.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
+  toggleFeedbackModal: PropTypes.func.isRequired,
+  displayDefault: PropTypes.bool.isRequired,
 };
 
 export default GridProjs;

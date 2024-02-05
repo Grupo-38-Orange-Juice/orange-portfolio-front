@@ -47,8 +47,12 @@ function TagTextField({
 TagTextField.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleInputChanges: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   helperText: PropTypes.string.isRequired,
+};
+
+TagTextField.defaultProps = {
+  error: false,
 };
 
 export default TagTextField;
