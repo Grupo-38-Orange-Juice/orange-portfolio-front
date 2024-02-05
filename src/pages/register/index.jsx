@@ -11,6 +11,7 @@ import { createUser } from '../../service/orangeApi';
 import registerImage from '../../images/img_cadastro.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerValidators } from '../../validators/validators';
+import './style.css';
 
 function Register() {
   const [formValues, setFormValues] = useState({
@@ -100,19 +101,18 @@ function Register() {
           justifyContent: 'center',
           padding: '20px',
         },
-        '@media (max-width: 300px)': {
+        '@media (max-width: 500px)': {
           marginBottom: '20px',
           fontSize: '24px',
+        },
+        '@media (max-width: 300px)': {
+          marginBottom: '60px',
         },
       }}
     >
       {windowWidth > 940 && (
       <Box
-        style={{
-          width: '100%',
-          maxWidth: '450px',
-          marginBottom: '0px',
-          height: '100%',
+        sx={{
           flex: '1',
           display: 'flex',
           flexDirection: 'column',
@@ -129,28 +129,29 @@ function Register() {
           style={{
             width: '100%',
             height: '100%',
+            objectFit: 'scale-down',
+            objectPosition: 'left center',
           }}
         />
       </Box>
       )}
 
-      <Box style={{
-        flexDirection: 'column', justifyContent: 'center',
+      <Box sx={{
+        display: 'flex', flexDirection: 'column', flex: 2.5, justifyContent: 'center', alignItems: 'center',
       }}
       >
-        <Box
+        <Typography
           variant="h3"
           style={{
             fontSize: '2.9rem', color: '#222244', textAlign: 'center', fontWeight: 400, lineHeight: '40px', marginTop: '10rem', marginBottom: '3rem',
           }}
         >
           Cadastre-se
-        </Box>
-
+        </Typography>
         <form
           onSubmit={handleFormSubmit}
           style={{
-            width: '100%', maxWidth: '500px',
+            width: '100%', maxWidth: '500px', alignSelf: 'center',
           }}
         >
           <Box
@@ -210,7 +211,6 @@ function Register() {
           <TextField
             label="Senha"
             placeholder="********"
-            defaultValue=""
             type="password"
             fullWidth
             InputLabelProps={{
