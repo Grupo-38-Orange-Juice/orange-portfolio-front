@@ -86,12 +86,27 @@ function Register() {
 
   return (
     <Container
+      disableGutters
       maxWidth={false}
-      style={{
-        margin: '0', display: 'flex', justifyContent: 'center', width: '100%', height: '100vh', fontFamily: 'Roboto',
+      sx={{
+        margin: '0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        height: '100vh',
+        fontFamily: 'Roboto',
+        '@media (max-width: 950px)': {
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px',
+        },
+        '@media (max-width: 300px)': {
+          marginBottom: '20px',
+          fontSize: '24px',
+        },
       }}
     >
-      {windowWidth > 700 && (
+      {windowWidth > 940 && (
       <Box
         style={{
           width: '100%',
@@ -105,10 +120,17 @@ function Register() {
           justifyContent: 'center',
           padding: '0px',
           overflow: 'hidden',
-          visibility: window.innerWidth <= 700 ? 'hidden' : 'visible',
+          visibility: window.innerWidth <= 940 ? 'hidden' : 'visible',
         }}
       >
-        <img src={registerImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
+        <img
+          src={registerImage}
+          alt="Imagem de registro"
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+        />
       </Box>
       )}
 
@@ -134,8 +156,8 @@ function Register() {
           <Box
             style={{
               display: 'flex',
-              flexDirection: window.innerWidth <= 700 ? 'column' : 'row',
-              justifyContent: window.innerWidth <= 700 ? 'center' : 'space-between',
+              flexDirection: window.innerWidth <= 940 ? 'column' : 'row',
+              justifyContent: window.innerWidth <= 940 ? 'center' : 'space-between',
             }}
           >
             <TextField
@@ -149,7 +171,7 @@ function Register() {
               onInput={handleInputChanges}
               name="name"
               fullWidth
-              style={{ margin: window.innerWidth <= 700 ? 'auto auto 15px auto' : 'auto 15px auto auto' }}
+              style={{ margin: window.innerWidth <= 940 ? 'auto auto 15px auto' : 'auto 15px auto auto' }}
               error={Boolean(errors.name)}
               helperText={errors.name}
             />
@@ -187,7 +209,8 @@ function Register() {
           />
           <TextField
             label="Senha"
-            placeholder="*************"
+            placeholder="********"
+            defaultValue=""
             type="password"
             fullWidth
             InputLabelProps={{
