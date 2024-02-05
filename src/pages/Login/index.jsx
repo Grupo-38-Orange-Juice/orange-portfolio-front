@@ -6,11 +6,12 @@ import { Box } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
-import { loginResquest } from '../../service/api';
+import { loginResquest } from '../../service/orangeApi';
 import loginImage from '../../images/img_login.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
 import { loginValidators } from '../../validators/validators';
+import './style.css';
 
 function Login() {
   const [formValues, setFormValues] = useState({
@@ -70,9 +71,20 @@ function Login() {
 
   return (
     <Container
+      disableGutters
       maxWidth={false}
-      style={{
-        margin: '0', display: 'flex', justifyContent: 'space-around', width: '100%', height: '100vh', fontFamily: 'Roboto',
+      sx={{
+        margin: '0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        height: '100vh',
+        padding: 0,
+        fontFamily: 'Roboto',
+        '@media (max-width: 700px)': {
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
       }}
     >
       {
@@ -85,18 +97,29 @@ function Login() {
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '0px',
+      alignItems: 'flex-start',
+      justifyContent: 'left',
+      padding: 0,
       overflow: 'hidden',
+      marginRight: '0',
+      fontFamily: 'Roboto',
+      '@media screen and (max-width: 950px)': {
+        alignItems: 'center',
+      },
     }}
   >
     <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
   </Box>
   )
     }
-      <Box style={{
-        display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        '@media (max-width: 970px)': {
+          margin: '20px',
+          justifyContent: 'center',
+        },
       }}
       >
         <Box

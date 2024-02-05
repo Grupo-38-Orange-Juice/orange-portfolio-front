@@ -8,10 +8,9 @@ import './style.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
 
 function CardPerfil({
-  location,
   toggleCreateModal,
 }) {
-  const { user } = useContext(AuthContext);
+  const { user, location } = useContext(AuthContext);
   return (
     <Box className="box__card_perfil">
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -29,12 +28,7 @@ function CardPerfil({
 }
 
 CardPerfil.propTypes = {
-  location: PropTypes.string,
   toggleCreateModal: PropTypes.func.isRequired,
-};
-
-CardPerfil.defaultProps = {
-  location: 'Brasil',
 };
 
 export default CardPerfil;

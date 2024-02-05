@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
-import { deleteProject } from '../../../service/api';
+import { deleteProject } from '../../../service/orangeApi';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 
 Modal.setAppElement('#root');

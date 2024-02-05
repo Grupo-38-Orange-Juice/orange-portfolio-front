@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
-import { postProject, updateProjectById } from '../../../service/api';
+import { postProject, updateProjectById } from '../../../service/orangeApi';
 import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
 import TagTextField from '../tagModalField';
 import imageTo64 from '../../../helpers/imageTo64';
@@ -23,10 +23,10 @@ Modal.setAppElement('#root');
 export default function CreateModalProject({
   isOpen, toggleCreateModal, toggleFeedbackModal, projectInfo, isEditMode,
 }) {
-  const [imageFile, setImageFile] = useState(null);
-  const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
+  const { tags, fetchProjects } = useContext(ProjectsContext);
 
+  const [imageFile, setImageFile] = useState(null);
   const [formValues, setFormValues] = useState({
     title: '',
     tags: [],

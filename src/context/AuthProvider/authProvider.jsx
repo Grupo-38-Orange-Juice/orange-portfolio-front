@@ -6,12 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import {
   getTokenStorage, clearTokenLocalStorage, clearTokenSessionStorage,
 } from './util';
-import { meRequest } from '../../service/api';
+import { meRequest } from '../../service/orangeApi';
+import getIpInfo from '../../service/ipdata';
+import contryCodeToPortuguese from '../../helpers/contryCodeToPortuguese';
 
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [location, setLocation] = useState(null);
   const navigate = useNavigate();
 
   const fetchUser = async () => {
@@ -23,8 +26,14 @@ function AuthProvider({ children }) {
     setUser(data);
   };
 
+  const fetchUserCountry = async () => {
+    const { data, status } = await getIpInfo();
+    if (status === 200) setLocation(contryCodeToPortuguese(data.country_code));
+  };
+
   useEffect(() => {
     fetchUser();
+    fetchUserCountry();
   }, []);
 
   function logout() {
@@ -34,8 +43,9 @@ function AuthProvider({ children }) {
 
   const authContextValue = useMemo(() => ({
     user,
+    location,
     logout,
-  }), [user]);
+  }), [user, location]);
 
   return (
     <AuthContext.Provider value={authContextValue}>
