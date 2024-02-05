@@ -71,8 +71,9 @@ function Login() {
 
   return (
     <Container
+      disableGutters
       maxWidth={false}
-      style={{
+      sx={{
         margin: '0',
         display: 'flex',
         justifyContent: 'space-between',
@@ -80,6 +81,10 @@ function Login() {
         height: '100vh',
         padding: 0,
         fontFamily: 'Roboto',
+        '@media (max-width: 700px)': {
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
       }}
     >
       {
@@ -97,14 +102,24 @@ function Login() {
       padding: 0,
       overflow: 'hidden',
       marginRight: '0',
+      fontFamily: 'Roboto',
+      '@media screen and (max-width: 950px)': {
+        alignItems: 'center',
+      },
     }}
   >
     <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
   </Box>
   )
     }
-      <Box style={{
-        display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        '@media (max-width: 970px)': {
+          margin: '20px',
+          justifyContent: 'center',
+        },
       }}
       >
         <Box
