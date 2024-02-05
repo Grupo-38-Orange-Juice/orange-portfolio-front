@@ -1,0 +1,14 @@
+.arrow {
+    display: none; /* descobrir como fazer aparecer apenas quando o menu aparecer */
+
+    width: 15px;
+    height: auto;
+    transform: rotate(-90deg);
+
+    position: absolute;
+    right: 24px;
+    top: 0.002px;
+
+    stroke-width: 3px;
+    stroke: #FCFDFF;
+}

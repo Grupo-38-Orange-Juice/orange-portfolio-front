@@ -1,0 +1,53 @@
+
+
+.div_proj {
+    width: 380px;
+    height: 280px;
+    border-radius: 4px;
+    background-color: #E6E9F2;
+    color: #303133;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.div_proj:hover {
+    cursor: pointer;
+}
+.collections_icon {
+    width: 46px;
+    height: 46px;
+    margin: auto;
+    display: block;
+}
+
+.box_message {
+    padding: 68px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title_message {
+    font-size: 16px;
+    opacity: 0.6;
+    letter-spacing: 0.5px;
+}
+
+p {
+    font-size: 14px;
+    opacity: 0.6;
+    letter-spacing: 0.25px;
+}
+
+@media screen and (max-width: 600px) {
+    .div_proj {
+        width: 320px;
+        height: 220px;
+    }
+
+    .box_message {
+        padding: 68px 21px;
+    }
+}

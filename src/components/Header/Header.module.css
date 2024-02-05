@@ -12,11 +12,10 @@
   position: relative;
 }
 
-/* .container_logo_navigate {
-  display: flex;
-  align-items: center;
-  gap: 1000px;
-} */
+.menuFilled,
+.notificationIcon {
+  cursor: pointer;
+}
 
 .container_logo {
   position: absolute;
@@ -41,7 +40,11 @@
   margin-right: 16px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .container {
+    padding: 0;
+  }
+
   .container_navigate {
     display: none;  
   }

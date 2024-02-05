@@ -10,11 +10,16 @@
           "any"
         ]
       }
-    ]
+    ],
+    "guard-for-in": 0,
+    "no-restricted-syntax": 0
   },
   "globals": {
     "localStorage": true,
     "window": true,
-    "sessionStorage": true
+    "sessionStorage": true,
+    "document": true,
+    "FileReader": true,
+    "Image": true
   }
 }

@@ -1,0 +1,15 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon_edit">
+<circle id="Ellipse 1" cx="14" cy="14" r="14" fill="#FFCC99"/>
+<g id="mode">
+<g id="mode_2" clip-path="url(#clip0_534_7006)">
+<path id="Vector" d="M5 19.46V22.5C5 22.78 5.22 23 5.5 23H8.54C8.67 23 8.8 22.95 8.89 22.85L19.81 11.94L16.06 8.19L5.15 19.1C5.05 19.2 5 19.32 5 19.46ZM22.71 9.04C23.1 8.65 23.1 8.02 22.71 7.63L20.37 5.29C19.98 4.9 19.35 4.9 18.96 5.29L17.13 7.12L20.88 10.87L22.71 9.04Z" fill="#303133"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_534_7006">
+<rect width="24" height="24" fill="white" transform="translate(2 2)"/>
+</clipPath>
+</defs>
+</svg>
