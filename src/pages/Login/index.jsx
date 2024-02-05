@@ -8,7 +8,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import DefaultButton from '../../components/default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import { loginResquest } from '../../service/orangeApi';
-import loginImage from '../../images/img_login.svg';
+import loginImage from '../../assets/loginImage.png';
 import 'react-toastify/dist/ReactToastify.css';
 import { setTokenLocalStorage } from '../../context/AuthProvider/util';
 import { loginValidators } from '../../validators/validators';
@@ -73,64 +73,84 @@ function Login() {
   return (
     <Container
       disableGutters
+      className="main_box"
       maxWidth={false}
       sx={{
         margin: '0',
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         width: '100%',
         height: '100vh',
         padding: 0,
         fontFamily: 'Roboto',
-        '@media (max-width: 700px)': {
-          alignItems: 'center',
-          justifyContent: 'center',
+        marginLeft: 'auto',
+        gap: '10px',
+        '@media screen and (max-width: 950px)': {
+          padding: '0 20px 0 0',
+        },
+        '@media screen and (max-width: 751px)': {
+          padding: '0 20px 0 20px',
         },
       }}
     >
       {
-  windowWidth > 700 && (
+  windowWidth > 750 && (
   <Box
     style={{
-      width: '100%',
-      maxWidth: '450px',
-      marginBottom: '0px',
       height: '100%',
       display: 'flex',
+      flex: 1.1,
       flexDirection: 'column',
       alignItems: 'flex-start',
       justifyContent: 'left',
       padding: 0,
       overflow: 'hidden',
-      marginRight: '0',
       fontFamily: 'Roboto',
-      '@media screen and (max-width: 950px)': {
+      left: '-10px',
+      margin: '-10px',
+      '@media screen and (maxWidth: 950px)': {
         alignItems: 'center',
+        justifyContent: 'center',
       },
     }}
   >
-    <img src={loginImage} alt="Imagem de registro" style={{ width: '100%', height: '100%' }} />
+    <img
+      src={loginImage}
+      alt="Imagem de registro"
+      style={{
+        width: '100%', height: '100%', left: 0, objectFit: 'scale-down', objectPosition: 'left center',
+      }}
+    />
   </Box>
   )
     }
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        '@media (max-width: 970px)': {
-          margin: '20px',
+      <Box
+        className="right_box"
+        sx={{
+          display: 'flex',
+          flex: 2,
+          flexDirection: 'column',
           justifyContent: 'center',
-        },
-      }}
+          gap: '30px',
+          alignItems: 'center',
+          '@media (maxWidth: 800px)': {
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          '@media (maxWidth: 970px)': {
+            margin: '0 20px 0  20px',
+          },
+        }}
       >
         <Box
           style={{
             textAlign: 'center',
             fontWeight: 400,
             lineHeight: '40px',
-            marginTop: '8rem',
-            fontSize: window.innerWidth < 550 ? '1.8rem' : '2.8rem',
+            fontSize: window.innerWidth < 760 ? '1.8rem' : '2.8rem',
             color: '#222244',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           Entre no Orange Portfólio
@@ -144,54 +164,57 @@ function Login() {
             console.log(response);
           }}
         />
-        <Box
-          style={{
-            fontSize: '1.2rem', color: '#515255', textAlign: 'left', fontWeight: 400, lineHeight: '40px', marginTop: '5rem',
-          }}
-        >
-          Faça login com Email
-        </Box>
-
-        <form onSubmit={handleFormSubmit} style={{ marginTop: '1rem', width: '100%', maxWidth: '500px' }}>
-          <TextField
-            label="E-mail"
-            placeholder="email@email.com"
-            type="email"
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={formValues.email}
-            onChange={handleInputChanges}
-            name="email"
-            style={{ marginBottom: '1rem' }}
-            error={Boolean(errors.email)}
-            helperText={errors.email}
-          />
-          <TextField
-            label="Senha"
-            placeholder="*************"
-            type="password"
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={formValues.password}
-            onChange={handleInputChanges}
-            name="password"
-            style={{ marginBottom: '1rem' }}
-            error={Boolean(errors.password)}
-            helperText={errors.password}
-          />
-          <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
-        </form>
-        <Box
-          style={{
-            marginTop: '0rem', fontSize: '1.2rem', textDecoration: 'none', color: '#818388', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
-          }}
-        >
-          <a href="/register" style={{ textDecoration: 'none', color: 'inherit' }}>Cadastre-se</a>
+        <Box sx={{ gap: 1 }}>
+          <Box>
+            <Box
+              style={{
+                fontSize: '1.2rem', color: '#515255', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
+              }}
+            >
+              Faça login com Email
+            </Box>
+            <form onSubmit={handleFormSubmit} style={{ width: '100%', maxWidth: '500px' }}>
+              <TextField
+                label="E-mail"
+                placeholder="email@email.com"
+                type="email"
+                fullWidth
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={formValues.email}
+                onChange={handleInputChanges}
+                name="email"
+                style={{ marginBottom: '1rem' }}
+                error={Boolean(errors.email)}
+                helperText={errors.email}
+              />
+              <TextField
+                label="Senha"
+                placeholder="********"
+                type="password"
+                fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={formValues.password}
+                onChange={handleInputChanges}
+                name="password"
+                style={{ marginBottom: '1rem' }}
+                error={Boolean(errors.password)}
+                helperText={errors.password}
+              />
+              <DefaultButton theme={primaryButtonTheme} label="Entrar" onClick={handleFormSubmit} fullWidth />
+            </form>
+            <Box
+              style={{
+                fontSize: '1.2rem', textDecoration: 'none', color: '#818388', textAlign: 'left', fontWeight: 400, lineHeight: '40px',
+              }}
+            >
+              <a href="/register" style={{ textDecoration: 'none', color: 'inherit' }}>Cadastre-se</a>
+            </Box>
+          </Box>
         </Box>
       </Box>
       <ToastContainer />
