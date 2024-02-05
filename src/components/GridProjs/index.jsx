@@ -56,11 +56,18 @@ function GridProjs({
 }
 
 GridProjs.propTypes = {
-  toggleCreateModal: PropTypes.func.isRequired,
+  toggleCreateModal: PropTypes.func,
   projectsInfo: PropTypes.array.isRequired,
-  fetchProjects: PropTypes.func.isRequired,
-  toggleFeedbackModal: PropTypes.func.isRequired,
-  displayDefault: PropTypes.bool.isRequired,
+  fetchProjects: PropTypes.func,
+  toggleFeedbackModal: PropTypes.func,
+  displayDefault: PropTypes.bool,
+};
+
+GridProjs.defaultProps = {
+  toggleCreateModal: () => {},
+  fetchProjects: () => {},
+  toggleFeedbackModal: () => {},
+  displayDefault: false,
 };
 
 export default GridProjs;

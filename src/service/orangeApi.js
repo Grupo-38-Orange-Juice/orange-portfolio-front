@@ -99,4 +99,13 @@ export async function deleteProject(projectId) {
   }
 }
 
+export async function updateProjectById(projectId, data) {
+  try {
+    const response = await Api.put(`projects/${projectId}`, data);
+    return { data: response.data, status: response.status };
+  } catch (error) {
+    return { data: error.response.data, status: error.response.status };
+  }
+}
+
 export default Api;
