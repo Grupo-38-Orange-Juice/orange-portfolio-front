@@ -32,9 +32,9 @@ function Header() {
     navigate('/Explore');
   }
 
-  const redirectToSettings = () => {
-    navigate('/Settings');
-  };
+  // const redirectToSettings = () => {
+  //   navigate('/Settings');
+  // };
 
   // handles menu
   const handleMenuClick = (event) => {
@@ -66,9 +66,9 @@ function Header() {
     {
       id: 'explore', label: 'Descobrir', path: '/Explore', onClick: redirectToExplore,
     },
-    {
-      id: 'settings', label: 'Configurações', path: '/Settings', onClick: redirectToSettings,
-    },
+    // {
+    //   id: 'settings', label: 'Configurações', path: '/Settings', onClick: redirectToSettings,
+    // },
   ];
 
   return (
