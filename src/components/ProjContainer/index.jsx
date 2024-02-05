@@ -7,14 +7,15 @@ import DeleteModal from '../Modals/DeleteModalProject';
 import ModalViewSavedProj from '../Modals/ModalViewSavedProj/modalViewSavedProj';
 import MenuEditAndDelete from './menuEditAndDelete';
 import './style.css';
+import CreateModalProject from '../Modals/CreateModalProject';
 
 function ProjContainer({
   projectInfo, fetchProjects, toggleFeedbackModal,
 }) {
   const location = useLocation();
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
-  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
   const [modalViewIsOpen, setModalViewIsOpen] = useState(false);
+  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
 
   const toggleViewModal = () => {
     setModalViewIsOpen(!modalViewIsOpen);
@@ -51,6 +52,13 @@ function ProjContainer({
         toggleDeleteModal={toggleDeleteModal}
         projectId={projectInfo.project.id}
         fetchProjects={fetchProjects}
+        toggleFeedbackModal={toggleFeedbackModal}
+      />
+      <CreateModalProject
+        isOpen={modalEditIsOpen}
+        toggleCreateModal={toggleEditModal}
+        projectInfo={projectInfo}
+        isEditMode
         toggleFeedbackModal={toggleFeedbackModal}
       />
     </Box>

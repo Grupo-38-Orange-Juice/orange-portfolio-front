@@ -5,11 +5,11 @@ import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
-import { postProject } from '../../../service/api';
+import { postProject, updateProjectById } from '../../../service/api';
 import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
 import TagTextField from '../tagModalField';
 import imageTo64 from '../../../helpers/imageTo64';
@@ -20,10 +20,13 @@ import { isImageBroken } from '../../../validators/helpers';
 
 Modal.setAppElement('#root');
 
-export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFeedbackModal }) {
+export default function CreateModalProject({
+  isOpen, toggleCreateModal, toggleFeedbackModal, projectInfo, isEditMode,
+}) {
   const [imageFile, setImageFile] = useState(null);
   const { tags, fetchProjects } = useContext(ProjectsContext);
   const { user } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState({
     title: '',
     tags: [],
@@ -38,11 +41,21 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     description: '',
   });
 
+  const clearForm = () => {
+    setFormValues({
+      title: '',
+      tags: [],
+      link: '',
+      description: '',
+    });
+    setImageFile(null);
+  };
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
 
-  const createProject = async () => {
+  const handleRequest = async () => {
     const base64Image = imageFile ? await imageTo64(imageFile) : null;
 
     setErrors({
@@ -61,15 +74,36 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
       }
     }
 
-    const response = await postProject(
-      {
-        description: formValues.description,
-        link: formValues.link,
-        tags: formValues.tags,
-        name: formValues.title,
-        image: base64Image,
-      },
-    );
+    let responseData;
+    try {
+      if (isEditMode) {
+        const responseUpdate = await updateProjectById(
+          projectInfo.project.id,
+          {
+            description: formValues.description,
+            link: formValues.link,
+            tags: formValues.tags,
+            name: formValues.title,
+            image: base64Image,
+          },
+        );
+        responseData = responseUpdate.data;
+      } else {
+        const responsePost = await postProject(
+          {
+            description: formValues.description,
+            link: formValues.link,
+            tags: formValues.tags,
+            name: formValues.title,
+            image: base64Image,
+          },
+        );
+        responseData = responsePost.data;
+      }
+    } catch (error) {
+      toast.error(responseData.data.message || 'Erro ao processar solicitação.');
+    }
+
     if (response.status === 201) {
       toggleCreateModal();
       toggleFeedbackModal('Projeto adicionado com sucesso!');
@@ -79,10 +113,22 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
       formValues.description = '';
       setImageFile(null);
       fetchProjects(user.id);
+      clearForm();
     } else {
       toast.error(response.data.message || 'Erro ao cadastrar projeto!');
     }
   };
+
+  useEffect(() => {
+    if (responseData) {
+      setFormValues({
+        title: responseData.name,
+        tags: responseData.tags,
+        link: responseData.link,
+        description: responseData.description,
+      });
+    }
+  }, [responseData]);
 
   const onCancelClick = () => {
     toggleCreateModal();
@@ -128,11 +174,6 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     setImageFile(file);
   };
 
-  // const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
-  // const handleClickLabel = () => {
-  //   setViewModalIsOpen(true);
-  // };
-
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       {isOpen && (
@@ -160,7 +201,16 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               margin: 'auto',
             }}
           >
-            <h1>Adicionar Projeto</h1>
+            <h1
+              style={{
+                fontSize: '24px',
+                lineHeight: '24px',
+                fontWeight: '400',
+
+              }}
+            >
+              {isEditMode ? 'Editar Projeto' : 'Adicionar Projeto'}
+            </h1>
           </Box>
           <Box
             style={{
@@ -290,7 +340,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               margin: windowWidth <= 950 ? 'auto' : '10px 0px 0px 0px',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={createProject} style={{ margin: '0 0.5rem 0 0' }} />
+            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={handleRequest} style={{ margin: '0 0.5rem 0 0' }} />
             <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={onCancelClick} style={{ margin: '0 0 0 0.5rem' }} />
           </Box>
         </Modal>
@@ -304,4 +354,23 @@ CreateModalProject.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleCreateModal: PropTypes.func.isRequired,
   toggleFeedbackModal: PropTypes.func.isRequired,
+  projectInfo: PropTypes.shape({
+    project: PropTypes.shape({
+      createdAt: PropTypes.string,
+      description: PropTypes.string,
+      id: PropTypes.string,
+      image: PropTypes.string,
+      link: PropTypes.string,
+      name: PropTypes.string,
+      updatedAt: PropTypes.string,
+    }).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    user: PropTypes.shape({
+      email: PropTypes.string,
+      id: PropTypes.string,
+      fullName: PropTypes.string,
+      image: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  isEditMode: PropTypes.bool.isRequired,
 };
