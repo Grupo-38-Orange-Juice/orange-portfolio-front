@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Chip } from '@mui/material';
 import foto from '../../../images/Circle.svg';
+import formatDate from '../../../helpers/formatDate';
 
 Modal.setAppElement('#root');
 
@@ -33,10 +33,11 @@ export default function ModalViewSavedProj({ isOpen, toggleViewModal, projectInf
           },
           content: {
             maxWidth: '900px',
-            margin: '5% auto auto auto',
+            margin: '3% auto 0% auto',
           },
         }}
       >
+
         <Box
           style={{
             position: 'absolute',
@@ -48,44 +49,85 @@ export default function ModalViewSavedProj({ isOpen, toggleViewModal, projectInf
         >
           <CloseIcon />
         </Box>
-        <Box sx={{ margin: 3 }}>
-          <Box
-            style={{
-              width: '100px',
-              maxWidth: '100%',
-              margin: 'auto',
-              display: 'grid',
-              position: 'absolute',
-            }}
+        <Box>
+          <Box sx={{
+            textAlign: 'center',
+            width: 'auto',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            flex: 1,
+            margin: '7% 10% 5% 10%',
+          }}
           >
-            <img
-              src={projectInfo.user.image || foto}
-              alt="Imagem de registro"
-              style={{ maxWidth: '30%', height: 'auto' }}
-            />
-          </Box>
-          <Box
-            style={{
-              fontFamily: 'Roboto, sans-serif',
-              fontSize: '20px',
-              color: '#303133',
-              margin: 'auto',
-              width: '100px',
-              maxWidth: '100%',
+            <Box style={{
+              flexDirection: 'row',
+              textAlign: 'center',
+              justifyContent: 'flex-start',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              whiteSpace: 'nowrap',
+              margin: '0',
             }}
-          >
-            <Typography variant="h1">
-              {projectInfo.project.name}
-            </Typography>
+            >
+              <Box
+                style={{
+                  width: '34px',
+                  maxWidth: '100%',
+                }}
+              >
+                <img
+                  src={projectInfo.user.image || foto}
+                  alt="Imagem de registro"
+                  style={{ maxWidth: '30px' }}
+                />
+              </Box>
+              <Box style={{
+                flexDirection: 'column',
+                display: 'grid',
+                justifyContent: 'center',
+              }}
+              >
+                <Box
+                  style={{
+                    color: '#303133', fontFamily: 'roboto', fontSize: '16px', alignItems: 'flex-start', margin: 'auto auto auto 0px', textAlign: 'initial',
+                  }}
+                >
+                  <p>{projectInfo.user.fullName}</p>
+                </Box>
+                <Box
+                  style={{
+                    color: '#303133', fontFamily: 'roboto', fontSize: '16px', alignItems: 'center',
+                  }}
+                >
+                  <p>{formatDate(projectInfo.project.createdAt)}</p>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                fontFamily: 'roboto',
+                fontSize: '50px',
+              }}
+            >
+              <h1 style={{
+                color: '#303133', fontFamily: 'roboto', fontSize: '24px',
+              }}
+              >
+                {projectInfo.project.name}
+              </h1>
+
+            </Box>
+
+            <Box className="tags" sx={{ display: 'flex', gap: '4px', mt: '2px' }}>
+              {projectInfo && projectInfo.tags.length > 0 && projectInfo.tags.map((tag) => (
+                <Chip label={tag} key={tag} />
+              ))}
+            </Box>
+
           </Box>
           <Box
             sx={{
               width: '100%',
-              maxWidth: '700px',
               flexDirection: 'column',
               display: 'grid',
               alignItems: 'center',
@@ -97,27 +139,20 @@ export default function ModalViewSavedProj({ isOpen, toggleViewModal, projectInf
             <img
               src={projectInfo.project.image}
               alt="Imagem de registro"
-              style={{ maxWidth: '100%', height: 'auto' }}
+              style={{ Width: '100%', height: 'auto', maxWidth: '500px' }}
             />
           </Box>
-          <TextField
-            placeholder=" "
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={projectInfo.project.description}
-            name="LastDescricao"
-            fullWidth
-            style={{
-              margin: '30px auto auto auto', alignItems: 'center',
-            }}
-            multiline
-            rows={3}
-          />
-          <Typography variant="h6">Download</Typography>
-          <Link href={projectInfo.project.link} />
+
         </Box>
+        <Typography variant="h3" gutterBottom style={{ fontFamily: 'Roboto', fontSize: '16px', margin: '3% 10% auto 10%' }}>
+          {projectInfo.project.description}
+        </Typography>
+        <Typography variant="h6" style={{ margin: '3% 10% auto 10%' }}>Download</Typography>
+
+        <a href={projectInfo.project.link} style={{ margin: '3% 10% auto 10%', textDecoration: 'none' }}>
+          {projectInfo.project.link}
+        </a>
+
       </Modal>
     </Box>
   );
