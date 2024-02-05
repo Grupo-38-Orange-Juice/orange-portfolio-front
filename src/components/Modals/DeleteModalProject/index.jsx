@@ -17,7 +17,6 @@ export default function DeleteModal({
   fetchProjects,
 }) {
   const { user } = useContext(AuthContext);
-  console.log('open delete modal', isOpen);
 
   const handleClickDelete = async () => {
     toggleDeleteModal();

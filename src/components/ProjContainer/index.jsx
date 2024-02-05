@@ -21,7 +21,6 @@ function ProjContainer({
   };
 
   const toggleDeleteModal = () => {
-    console.log('chamei');
     setDeleteModalIsOpen(!deleteModalIsOpen);
   };
 
