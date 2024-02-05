@@ -9,7 +9,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
-import { postProject } from '../../../service/api';
 import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
 import TagTextField from '../tagModalField';
 import imageTo64 from '../../../helpers/imageTo64';
@@ -17,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 import { postProjectValidators } from '../../../validators/validators';
 import { isImageBroken } from '../../../validators/helpers';
+import { postProject } from '../../../service/orangeApi';
 
 Modal.setAppElement('#root');
 

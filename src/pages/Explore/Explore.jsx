@@ -5,8 +5,8 @@ import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/s
 import Header from '../../components/Header/Header';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
-import { getProjects } from '../../service/api';
 import ModalViewSavedProj from '../../components/Modals/ModalViewSavedProj/modalViewSavedProj';
+import { getProjects } from '../../service/orangeApi';
 
 const theme = createTheme();
 const typographyResponsive = responsiveFontSizes(theme);
