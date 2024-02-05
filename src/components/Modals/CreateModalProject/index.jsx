@@ -119,17 +119,6 @@ export default function CreateModalProject({
     }
   };
 
-  useEffect(() => {
-    if (responseData) {
-      setFormValues({
-        title: responseData.name,
-        tags: responseData.tags,
-        link: responseData.link,
-        description: responseData.description,
-      });
-    }
-  }, [responseData]);
-
   const onCancelClick = () => {
     toggleCreateModal();
     setFormValues({
