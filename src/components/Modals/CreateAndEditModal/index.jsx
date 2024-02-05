@@ -5,10 +5,11 @@ import Modal from 'react-modal';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { secondaryButtonTheme, primaryButtonTheme } from '../../../mui-theme/buttons';
 import DefaultButton from '../../default-button';
 import ImageUpload from '../../../images/Upload.svg';
+import { postProject, updateProjectById } from '../../../service/orangeApi';
 import { ProjectsContext } from '../../../context/AuthProvider/projectsProvider';
 import TagTextField from '../tagModalField';
 import imageTo64 from '../../../helpers/imageTo64';
@@ -16,14 +17,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../context/AuthProvider/authProvider';
 import { postProjectValidators } from '../../../validators/validators';
 import { isImageBroken } from '../../../validators/helpers';
-import { postProject } from '../../../service/orangeApi';
 
 Modal.setAppElement('#root');
 
-export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFeedbackModal }) {
-  const [imageFile, setImageFile] = useState(null);
-  const { tags, fetchProjects } = useContext(ProjectsContext);
+export default function CreateAndEditModalProject({
+  isOpen, toggleCreateModal, toggleFeedbackModal, projectInfo, isEditMode,
+}) {
   const { user } = useContext(AuthContext);
+  const { tags, fetchProjects } = useContext(ProjectsContext);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [imageFile, setImageFile] = useState(null);
   const [formValues, setFormValues] = useState({
     title: '',
     tags: [],
@@ -38,11 +41,44 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     description: '',
   });
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const clearForm = () => {
+    setFormValues({
+      title: '',
+      tags: [],
+      link: '',
+      description: '',
+    });
+    setImageFile(null);
+  };
+
+  const handleResponse = async (response, message) => {
+    if (response.status === 201 || response.status === 200) {
+      toggleCreateModal();
+      toggleFeedbackModal(message);
+      fetchProjects(user.id);
+      clearForm();
+      return;
+    }
+    toast.error(response.data.message);
+  };
 
   const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
 
-  const createProject = async () => {
+  const validation = (forms) => {
+    for (const field in postProjectValidators) {
+      const valid = postProjectValidators[field](forms[field]);
+      if (valid) {
+        updateErrors({ [field]: valid });
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleRequest = async () => {
+    const {
+      title, tags: formTags, link, description,
+    } = formValues;
     const base64Image = imageFile ? await imageTo64(imageFile) : null;
 
     setErrors({
@@ -53,35 +89,32 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
       image: '',
     });
 
-    for (const field in postProjectValidators) {
-      const validation = postProjectValidators[field](formValues[field]);
-      if (validation) {
-        updateErrors({ [field]: validation });
-        return;
-      }
-    }
+    if (!validation(formValues)) return;
 
+    if (isEditMode) {
+      const response = await updateProjectById(
+        projectInfo.project.id,
+        {
+          description,
+          link,
+          tags: formTags,
+          name: title,
+          image: base64Image,
+        },
+      );
+      handleResponse(response, 'Projeto editado com sucesso!');
+      return;
+    }
     const response = await postProject(
       {
-        description: formValues.description,
-        link: formValues.link,
-        tags: formValues.tags,
-        name: formValues.title,
+        description,
+        link,
+        tags: formTags,
+        name: title,
         image: base64Image,
       },
     );
-    if (response.status === 201) {
-      toggleCreateModal();
-      toggleFeedbackModal('Projeto adicionado com sucesso!');
-      formValues.title = '';
-      formValues.tags = [];
-      formValues.link = '';
-      formValues.description = '';
-      setImageFile(null);
-      fetchProjects(user.id);
-    } else {
-      toast.error(response.data.message || 'Erro ao cadastrar projeto!');
-    }
+    handleResponse(response, 'Projeto adicionado com sucesso!');
   };
 
   const onCancelClick = () => {
@@ -128,11 +161,6 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
     setImageFile(file);
   };
 
-  // const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
-  // const handleClickLabel = () => {
-  //   setViewModalIsOpen(true);
-  // };
-
   return (
     <Box style={{ textAlign: 'center', justifyContent: 'flex-start' }}>
       {isOpen && (
@@ -160,7 +188,16 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               margin: 'auto',
             }}
           >
-            <h1>Adicionar Projeto</h1>
+            <h1
+              style={{
+                fontSize: '24px',
+                lineHeight: '24px',
+                fontWeight: '400',
+
+              }}
+            >
+              {isEditMode ? 'Editar Projeto' : 'Adicionar Projeto'}
+            </h1>
           </Box>
           <Box
             style={{
@@ -290,7 +327,7 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
               margin: windowWidth <= 950 ? 'auto' : '10px 0px 0px 0px',
             }}
           >
-            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={createProject} style={{ margin: '0 0.5rem 0 0' }} />
+            <DefaultButton theme={primaryButtonTheme} label="Salvar" onClick={handleRequest} style={{ margin: '0 0.5rem 0 0' }} />
             <DefaultButton theme={secondaryButtonTheme} label="Cancelar" onClick={onCancelClick} style={{ margin: '0 0 0 0.5rem' }} />
           </Box>
         </Modal>
@@ -300,8 +337,48 @@ export default function CreateModalProject({ isOpen, toggleCreateModal, toggleFe
   );
 }
 
-CreateModalProject.propTypes = {
+CreateAndEditModalProject.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleCreateModal: PropTypes.func.isRequired,
   toggleFeedbackModal: PropTypes.func.isRequired,
+  projectInfo: PropTypes.shape({
+    project: PropTypes.shape({
+      createdAt: PropTypes.string,
+      description: PropTypes.string,
+      id: PropTypes.string,
+      image: PropTypes.string,
+      link: PropTypes.string,
+      name: PropTypes.string,
+      updatedAt: PropTypes.string,
+    }).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    user: PropTypes.shape({
+      email: PropTypes.string,
+      id: PropTypes.string,
+      fullName: PropTypes.string,
+      image: PropTypes.string,
+    }).isRequired,
+  }),
+  isEditMode: PropTypes.bool.isRequired,
+};
+
+CreateAndEditModalProject.defaultProps = {
+  projectInfo: {
+    project: {
+      createdAt: '',
+      description: '',
+      id: '',
+      image: '',
+      link: '',
+      name: '',
+      updatedAt: '',
+    },
+    tags: [],
+    user: {
+      email: '',
+      id: '',
+      fullName: '',
+      image: '',
+    },
+  },
 };
