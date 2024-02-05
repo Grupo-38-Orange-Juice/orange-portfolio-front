@@ -6,7 +6,7 @@ import CardPerfil from '../../components/CardPerfil';
 import TextfieldResponsive from '../../components/TextfieldResponsive';
 import GridProjs from '../../components/GridProjs/index';
 import { ProjectsContext } from '../../context/AuthProvider/projectsProvider';
-import CreateModalProject from '../../components/Modals/CreateModalProject';
+import CreateAndEditModalProject from '../../components/Modals/CreateAndEditModal';
 import FeedbackModal from '../../components/Modals/FeedbackModal';
 
 function HomePage() {
@@ -131,15 +131,11 @@ function HomePage() {
           />
         </Box>
       </Box>
-      <CreateModalProject
+      <CreateAndEditModalProject
         isOpen={createModalIsOpen}
         toggleCreateModal={toggleCreateModal}
         toggleFeedbackModal={toggleFeedbackModal}
-      />
-      <CreateModalProject
-        isOpen={editModalIsOpen}
-        toggleCreateModal={toggleEditModal}
-        toggleFeedbackModal={toggleFeedbackModal}
+        isEditMode={false}
       />
       <FeedbackModal
         isOpen={feedbackModal.open}

@@ -20,7 +20,7 @@ import { isImageBroken } from '../../../validators/helpers';
 
 Modal.setAppElement('#root');
 
-export default function CreateModalProject({
+export default function CreateAndEditModalProject({
   isOpen, toggleCreateModal, toggleFeedbackModal, projectInfo, isEditMode,
 }) {
   const { user } = useContext(AuthContext);
@@ -62,37 +62,23 @@ export default function CreateModalProject({
     toast.error(response.data.message);
   };
 
-  const validation = (formValues) => {
+  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
+
+  const validation = (forms) => {
     for (const field in postProjectValidators) {
-      const validation = postProjectValidators[field](formValues[field]);
-      if (validation) {
-        updateErrors({ [field]: validation });
+      const valid = postProjectValidators[field](forms[field]);
+      if (valid) {
+        updateErrors({ [field]: valid });
         return false;
       }
     }
+    return true;
   };
 
   const handleRequest = async () => {
-    const base64Image = imageFile ? await imageTo64(imageFile) : null;
-    if (isEditMode) {
-      const response = await updateProjectById(
-        projectInfo.project.id,
-        {
-          description: formValues.description,
-          link: formValues.link,
-          tags: formValues.tags,
-          name: formValues.title,
-          image: base64Image,
-        },
-      );
-      handleResponse(response, 'Projeto atualizado com sucesso!');
-      return;
-    }
-  }
-
-  const updateErrors = (newErrors) => setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
-
-  const handleRequest = async () => {
+    const {
+      title, tags: formTags, link, description,
+    } = formValues;
     const base64Image = imageFile ? await imageTo64(imageFile) : null;
 
     setErrors({
@@ -103,57 +89,32 @@ export default function CreateModalProject({
       image: '',
     });
 
-    for (const field in postProjectValidators) {
-      const validation = postProjectValidators[field](formValues[field]);
-      if (validation) {
-        updateErrors({ [field]: validation });
-        return;
-      }
-    }
+    if (!validation(formValues)) return;
 
-    let responseData;
-    try {
-      if (isEditMode) {
-        const responseUpdate = await updateProjectById(
-          projectInfo.project.id,
-          {
-            description: formValues.description,
-            link: formValues.link,
-            tags: formValues.tags,
-            name: formValues.title,
-            image: base64Image,
-          },
-        );
-        responseData = responseUpdate.data;
-      } else {
-        const responsePost = await postProject(
-          {
-            description: formValues.description,
-            link: formValues.link,
-            tags: formValues.tags,
-            name: formValues.title,
-            image: base64Image,
-          },
-        );
-        responseData = responsePost.data;
-      }
-    } catch (error) {
-      toast.error(responseData.data.message || 'Erro ao processar solicitação.');
+    if (isEditMode) {
+      const response = await updateProjectById(
+        projectInfo.project.id,
+        {
+          description,
+          link,
+          tags: formTags,
+          name: title,
+          image: base64Image,
+        },
+      );
+      handleResponse(response, 'Projeto editado com sucesso!');
+      return;
     }
-
-    if (response.status === 201) {
-      toggleCreateModal();
-      toggleFeedbackModal('Projeto adicionado com sucesso!');
-      formValues.title = '';
-      formValues.tags = [];
-      formValues.link = '';
-      formValues.description = '';
-      setImageFile(null);
-      fetchProjects(user.id);
-      clearForm();
-    } else {
-      toast.error(response.data.message || 'Erro ao cadastrar projeto!');
-    }
+    const response = await postProject(
+      {
+        description,
+        link,
+        tags: formTags,
+        name: title,
+        image: base64Image,
+      },
+    );
+    handleResponse(response, 'Projeto adicionado com sucesso!');
   };
 
   const onCancelClick = () => {
@@ -376,7 +337,7 @@ export default function CreateModalProject({
   );
 }
 
-CreateModalProject.propTypes = {
+CreateAndEditModalProject.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleCreateModal: PropTypes.func.isRequired,
   toggleFeedbackModal: PropTypes.func.isRequired,
@@ -397,6 +358,27 @@ CreateModalProject.propTypes = {
       fullName: PropTypes.string,
       image: PropTypes.string,
     }).isRequired,
-  }).isRequired,
+  }),
   isEditMode: PropTypes.bool.isRequired,
+};
+
+CreateAndEditModalProject.defaultProps = {
+  projectInfo: {
+    project: {
+      createdAt: '',
+      description: '',
+      id: '',
+      image: '',
+      link: '',
+      name: '',
+      updatedAt: '',
+    },
+    tags: [],
+    user: {
+      email: '',
+      id: '',
+      fullName: '',
+      image: '',
+    },
+  },
 };

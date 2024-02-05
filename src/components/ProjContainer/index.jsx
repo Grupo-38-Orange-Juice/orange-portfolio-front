@@ -7,7 +7,7 @@ import DeleteModal from '../Modals/DeleteModalProject';
 import ModalViewSavedProj from '../Modals/ModalViewSavedProj/modalViewSavedProj';
 import MenuEditAndDelete from './menuEditAndDelete';
 import './style.css';
-import CreateModalProject from '../Modals/CreateModalProject';
+import CreateModalProject from '../Modals/CreateAndEditModal';
 
 function ProjContainer({
   projectInfo, fetchProjects, toggleFeedbackModal,
