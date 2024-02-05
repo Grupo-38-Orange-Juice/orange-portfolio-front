@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
@@ -12,6 +13,7 @@ import NotificationIcon from './Notification/NotificationIcon';
 import Paragraph from './Paragraph/Paragraph';
 import MenuFilled from './MenuFilledBar';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
+import ImageUser from '../../images/user.jpg';
 
 function Header() {
   const { user } = useContext(AuthContext);
@@ -107,7 +109,7 @@ function Header() {
       </div>
 
       <div className={styles.container_profile}>
-        <Profile className="profile" image={user ? user.image : 'https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg'} size="41" />
+        <Profile className="profile" image={user && user.image || ImageUser} size="41" />
         <NotificationIcon onClick={handleNotificationClick} />
       </div>
 

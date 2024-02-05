@@ -8,6 +8,7 @@ import { Chip, useMediaQuery } from '@mui/material';
 import foto from '../../../images/Circle.svg';
 import formatDate from '../../../helpers/formatDate';
 import Header from '../../Header/Header';
+import ImagDefault from '../../../images/semImage.jpg';
 
 Modal.setAppElement('#root');
 
@@ -91,7 +92,7 @@ export default function ModalViewSavedProj({ isOpen, toggleViewModal, projectInf
                 }}
               >
                 <img
-                  src={projectInfo.project.image}
+                  src={projectInfo.project.image || ImagDefault}
                   alt="Imagem de registro"
                   style={{ width: '100%', height: 'auto', maxWidth: '500px' }}
                 />
@@ -284,7 +285,7 @@ export default function ModalViewSavedProj({ isOpen, toggleViewModal, projectInf
                 }}
               >
                 <img
-                  src={projectInfo.project.image}
+                  src={projectInfo.project.image || ImagDefault}
                   alt="Imagem de registro"
                   style={{ Width: '100%', height: 'auto', maxWidth: '500px' }}
                 />

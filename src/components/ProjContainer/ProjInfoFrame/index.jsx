@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Profile from '../../Profile/Profile';
 import './style.css';
 import formatDate from '../../../helpers/formatDate';
+import ImageUser from '../../../images/user.jpg';
 
 function ProjInfoFrame({ createdAt, tags, user }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
@@ -23,7 +24,7 @@ function ProjInfoFrame({ createdAt, tags, user }) {
       {user
         && (
         <>
-          <Profile size="26" className="profile" image={user.image} />
+          <Profile size="26" className="profile" image={user.image || ImageUser} />
           <p className="infos">
             {user.fullName}
             {isMobile ? (

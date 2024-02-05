@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { useContext } from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import DefaultButton from '../default-button';
 import { primaryButtonTheme } from '../../mui-theme/buttons';
 import './style.css';
 import { AuthContext } from '../../context/AuthProvider/authProvider';
+import ImageUser from '../../images/user.jpg';
 
 function CardPerfil({
   toggleCreateModal,
@@ -14,7 +16,7 @@ function CardPerfil({
   return (
     <Box className="box__card_perfil">
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Profile className="profile" image={user ? user.image : 'https://www.ecompletocdn.com.br/i/fp/1178/1521968_2_1692801033.jpg'} size="130" />
+        <Profile className="profile" image={user && user.image || ImageUser} size="130" />
       </Box>
       <Box className="container__right">
         <Box className="text_input">
