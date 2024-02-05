@@ -51,6 +51,17 @@ export default function CreateAndEditModalProject({
     setImageFile(null);
   };
 
+  useEffect(() => {
+    if (isEditMode) {
+      setFormValues({
+        title: projectInfo.project.name,
+        tags: projectInfo.tags,
+        link: projectInfo.project.link,
+        description: projectInfo.project.description,
+      });
+    }
+  }, [isEditMode, projectInfo, isOpen]);
+
   const handleResponse = async (response, message) => {
     if (response.status === 201 || response.status === 200) {
       toggleCreateModal();
