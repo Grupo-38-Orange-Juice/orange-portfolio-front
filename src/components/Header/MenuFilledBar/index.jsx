@@ -52,7 +52,7 @@ function MenuFilled({ onClick }) {
         onClose={handleSnackbarClose}
       >
         <Alert onClose={handleSnackbarClose} severity="info">
-          Menu clicked!
+          Menu clicado!
         </Alert>
       </Snackbar>
     </>

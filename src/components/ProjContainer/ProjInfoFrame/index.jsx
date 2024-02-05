@@ -38,7 +38,7 @@ function ProjInfoFrame({ createdAt, tags, user }) {
                 {formatDate(createdAt)}
               </>
             ) : (
-            /* se a tela for maior que 600px, rendeniza o "•" */
+            /* se a tela for maior que 1100px, rendeniza o "•" */
               <>
                 {' '}
                 •
