@@ -12,10 +12,10 @@ const formatDate = (date) => {
 };
 
 function ProjInfoFrame({ createdAt, tags, user }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
+      setIsMobile(window.innerWidth <= 1100);
     };
 
     window.addEventListener('resize', handleResize);
@@ -32,7 +32,7 @@ function ProjInfoFrame({ createdAt, tags, user }) {
           <Profile size="26" className="profile" image={user.image} />
           <p className="infos">
             {user.fullName}
-            {isMobile ? (
+            {(isMobile) ? (
               <>
                 <br />
                 {formatDate(createdAt)}
