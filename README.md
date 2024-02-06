@@ -9,6 +9,7 @@ Certifique-se de ter as seguintes ferramentas instaladas em seu ambiente de dese
 - [Node.js](https://nodejs.org/) (v21.6.1 recomendado)
 - [npm](https://www.npmjs.com/) (v10.3.0 recomendado)
 - [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) (v0.39.7 recomendado)
+- [Backend do Orange Portfolio](https://github.com/Grupo-38-Orange-Juice/orange-portfolio-back)
 
 ## Clonando o Repositório
 
